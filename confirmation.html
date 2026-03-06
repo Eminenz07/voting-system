@@ -31,87 +31,6 @@
             },
         }
     </script>
-
-<style id="au-brand-overrides">
-  /* ===== AU Brand Colors Override ===== */
-  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
-
-  /* Active sidebar items get yellow left border */
-  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
-
-  /* Progress bars: yellow fill */
-  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Live/ENDS SOON badges: yellow instead of red */
-  .bg-red-500.rounded-full, .bg-red-500.px-2 {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Camera scan frame corners: yellow */
-  [class*="border-t-4"][class*="border-primary"],
-  [class*="border-b-4"][class*="border-primary"],
-  [class*="border-l-4"][class*="border-primary"],
-  [class*="border-r-4"][class*="border-primary"] {
-    border-color: #F5B400 !important;
-  }
-
-  /* Scan line glow: yellow */
-  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
-  [class*="animate-scanline"] div[class*="bg-primary"] {
-    background-color: #F5B400 !important;
-    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
-  }
-
-  /* Selected candidate card border: yellow */
-  [class*="border-primary"][class*="shadow-lg"] {
-    border-color: #F5B400 !important;
-    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
-  }
-
-  /* Selected candidate radio dot: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Verified check badges on candidates: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* KPI/stat card accent lines at bottom */
-  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Step badges: yellow-tinted bg */
-  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
-    background-color: #FFF5D6 !important;
-    color: #8B6D00 !important;
-  }
-
-  /* Capture button (verify screen): yellow ring */
-  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Stat card icon backgrounds: slightly yellow-tinted */
-  .bg-primary\/10 > .material-symbols-outlined {
-    color: #003DA5 !important;
-  }
-
-  /* University logo wrapper ring */
-  .rounded-lg.bg-primary\/10.text-primary {
-    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
-  }
-</style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col antialiased">
 <!-- Top Navigation Bar -->
@@ -164,58 +83,8 @@
                         Ballot Summary
                     </h2>
 </div>
-<div class="divide-y divide-slate-100 dark:divide-slate-800">
-<!-- Item 1 -->
-<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-<div class="flex items-start gap-4">
-<div class="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-slate-100 border border-slate-200 dark:border-slate-700" data-alt="Portrait of candidate Adedayo O.">
-<img alt="Candidate" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG2PWn05KQXy1dmcGZR_xbUi6P-IT51nTzt0ln83gn3pNDeSOlCe68GHDKUP0HXIvm_d3PH2I3jHJVi2NukHkqdYzfb01luR315faIs0mmcGztT0z7fj6fVd7ymupM4h8ozItzXs6uh_UEIrQzsY3mQu4T4xogW0R7IfUTgSseePUXdUnbeti6MTyfcelDcR1RVbYA4obkMzMPzsou1VcxrSPh8Ke-mjMRTVMTnSlwJz5vFnQWv08JNOPQ-naQFfftsoguxs0K2Yj3"/>
-</div>
-<div>
-<h3 class="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-1">Student Union President</h3>
-<p class="text-lg font-semibold text-slate-900 dark:text-white">Adedayo O.</p>
-<p class="text-sm text-slate-600 dark:text-slate-400">Computer Science Dept.</p>
-</div>
-</div>
-<button class="group flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors w-fit ml-auto sm:ml-0">
-<span class="material-symbols-outlined text-lg">edit</span>
-                            Change
-                        </button>
-</div>
-<!-- Item 2 -->
-<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-<div class="flex items-start gap-4">
-<div class="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-slate-100 border border-slate-200 dark:border-slate-700" data-alt="Portrait of candidate Sarah J.">
-<img alt="Candidate" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDera88X_y6hhkZMd8bqmEi4n_04m5kaHQoSh-DXTYfwNsXDM9uPH2kEliv5IG_9vzAeCtNnG4ctkp6zVQ4YJ0cwB39UCD1cRgmny2Amn1JtjQ9IhYC627cp5qAgCUyKLc3qSAa7QY3cUtFdye-Cqmd5m1BoqrKEUWs4Af3d1r-y3ppAc-GyLIu5AD6q1mmPqo46lvGsivp5jTYKP6cSku9d0zToke7POoR0TU0exFVkZgxuwQ6GvvgncCvMdVFm6V1ppXvsROC642M"/>
-</div>
-<div>
-<h3 class="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-1">Vice President</h3>
-<p class="text-lg font-semibold text-slate-900 dark:text-white">Sarah J.</p>
-<p class="text-sm text-slate-600 dark:text-slate-400">Law Faculty</p>
-</div>
-</div>
-<button class="group flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors w-fit ml-auto sm:ml-0">
-<span class="material-symbols-outlined text-lg">edit</span>
-                            Change
-                        </button>
-</div>
-<!-- Item 3 - Abstention Example -->
-<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-slate-50/30 dark:bg-slate-800/10">
-<div class="flex items-start gap-4">
-<div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-slate-200 text-slate-400 dark:bg-slate-700 dark:text-slate-500">
-<span class="material-symbols-outlined text-2xl">block</span>
-</div>
-<div>
-<h3 class="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-1">Sports Director</h3>
-<p class="text-lg font-medium text-slate-500 dark:text-slate-400 italic">Abstained</p>
-<p class="text-sm text-slate-400 dark:text-slate-500">No selection made</p>
-</div>
-</div>
-<button class="group flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors w-fit ml-auto sm:ml-0">
-<span class="material-symbols-outlined text-lg">edit</span>
-                            Change
-                        </button>
-</div>
+<div class="divide-y divide-slate-100 dark:divide-slate-800" id="confirmation-list">
+<!-- Dynamic selections will be injected here -->
 </div>
 </div>
 <!-- Confirmation & Submit -->
@@ -441,6 +310,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load selections
     const selections = JSON.parse(sessionStorage.getItem('au-ballot-selections') || '{}');
+    const ballotData = JSON.parse(localStorage.getItem('au-ballot-data') || '{}');
+
+    // Render confirmations dynamically
+    const confirmationList = document.getElementById('confirmation-list');
+    if (confirmationList && ballotData.positions) {
+        let html = '';
+        for (const position of ballotData.positions) {
+            const selectedName = selections[position.title];
+            if (selectedName && selectedName !== 'Abstain') {
+                const candidate = position.candidates.find(c => c.name === selectedName);
+                html += `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <div class="flex items-start gap-4">
+                        <div class="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-slate-100 border border-slate-200 dark:border-slate-700">
+                            <img alt="Candidate" class="h-full w-full object-cover" src="${candidate?.photo_url || 'https://via.placeholder.com/150'}"/>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-1">${position.title}</h3>
+                            <p class="text-lg font-semibold text-slate-900 dark:text-white">${selectedName}</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">${candidate?.party || 'Independent'}</p>
+                        </div>
+                    </div>
+                    <button onclick="window.location.href='/ballot.html'" class="group flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors w-fit ml-auto sm:ml-0">
+                        <span class="material-symbols-outlined text-lg">edit</span> Change
+                    </button>
+                </div>`;
+            } else {
+                html += `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-slate-50/30 dark:bg-slate-800/10">
+                    <div class="flex items-start gap-4">
+                        <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-slate-200 text-slate-400 dark:bg-slate-700 dark:text-slate-500">
+                            <span class="material-symbols-outlined text-2xl">block</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-1">${position.title}</h3>
+                            <p class="text-lg font-medium text-slate-500 dark:text-slate-400 italic">Abstained</p>
+                            <p class="text-sm text-slate-400 dark:text-slate-500">No selection made</p>
+                        </div>
+                    </div>
+                    <button onclick="window.location.href='/ballot.html'" class="group flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors w-fit ml-auto sm:ml-0">
+                        <span class="material-symbols-outlined text-lg">edit</span> Change
+                    </button>
+                </div>`;
+            }
+        }
+        confirmationList.innerHTML = html;
+    }
 
     // Find the confirmation checkbox
     const checkbox = document.querySelector('input[type="checkbox"]');
@@ -479,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (ballotData.positions) {
                 for (const position of ballotData.positions) {
                     const selectedName = selections[position.title];
-                    if (selectedName) {
+                    if (selectedName && selectedName !== 'Abstain') {
                         const candidate = position.candidates.find(c => c.name === selectedName);
                         if (candidate) {
                             votes.push({ position_id: position.id, candidate_id: candidate.id });

@@ -56,87 +56,6 @@
         }
     </script>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-
-<style id="au-brand-overrides">
-  /* ===== AU Brand Colors Override ===== */
-  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
-
-  /* Active sidebar items get yellow left border */
-  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
-
-  /* Progress bars: yellow fill */
-  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Live/ENDS SOON badges: yellow instead of red */
-  .bg-red-500.rounded-full, .bg-red-500.px-2 {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Camera scan frame corners: yellow */
-  [class*="border-t-4"][class*="border-primary"],
-  [class*="border-b-4"][class*="border-primary"],
-  [class*="border-l-4"][class*="border-primary"],
-  [class*="border-r-4"][class*="border-primary"] {
-    border-color: #F5B400 !important;
-  }
-
-  /* Scan line glow: yellow */
-  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
-  [class*="animate-scanline"] div[class*="bg-primary"] {
-    background-color: #F5B400 !important;
-    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
-  }
-
-  /* Selected candidate card border: yellow */
-  [class*="border-primary"][class*="shadow-lg"] {
-    border-color: #F5B400 !important;
-    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
-  }
-
-  /* Selected candidate radio dot: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Verified check badges on candidates: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* KPI/stat card accent lines at bottom */
-  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Step badges: yellow-tinted bg */
-  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
-    background-color: #FFF5D6 !important;
-    color: #8B6D00 !important;
-  }
-
-  /* Capture button (verify screen): yellow ring */
-  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Stat card icon backgrounds: slightly yellow-tinted */
-  .bg-primary\/10 > .material-symbols-outlined {
-    color: #003DA5 !important;
-  }
-
-  /* University logo wrapper ring */
-  .rounded-lg.bg-primary\/10.text-primary {
-    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
-  }
-</style>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-gray-100 min-h-screen flex flex-col">
 <div class="relative flex flex-col w-full h-full overflow-x-hidden">
@@ -189,7 +108,7 @@
 <span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded-md text-[20px]">how_to_vote</span>
 </div>
 <div class="flex items-end gap-2">
-<p class="text-3xl font-bold leading-tight">4,521</p>
+<p class="text-3xl font-bold leading-tight" id="admin-results-total-votes">--</p>
 <p class="text-success text-sm font-bold mb-1 flex items-center">
 <span class="material-symbols-outlined text-[16px]">trending_up</span>
                                 12%
@@ -204,7 +123,7 @@
 <span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded-md text-[20px]">group</span>
 </div>
 <div class="flex items-end gap-2">
-<p class="text-3xl font-bold leading-tight">87.4%</p>
+<p class="text-3xl font-bold leading-tight" id="admin-results-turnout">--%</p>
 <p class="text-success text-sm font-bold mb-1 flex items-center">
 <span class="material-symbols-outlined text-[16px]">trending_up</span>
                                 5%
@@ -219,7 +138,7 @@
 <span class="material-symbols-outlined text-warning bg-warning/10 p-1 rounded-md text-[20px]">do_not_disturb_on</span>
 </div>
 <div class="flex items-end gap-2">
-<p class="text-3xl font-bold leading-tight">124</p>
+<p class="text-3xl font-bold leading-tight" id="admin-results-abstentions">--</p>
 <p class="text-error text-sm font-bold mb-1 flex items-center">
 <span class="material-symbols-outlined text-[16px]">trending_down</span>
                                 2%
@@ -380,55 +299,8 @@
 <th class="p-4 text-xs font-bold text-text-secondary uppercase tracking-wider text-center">Status</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-border-light dark:divide-gray-700">
-<tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-<td class="p-4 font-medium">President</td>
-<td class="p-4">
-<div class="flex items-center gap-3">
-<div class="size-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-300 font-bold text-xs">DA</div>
-<span class="font-bold text-text-main dark:text-gray-100">David Adeleke</span>
-</div>
-</td>
-<td class="p-4 text-right tabular-nums">2,845</td>
-<td class="p-4 text-right tabular-nums font-medium">62.9%</td>
-<td class="p-4 text-center">
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
-<span class="material-symbols-outlined text-[14px]">check_circle</span> Winner
-                                        </span>
-</td>
-</tr>
-<tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-<td class="p-4 font-medium">Vice President</td>
-<td class="p-4">
-<div class="flex items-center gap-3">
-<div class="size-8 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-purple-600 dark:text-purple-300 font-bold text-xs">SO</div>
-<span class="font-bold text-text-main dark:text-gray-100">Sarah Oladipo</span>
-</div>
-</td>
-<td class="p-4 text-right tabular-nums">2,100</td>
-<td class="p-4 text-right tabular-nums font-medium">46.4%</td>
-<td class="p-4 text-center">
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning/10 text-warning border border-warning/20">
-<span class="material-symbols-outlined text-[14px]">scale</span> Run-off Likely
-                                        </span>
-</td>
-</tr>
-<tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-<td class="p-4 font-medium">Secretary General</td>
-<td class="p-4">
-<div class="flex items-center gap-3">
-<div class="size-8 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-300 font-bold text-xs">CN</div>
-<span class="font-bold text-text-main dark:text-gray-100">Chinedu Nwachukwu</span>
-</div>
-</td>
-<td class="p-4 text-right tabular-nums">3,120</td>
-<td class="p-4 text-right tabular-nums font-medium">69.0%</td>
-<td class="p-4 text-center">
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
-<span class="material-symbols-outlined text-[14px]">check_circle</span> Winner
-                                        </span>
-</td>
-</tr>
+<tbody class="divide-y divide-border-light dark:divide-gray-700" id="admin-results-winners-tbody">
+<!-- Dynamic Winners List Injected Here -->
 </tbody>
 </table>
 </div>
@@ -679,21 +551,67 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const data = await apiCall(`/elections/${electionId}/results/`);
 
-        // Update turnout
-        document.querySelectorAll('span, p, h3, h4').forEach(el => {
-            if (el.textContent.includes('%') && el.textContent.match(/\d+\.?\d*%/)) {
-                el.textContent = data.turnout + '%';
-            }
-        });
+        // Update KPIs
+        const totalVotesEl = document.getElementById('admin-results-total-votes');
+        if (totalVotesEl) totalVotesEl.textContent = data.total_votes.toLocaleString();
 
-        // Update total votes
-        document.querySelectorAll('h3, .text-3xl, .text-4xl').forEach(el => {
-            const text = el.textContent.trim().replace(/,/g, '');
-            const num = parseInt(text);
-            if (!isNaN(num) && num > 100) {
-                el.textContent = data.total_votes.toLocaleString();
-            }
-        });
+        const turnoutEl = document.getElementById('admin-results-turnout');
+        if (turnoutEl) turnoutEl.textContent = data.turnout.toFixed(1) + '%';
+
+        const abstentionsEl = document.getElementById('admin-results-abstentions');
+        if (abstentionsEl) {
+            const eligible = data.eligible_voters || Math.round((data.total_votes / (data.turnout / 100))) || 0;
+            const abstain = Math.max(0, eligible - data.total_votes);
+            abstentionsEl.textContent = abstain.toLocaleString();
+        }
+
+        // Render Projected Winners Table
+        const winnersTbody = document.getElementById('admin-results-winners-tbody');
+        if (winnersTbody && data.positions) {
+            let html = '';
+            const bgColors = ['bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300', 'bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300', 'bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300', 'bg-warning/20 text-warning'];
+
+            data.positions.forEach((position, i) => {
+                if (position.candidates && position.candidates.length > 0) {
+                    // Sort candidates by votes to find the top one
+                    const sortedCandidates = [...position.candidates].sort((a, b) => b.votes - a.votes);
+                    const winner = sortedCandidates[0];
+                    const runnerUp = sortedCandidates.length > 1 ? sortedCandidates[1] : null;
+
+                    const initials = winner.name.substring(0, 2).toUpperCase();
+                    const colorClass = bgColors[i % bgColors.length];
+
+                    const percent = winner.percentage || 0;
+                    const margin = runnerUp ? (percent - (runnerUp.percentage || 0)) : percent;
+
+                    const isClearWinner = percent > 50 || margin > 10;
+                    const statusHtml = isClearWinner
+                        ? `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+                            <span class="material-symbols-outlined text-[14px]">check_circle</span> Winner
+                           </span>`
+                        : `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+                            <span class="material-symbols-outlined text-[14px]">scale</span> Run-off Likely
+                           </span>`;
+
+                    html += `
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                        <td class="p-4 font-medium">${position.title}</td>
+                        <td class="p-4">
+                            <div class="flex items-center gap-3">
+                                <div class="size-8 rounded-full ${colorClass} flex items-center justify-center font-bold text-xs">${initials}</div>
+                                <span class="font-bold text-text-main dark:text-gray-100">${winner.name}</span>
+                            </div>
+                        </td>
+                        <td class="p-4 text-right tabular-nums">${winner.votes.toLocaleString()}</td>
+                        <td class="p-4 text-right tabular-nums font-medium">${percent.toFixed(1)}%</td>
+                        <td class="p-4 text-center">${statusHtml}</td>
+                    </tr>
+                    `;
+                }
+            });
+            winnersTbody.innerHTML = html;
+        }
+
     } catch (err) {
         console.error('Failed to fetch results:', err);
     }

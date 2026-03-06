@@ -45,87 +45,6 @@
             scrollbar-width: none;  /* Firefox */
         }
     </style>
-
-<style id="au-brand-overrides">
-  /* ===== AU Brand Colors Override ===== */
-  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
-
-  /* Active sidebar items get yellow left border */
-  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
-
-  /* Progress bars: yellow fill */
-  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Live/ENDS SOON badges: yellow instead of red */
-  .bg-red-500.rounded-full, .bg-red-500.px-2 {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Camera scan frame corners: yellow */
-  [class*="border-t-4"][class*="border-primary"],
-  [class*="border-b-4"][class*="border-primary"],
-  [class*="border-l-4"][class*="border-primary"],
-  [class*="border-r-4"][class*="border-primary"] {
-    border-color: #F5B400 !important;
-  }
-
-  /* Scan line glow: yellow */
-  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
-  [class*="animate-scanline"] div[class*="bg-primary"] {
-    background-color: #F5B400 !important;
-    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
-  }
-
-  /* Selected candidate card border: yellow */
-  [class*="border-primary"][class*="shadow-lg"] {
-    border-color: #F5B400 !important;
-    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
-  }
-
-  /* Selected candidate radio dot: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Verified check badges on candidates: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* KPI/stat card accent lines at bottom */
-  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Step badges: yellow-tinted bg */
-  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
-    background-color: #FFF5D6 !important;
-    color: #8B6D00 !important;
-  }
-
-  /* Capture button (verify screen): yellow ring */
-  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Stat card icon backgrounds: slightly yellow-tinted */
-  .bg-primary\/10 > .material-symbols-outlined {
-    color: #003DA5 !important;
-  }
-
-  /* University logo wrapper ring */
-  .rounded-lg.bg-primary\/10.text-primary {
-    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
-  }
-</style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-display antialiased selection:bg-primary selection:text-white">
 <div class="flex h-screen w-full overflow-hidden">
@@ -181,12 +100,12 @@
 <div class="flex items-center justify-between">
 <div>
 <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Voting Status</p>
-<p class="mt-2 text-2xl font-bold text-green-600 dark:text-green-400 flex items-center gap-2">
-<span class="material-symbols-outlined filled text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                                    Eligible
+<p class="mt-2 text-2xl font-bold flex items-center gap-2" id="dashboard-voting-status">
+<span class="material-symbols-outlined filled text-xl" style="font-variation-settings: 'FILL' 1;" id="dashboard-voting-icon">...</span>
+                                    Loading
                                 </p>
 </div>
-<div class="flex h-12 w-12 items-center justify-center rounded-full bg-accent-light dark:bg-accent/10 text-green-600 dark:text-green-400">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400" id="dashboard-voting-bg">
 <span class="material-symbols-outlined">verified_user</span>
 </div>
 </div>
@@ -528,6 +447,22 @@ document.addEventListener('DOMContentLoaded', async () => {
                 el.textContent = user.name;
             }
         });
+
+        // Update Voting Status
+        const statusEl = document.getElementById('dashboard-voting-status');
+        const iconEl = document.getElementById('dashboard-voting-icon');
+        const bgEl = document.getElementById('dashboard-voting-bg');
+        if (statusEl && iconEl && bgEl) {
+            if (user.is_verified) {
+                statusEl.innerHTML = `<span class="material-symbols-outlined filled text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span> Eligible`;
+                statusEl.className = 'mt-2 text-2xl font-bold text-green-600 dark:text-green-400 flex items-center gap-2';
+                bgEl.className = 'flex h-12 w-12 items-center justify-center rounded-full bg-accent-light dark:bg-accent/10 text-green-600 dark:text-green-400';
+            } else {
+                statusEl.innerHTML = `<span class="material-symbols-outlined filled text-xl" style="font-variation-settings: 'FILL' 1;">error</span> Unverified`;
+                statusEl.className = 'mt-2 text-2xl font-bold text-red-600 dark:text-red-400 flex items-center gap-2';
+                bgEl.className = 'flex h-12 w-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400';
+            }
+        }
     } catch (err) {
         console.error('Failed to fetch user data:', err);
     }
@@ -666,8 +601,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // News Items (elements with cursor-pointer)
-        else if (el.classList.contains('cursor-pointer') && !el.closest('header')) {
+        else if (el.classList.contains('cursor-pointer') && 
+                 !el.closest('header') && 
+                 !el.closest('#floating-nav') && 
+                 el.id !== 'nav-toggle' && 
+                 el.id !== 'dark-mode-toggle') {
             el.addEventListener('click', (e) => {
+                // Double check we haven't clicked inside the nav menu accidentally
+                if (e.target.closest('#floating-nav') || e.target.closest('#nav-toggle') || e.target.closest('#dark-mode-toggle')) return;
+                
                 e.preventDefault();
                 showToast("Opening full news article...");
             });

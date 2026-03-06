@@ -48,87 +48,6 @@
             scrollbar-width: none;
         }
     </style>
-
-<style id="au-brand-overrides">
-  /* ===== AU Brand Colors Override ===== */
-  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
-
-  /* Active sidebar items get yellow left border */
-  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
-
-  /* Progress bars: yellow fill */
-  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Live/ENDS SOON badges: yellow instead of red */
-  .bg-red-500.rounded-full, .bg-red-500.px-2 {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Camera scan frame corners: yellow */
-  [class*="border-t-4"][class*="border-primary"],
-  [class*="border-b-4"][class*="border-primary"],
-  [class*="border-l-4"][class*="border-primary"],
-  [class*="border-r-4"][class*="border-primary"] {
-    border-color: #F5B400 !important;
-  }
-
-  /* Scan line glow: yellow */
-  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
-  [class*="animate-scanline"] div[class*="bg-primary"] {
-    background-color: #F5B400 !important;
-    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
-  }
-
-  /* Selected candidate card border: yellow */
-  [class*="border-primary"][class*="shadow-lg"] {
-    border-color: #F5B400 !important;
-    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
-  }
-
-  /* Selected candidate radio dot: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Verified check badges on candidates: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* KPI/stat card accent lines at bottom */
-  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Step badges: yellow-tinted bg */
-  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
-    background-color: #FFF5D6 !important;
-    color: #8B6D00 !important;
-  }
-
-  /* Capture button (verify screen): yellow ring */
-  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Stat card icon backgrounds: slightly yellow-tinted */
-  .bg-primary\/10 > .material-symbols-outlined {
-    color: #003DA5 !important;
-  }
-
-  /* University logo wrapper ring */
-  .rounded-lg.bg-primary\/10.text-primary {
-    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
-  }
-</style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col antialiased selection:bg-primary/30">
 <!-- Header Section -->
@@ -164,34 +83,8 @@
 <!-- Tab Navigation (Sticky below header) -->
 <div class="bg-surface-light dark:bg-surface-dark border-b border-neutral-light dark:border-neutral-dark">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<nav aria-label="Tabs" class="flex space-x-8 overflow-x-auto scrollbar-hide py-3 md:py-0">
-<!-- Current Active Tab -->
-<a class="border-primary text-primary whitespace-nowrap py-4 px-1 border-b-2 font-bold text-sm flex items-center gap-2 group" href="#">
-<span class="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs mr-1">1</span>
-                        President
-                    </a>
-<!-- Pending Tabs -->
-<a class="border-transparent text-slate-500 dark:text-slate-400 hover:text-primary hover:border-primary/30 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 group transition-colors" href="#">
-<span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 group-hover:bg-primary/20 group-hover:text-primary text-xs mr-1 transition-colors">2</span>
-                        Vice President
-                    </a>
-<a class="border-transparent text-slate-500 dark:text-slate-400 hover:text-primary hover:border-primary/30 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 group transition-colors" href="#">
-<span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 group-hover:bg-primary/20 group-hover:text-primary text-xs mr-1 transition-colors">3</span>
-                        Gen. Secretary
-                    </a>
-<a class="border-transparent text-slate-500 dark:text-slate-400 hover:text-primary hover:border-primary/30 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 group transition-colors" href="#">
-<span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 group-hover:bg-primary/20 group-hover:text-primary text-xs mr-1 transition-colors">4</span>
-                        Fin. Secretary
-                    </a>
-<a class="border-transparent text-slate-500 dark:text-slate-400 hover:text-primary hover:border-primary/30 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 group transition-colors" href="#">
-<span class="flex items-center justify-center w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 group-hover:bg-primary/20 group-hover:text-primary text-xs mr-1 transition-colors">5</span>
-                        PRO
-                    </a>
-<!-- Completed indicator (Example styling) -->
-<span class="flex-1"></span>
-<div class="hidden md:flex items-center text-xs text-slate-500 py-4">
-                        Step 1 of 5
-                    </div>
+<nav aria-label="Tabs" class="flex space-x-8 overflow-x-auto scrollbar-hide py-3 md:py-0" id="ballot-tabs">
+<!-- Dynamic Tabs will be injected here -->
 </nav>
 </div>
 </div>
@@ -200,132 +93,14 @@
 <main class="flex-grow flex flex-col max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 <!-- Context Header -->
 <div class="mb-8 text-center md:text-left">
-<h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-2">Vote for President</h2>
-<p class="text-slate-600 dark:text-slate-400 max-w-2xl text-lg">
-                The President leads the Student Union, representing the student body in all university matters. Select the candidate who best aligns with your vision for the future.
+<h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-2" id="position-title">Loading...</h2>
+<p class="text-slate-600 dark:text-slate-400 max-w-2xl text-lg" id="position-desc">
+                Please wait while we load the ballot.
             </p>
 </div>
 <!-- Candidates Grid -->
-<form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
-<!-- Candidate 1: Selected State -->
-<label class="relative group cursor-pointer">
-<input checked="" class="peer sr-only" name="president_vote" type="radio" value="candidate_1"/>
-<!-- Card Container -->
-<div class="h-full bg-surface-light dark:bg-surface-dark rounded-2xl border-2 border-[#F5B400] shadow-lg shadow-[#F5B400]/10 transition-all duration-300 peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-primary dark:peer-checked:ring-offset-background-dark peer-checked:bg-primary/5 flex flex-col overflow-hidden">
-<!-- Selected Badge -->
-<div class="absolute top-4 right-4 z-10 bg-[#F5B400] text-black rounded-full p-1 opacity-100 transition-opacity duration-200 shadow-sm">
-<span class="material-symbols-outlined text-xl">check</span>
-</div>
-<!-- Image Section -->
-<div class="h-48 w-full bg-slate-100 relative overflow-hidden">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Portrait of Candidate Oluwaseun Adebayo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC-jkTGM8aehEfHQrM1ls5Rj6gOZGyc-HW56jZL3QkKRTQb4hjwpLcMxIW9Ek93zfcd3wXoZSyDsN2Mpu8y7EdFjITvgCRWmPLzcANSsrhzkKZdIHYba1C5ZQM1ZPNpAe4gSKPhqVM96LYS641CVNVWQOrD6lmfCRGw5ABAj5ff2SaBCxa5iQQ8fk6ox1Ydu4SSSGlC1NBEEeQmDR7oKXVaMl9SuXBkmT_xSKM9LKeBvIvguh3KqfeuV80awTWz6FgtA4t_GpDE7qCu');"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-<div class="absolute bottom-4 left-4 text-white">
-<div class="bg-[#F5B400] text-black backdrop-blur-sm text-xs font-bold px-2 py-1 rounded inline-block mb-1">BALLOT #01</div>
-</div>
-</div>
-<!-- Content Section -->
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Oluwaseun Adebayo</h3>
-<p class="text-sm font-medium text-primary mb-4">Computer Science, 400L</p>
-<p class="text-slate-600 dark:text-slate-400 text-sm mb-6 line-clamp-3 leading-relaxed">
-                            "My vision is to create a fully digitized campus experience where every student has access to resources at the click of a button. We will prioritize Wi-Fi stability and library access."
-                        </p>
-<div class="mt-auto flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
-<button class="text-sm font-semibold text-primary hover:text-primary/80 flex items-center gap-1 transition-colors group/link" onclick="document.getElementById('manifesto-modal').showModal()" type="button">
-<span class="material-symbols-outlined text-lg">article</span>
-                                Read Full Manifesto
-                            </button>
-<!-- Custom Radio Indicator UI -->
-<div class="h-6 w-6 rounded-full border-2 border-primary flex items-center justify-center bg-primary">
-<div class="h-2.5 w-2.5 rounded-full bg-white"></div>
-</div>
-</div>
-</div>
-</div>
-</label>
-<!-- Candidate 2: Default State -->
-<label class="relative group cursor-pointer">
-<input class="peer sr-only" name="president_vote" type="radio" value="candidate_2"/>
-<!-- Card Container -->
-<div class="h-full bg-surface-light dark:bg-surface-dark rounded-2xl border border-neutral-light dark:border-neutral-dark hover:border-primary/50 hover:shadow-md transition-all duration-300 peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-primary dark:peer-checked:ring-offset-background-dark peer-checked:bg-primary/5 flex flex-col overflow-hidden">
-<!-- Selected Badge (Hidden by default) -->
-<div class="absolute top-4 right-4 z-10 bg-primary text-white rounded-full p-1 opacity-0 peer-checked:opacity-100 transition-opacity duration-200 shadow-sm">
-<span class="material-symbols-outlined text-xl">check</span>
-</div>
-<!-- Image Section -->
-<div class="h-48 w-full bg-slate-100 relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Portrait of Candidate Chidinma Okonkwo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDQtXSpQ2--u3-71Gb1i_RwvfK0h1-iUIeRaeWPI03Pz6UXcsoDTWQVV_NwleE7jGhaBZHyO54YY1cS0bB8xW4R_ttT4n242KCfgRgWFxs--GHsC2ceoF6ExPo_6ySGRkNPkWDuSZHbhVq2bL_SHtZSr1EmuzHWgYog2LL_ZXJuRI32Xmt2x4yFTzw6TUY2hja-Z1BrUD0Z5AKy0i3h0c2sxXD_KwENlqCKx47HapUbFi1HEAPzJ85Yahpx0wspXLx816gN92dHEoyE');"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-<div class="absolute bottom-4 left-4 text-white">
-<div class="bg-slate-800/80 backdrop-blur-sm text-xs font-bold px-2 py-1 rounded inline-block mb-1">BALLOT #02</div>
-</div>
-</div>
-<!-- Content Section -->
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Chidinma Okonkwo</h3>
-<p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-4">Law, 500L</p>
-<p class="text-slate-600 dark:text-slate-400 text-sm mb-6 line-clamp-3 leading-relaxed">
-                            "Justice, Equity, and Progress. A vote for me is a vote for a student union that listens. I plan to revamp the student judicial council and ensure fair hearings for all."
-                        </p>
-<div class="mt-auto flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
-<button class="text-sm font-semibold text-slate-500 hover:text-primary flex items-center gap-1 transition-colors group/link" type="button">
-<span class="material-symbols-outlined text-lg">article</span>
-                                Read Full Manifesto
-                            </button>
-<!-- Custom Radio Indicator UI -->
-<div class="h-6 w-6 rounded-full border-2 border-slate-300 dark:border-slate-600 group-hover:border-primary flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
-<div class="h-2.5 w-2.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
-</div>
-</div>
-</div>
-</div>
-</label>
-<!-- Candidate 3: Default State -->
-<label class="relative group cursor-pointer">
-<input class="peer sr-only" name="president_vote" type="radio" value="candidate_3"/>
-<!-- Card Container -->
-<div class="h-full bg-surface-light dark:bg-surface-dark rounded-2xl border border-neutral-light dark:border-neutral-dark hover:border-primary/50 hover:shadow-md transition-all duration-300 peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-primary dark:peer-checked:ring-offset-background-dark peer-checked:bg-primary/5 flex flex-col overflow-hidden">
-<!-- Selected Badge (Hidden by default) -->
-<div class="absolute top-4 right-4 z-10 bg-primary text-white rounded-full p-1 opacity-0 peer-checked:opacity-100 transition-opacity duration-200 shadow-sm">
-<span class="material-symbols-outlined text-xl">check</span>
-</div>
-<!-- Image Section -->
-<div class="h-48 w-full bg-slate-100 relative overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Portrait of Candidate Yusuf Ibrahim" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCN0jbq0rCO94Ewg-ayVFZS3fn1wPbKy3fciFDaHyOSyCiRCKUR-c15Y4fWWTIlRA3Haq3wuslFyXnx3TJCXPo2yEtJ9E6Svj0e8riFqdGhdFmH5TMSSlqqttmjEFvC0oxD-gZN3xHiIxnq8FUZwHM5ExvY8Zmn4CR1fPPR3kvrQwFR487cg7jC62CkYSrAA6cMB-6riS5lNv-AWToLfU5Zx-gh9G_A3YhMJuqG8aphzrRBTqefE2hCdMsrzXE55D9MIBo6Twz8TiiI');"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-<div class="absolute bottom-4 left-4 text-white">
-<div class="bg-slate-800/80 backdrop-blur-sm text-xs font-bold px-2 py-1 rounded inline-block mb-1">BALLOT #03</div>
-</div>
-</div>
-<!-- Content Section -->
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">Yusuf Ibrahim</h3>
-<p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-4">Accounting, 300L</p>
-<p class="text-slate-600 dark:text-slate-400 text-sm mb-6 line-clamp-3 leading-relaxed">
-                            "Transparency in funding is key. As President, I will ensure every Naira spent is accounted for. My administration will focus on upgrading the cafeteria and sports complex."
-                        </p>
-<div class="mt-auto flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
-<button class="text-sm font-semibold text-slate-500 hover:text-primary flex items-center gap-1 transition-colors group/link" type="button">
-<span class="material-symbols-outlined text-lg">article</span>
-                                Read Full Manifesto
-                            </button>
-<!-- Custom Radio Indicator UI -->
-<div class="h-6 w-6 rounded-full border-2 border-slate-300 dark:border-slate-600 group-hover:border-primary flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
-<div class="h-2.5 w-2.5 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
-</div>
-</div>
-</div>
-</div>
-</label>
-<!-- Abstain Option -->
-<label class="relative group cursor-pointer md:col-span-2 lg:col-span-3">
-<input class="peer sr-only" name="president_vote" type="radio" value="abstain"/>
-<div class="bg-transparent border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-4 flex items-center justify-center gap-3 hover:border-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary text-slate-500">
-<span class="material-symbols-outlined">block</span>
-<span class="font-bold">I wish to abstain from voting for President</span>
-</div>
-</label>
+<form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24" id="candidates-grid">
+<!-- Dynamic Candidate Cards will be injected here -->
 </form>
 </main>
 <!-- Sticky Footer -->
@@ -578,95 +353,195 @@ document.addEventListener('DOMContentLoaded', async () => {
     const session = requireStudentAuth();
     if (!session) return;
 
-    const selections = {};
+    let selections = JSON.parse(sessionStorage.getItem('au-ballot-selections') || '{}');
     const electionId = localStorage.getItem('au-active-election') || '1';
+    let currentBallot = null;
+    let activePositionIndex = 0;
 
     // Fetch ballot data from API
     try {
-        const ballot = await apiCall(`/elections/${electionId}/ballot/`);
-        if (ballot.has_voted) {
+        currentBallot = await apiCall(`/elections/${electionId}/ballot/`);
+        if (currentBallot.has_voted) {
             showToast('You have already voted in this election.', 'info');
         }
         // Store positions data for the confirmation page
-        localStorage.setItem('au-ballot-data', JSON.stringify(ballot));
+        localStorage.setItem('au-ballot-data', JSON.stringify(currentBallot));
+
+        if (currentBallot.positions && currentBallot.positions.length > 0) {
+            renderTabs();
+            renderPosition(0);
+        } else {
+            document.getElementById('position-title').textContent = "No Positions Available";
+            document.getElementById('position-desc').textContent = "This election has no positions created yet.";
+        }
     } catch (err) {
         console.error('Failed to fetch ballot:', err);
+        document.getElementById('position-title').textContent = "Error Loading Ballot";
+        document.getElementById('position-desc').textContent = "Failed to communicate with the server.";
     }
 
-    // Make candidate cards selectable (radio behavior per position)
-    const candidateCards = document.querySelectorAll('[class*="border"][class*="rounded"][class*="cursor-pointer"], [class*="group"][class*="cursor-pointer"]');
+    function renderTabs() {
+        const tabsContainer = document.getElementById('ballot-tabs');
+        if (!tabsContainer || !currentBallot.positions) return;
 
-    candidateCards.forEach(card => {
-        card.addEventListener('click', () => {
-            // Find the position/category this card belongs to
-            const section = card.closest('section, [class*="space-y"], [class*="grid"]')?.parentElement;
-            const positionEl = section?.querySelector('h2, h3, h4, [class*="font-bold"]');
-            const position = positionEl?.textContent?.trim() || 'Unknown';
+        tabsContainer.innerHTML = currentBallot.positions.map((pos, index) => {
+            const isActive = index === activePositionIndex;
+            const hasSelection = !!selections[pos.title];
 
-            // Find candidate name
-            const nameEl = card.querySelector('h3, h4, [class*="font-bold"], [class*="font-semibold"]');
-            const name = nameEl?.textContent?.trim() || 'Unknown';
-
-            // Deselect siblings
-            const siblings = card.parentElement?.children;
-            if (siblings) {
-                Array.from(siblings).forEach(sib => {
-                    sib.classList.remove('border-[#F5B400]', 'border-primary', 'shadow-lg', 'ring-2', 'ring-primary/20');
-                    sib.classList.add('border-slate-200', 'dark:border-slate-700');
-                    const check = sib.querySelector('[class*="opacity-100"]');
-                    if (check) check.classList.replace('opacity-100', 'opacity-0');
-                    const radio = sib.querySelector('[class*="bg-primary"], [class*="bg-\\[#F5B400\\]"]');
-                    if (radio && radio.classList.contains('size-3')) radio.classList.add('scale-0');
-                });
+            if (isActive) {
+                return `
+                <a class="border-primary text-primary whitespace-nowrap py-4 px-1 border-b-2 font-bold text-sm flex items-center gap-2 group cursor-pointer" 
+                   onclick="window.switchPosition(${index})">
+                    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white text-xs mr-1">${index + 1}</span>
+                    ${pos.title}
+                </a>`;
+            } else {
+                const badgeColor = hasSelection ? 'bg-green-500 text-white' : 'bg-slate-200 dark:bg-slate-700 text-slate-500 group-hover:bg-primary/20 group-hover:text-primary';
+                const badgeIcon = hasSelection ? '<span class="material-symbols-outlined text-[14px]">check</span>' : (index + 1);
+                return `
+                <a class="border-transparent text-slate-500 dark:text-slate-400 hover:text-primary hover:border-primary/30 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center gap-2 group transition-colors cursor-pointer" 
+                   onclick="window.switchPosition(${index})">
+                    <span class="flex items-center justify-center w-6 h-6 rounded-full ${badgeColor} text-xs mr-1 transition-colors">
+                        ${badgeIcon}
+                    </span>
+                    ${pos.title}
+                </a>`;
             }
+        }).join('') + `
+        <span class="flex-1"></span>
+        <div class="hidden md:flex items-center text-xs text-slate-500 py-4">
+            Step ${activePositionIndex + 1} of ${currentBallot.positions.length}
+        </div>
+        `;
+    }
 
-            // Select this card
-            card.classList.remove('border-slate-200', 'dark:border-slate-700');
-            card.classList.add('border-[#F5B400]', 'shadow-lg', 'ring-2', 'ring-primary/20');
-            const check = card.querySelector('[class*="opacity-0"]');
-            if (check) check.classList.replace('opacity-0', 'opacity-100');
-            const radio = card.querySelector('.size-3');
-            if (radio) radio.classList.remove('scale-0');
+    function renderPosition(index) {
+        if (!currentBallot || !currentBallot.positions || !currentBallot.positions[index]) return;
+        activePositionIndex = index;
+        const position = currentBallot.positions[index];
 
-            // Store selection by position name and try to identify candidate/position IDs
-            selections[position] = { name, card };
-            sessionStorage.setItem('au-ballot-selections', JSON.stringify(
-                Object.fromEntries(Object.entries(selections).map(([k, v]) => [k, v.name]))
-            ));
-        });
-    });
+        document.getElementById('position-title').textContent = `Vote for ${position.title}`;
+        document.getElementById('position-desc').textContent = "Select the candidate who best aligns with your vision for the future.";
 
-    // Tab navigation
-    document.querySelectorAll('[class*="tab"], [role="tab"]').forEach(tab => {
-        tab.addEventListener('click', () => {
-            tab.parentElement?.querySelectorAll('[class*="tab"], [role="tab"]').forEach(t => {
-                t.classList.remove('text-primary', 'border-primary', 'border-b-2');
-                t.classList.add('text-slate-500');
-            });
-            tab.classList.add('text-primary', 'border-primary', 'border-b-2');
-            tab.classList.remove('text-slate-500');
-        });
-    });
+        renderTabs(); // Re-render tabs to update active state
 
-    // Next / Submit button -> confirmation
-    document.querySelectorAll('a, button').forEach(el => {
+        const grid = document.getElementById('candidates-grid');
+        if (!grid) return;
+
+        let html = '';
+        if (position.candidates && position.candidates.length > 0) {
+            html += position.candidates.map((cand, candIndex) => {
+                const isSelected = selections[position.title] === cand.name;
+
+                // CSS classes based on selection state
+                const cardContainerClass = isSelected
+                    ? "border-[#F5B400] shadow-lg shadow-[#F5B400]/10 ring-2 ring-offset-2 ring-primary dark:ring-offset-background-dark bg-primary/5"
+                    : "border-neutral-light dark:border-neutral-dark hover:border-primary/50 hover:shadow-md";
+
+                const checkBadgeOpacity = isSelected ? "opacity-100" : "opacity-0";
+                const imgGrayscaleClass = isSelected ? "" : "grayscale group-hover:grayscale-0";
+                const radioCircleClass = isSelected ? "bg-primary border-primary" : "border-slate-300 dark:border-slate-600 group-hover:border-primary";
+                const radioDotOpacity = isSelected ? "opacity-100" : "opacity-0 text-white";
+
+                return `
+                <label class="relative group cursor-pointer" onclick="window.selectCandidate('${position.title}', '${cand.name.replace(/'/g, "\\'")}')">
+                    <input class="peer sr-only" name="${position.id}_vote" type="radio" value="${cand.id}" ${isSelected ? 'checked' : ''}/>
+                    <div class="h-full bg-surface-light dark:bg-surface-dark rounded-2xl border-2 ${cardContainerClass} transition-all duration-300 flex flex-col overflow-hidden">
+                        <div class="absolute top-4 right-4 z-10 bg-[#F5B400] text-black rounded-full p-1 ${checkBadgeOpacity} transition-opacity duration-200 shadow-sm">
+                            <span class="material-symbols-outlined text-xl">check</span>
+                        </div>
+                        <div class="h-48 w-full bg-slate-100 relative overflow-hidden ${imgGrayscaleClass} transition-all duration-500">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" 
+                                 style="background-image: url('${cand.photo_url || 'https://via.placeholder.com/300?text=No+Photo'}');"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 text-white">
+                                <div class="bg-[#F5B400] text-black backdrop-blur-sm text-xs font-bold px-2 py-1 rounded inline-block mb-1">BALLOT #${(candIndex + 1).toString().padStart(2, '0')}</div>
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-1">${cand.name}</h3>
+                            <p class="text-sm font-medium text-primary mb-4">${cand.party || 'Independent'}</p>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 line-clamp-3 leading-relaxed">
+                                "${cand.bio || 'I promise to serve the student body with integrity and diligence.'}"
+                            </p>
+                            <div class="mt-auto flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
+                                <button class="text-sm font-semibold text-primary hover:text-primary/80 flex items-center gap-1 transition-colors group/link" type="button">
+                                    <span class="material-symbols-outlined text-lg">article</span>
+                                    Read Full Manifesto
+                                </button>
+                                <div class="h-6 w-6 rounded-full border-2 ${radioCircleClass} flex items-center justify-center transition-colors">
+                                    <div class="h-2.5 w-2.5 rounded-full bg-white ${radioDotOpacity}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+                `;
+            }).join('');
+        }
+
+        const isAbstain = selections[position.title] === 'Abstain';
+        const abstainClass = isAbstain ? "border-primary bg-primary/5 text-primary" : "border-slate-300 dark:border-slate-700 text-slate-500 hover:border-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800";
+
+        html += `
+        <label class="relative group cursor-pointer md:col-span-2 lg:col-span-3" onclick="window.selectCandidate('${position.title}', 'Abstain')">
+            <input class="peer sr-only" name="${position.id}_vote" type="radio" value="abstain" ${isAbstain ? 'checked' : ''}/>
+            <div class="bg-transparent border-2 border-dashed rounded-xl p-4 flex items-center justify-center gap-3 transition-colors ${abstainClass}">
+                <span class="material-symbols-outlined">block</span>
+                <span class="font-bold">I wish to abstain from voting for ${position.title}</span>
+            </div>
+        </label>
+        `;
+
+        grid.innerHTML = html;
+
+        // Update summary footer
+        const selectionMadeContainer = document.querySelector('.fixed.bottom-0 .hidden.sm\\:block');
+        if (selectionMadeContainer) {
+            const selectedName = selections[position.title];
+            if (selectedName) {
+                selectionMadeContainer.innerHTML = `Selection made: <span class="font-bold text-primary">${selectedName}</span>`;
+            } else {
+                selectionMadeContainer.innerHTML = `No selection made yet`;
+            }
+        }
+    }
+
+    // Global methods for inline handlers
+    window.switchPosition = (index) => {
+        renderPosition(index);
+    };
+
+    window.selectCandidate = (positionTitle, candidateName) => {
+        selections[positionTitle] = candidateName;
+        sessionStorage.setItem('au-ballot-selections', JSON.stringify(selections));
+        renderPosition(activePositionIndex); // Re-render to update UI state
+    };
+
+    // Submitting or Reviewing Ballot
+    document.querySelectorAll('.fixed.bottom-0 button').forEach(el => {
         const text = el.textContent.trim().toLowerCase();
-        if (text.includes('review') || text.includes('next') || text.includes('proceed') || text.includes('continue')) {
+
+        if (text.includes('review') || text.includes('next') || text.includes('proceed') || text.includes('confirm')) {
             el.addEventListener('click', (e) => {
                 e.preventDefault();
                 if (Object.keys(selections).length === 0) {
-                    showToast('Please select at least one candidate', 'error');
+                    showToast('Please select at least one candidate before proceeding', 'error');
                     return;
                 }
-                sessionStorage.setItem('au-ballot-selections', JSON.stringify(
-                    Object.fromEntries(Object.entries(selections).map(([k, v]) => [k, v.name]))
-                ));
                 window.location.href = '/confirmation.html';
             });
         }
-        // Back button
+
         if (text.includes('back') || text.includes('previous')) {
-            el.addEventListener('click', (e) => { e.preventDefault(); window.location.href = '/elections.html'; });
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (activePositionIndex > 0) {
+                    window.switchPosition(activePositionIndex - 1);
+                } else {
+                    window.location.href = '/elections.html';
+                }
+            });
         }
     });
 });

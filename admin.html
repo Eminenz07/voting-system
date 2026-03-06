@@ -56,87 +56,6 @@
             'opsz' 24
         }
     </style>
-
-<style id="au-brand-overrides">
-  /* ===== AU Brand Colors Override ===== */
-  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
-
-  /* Active sidebar items get yellow left border */
-  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
-
-  /* Progress bars: yellow fill */
-  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Live/ENDS SOON badges: yellow instead of red */
-  .bg-red-500.rounded-full, .bg-red-500.px-2 {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Camera scan frame corners: yellow */
-  [class*="border-t-4"][class*="border-primary"],
-  [class*="border-b-4"][class*="border-primary"],
-  [class*="border-l-4"][class*="border-primary"],
-  [class*="border-r-4"][class*="border-primary"] {
-    border-color: #F5B400 !important;
-  }
-
-  /* Scan line glow: yellow */
-  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
-  [class*="animate-scanline"] div[class*="bg-primary"] {
-    background-color: #F5B400 !important;
-    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
-  }
-
-  /* Selected candidate card border: yellow */
-  [class*="border-primary"][class*="shadow-lg"] {
-    border-color: #F5B400 !important;
-    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
-  }
-
-  /* Selected candidate radio dot: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Verified check badges on candidates: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* KPI/stat card accent lines at bottom */
-  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Step badges: yellow-tinted bg */
-  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
-    background-color: #FFF5D6 !important;
-    color: #8B6D00 !important;
-  }
-
-  /* Capture button (verify screen): yellow ring */
-  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Stat card icon backgrounds: slightly yellow-tinted */
-  .bg-primary\/10 > .material-symbols-outlined {
-    color: #003DA5 !important;
-  }
-
-  /* University logo wrapper ring */
-  .rounded-lg.bg-primary\/10.text-primary {
-    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
-  }
-</style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-text-primary dark:text-slate-100 min-h-screen flex overflow-hidden">
 <!-- Main Content Area -->
@@ -274,7 +193,7 @@
 </select>
 </div>
 <!-- CSS Chart Representation -->
-<div class="relative h-64 w-full flex items-end justify-between gap-2 px-2">
+<div class="relative w-full flex items-end justify-between gap-2 px-2 mt-8 pb-4 min-h-[260px]">
 <!-- Y-Axis Lines (Background) -->
 <div class="absolute inset-0 flex flex-col justify-between pointer-events-none z-0">
 <div class="w-full h-px bg-slate-100 dark:bg-slate-700"></div>
@@ -284,51 +203,51 @@
 <div class="w-full h-px bg-slate-100 dark:bg-slate-700"></div>
 </div>
 <!-- Data Bars -->
-<div class="relative z-10 w-full flex items-end justify-around h-full pt-6 pb-6">
+<div class="relative z-10 w-full flex items-end justify-around h-full pt-6">
 <!-- Bar Group 1 -->
-<div class="flex flex-col items-center gap-2 group w-1/12">
+<div class="flex flex-col items-center gap-2 group w-1/12 h-[200px] justify-end">
 <div class="w-full max-w-[24px] bg-primary rounded-t-sm h-[40%] group-hover:bg-[#00358F] transition-all relative">
 <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">40%</div>
 </div>
 <span class="text-xs text-slate-400">Mon</span>
 </div>
 <!-- Bar Group 2 -->
-<div class="flex flex-col items-center gap-2 group w-1/12">
+<div class="flex flex-col items-center gap-2 group w-1/12 h-[200px] justify-end">
 <div class="w-full max-w-[24px] bg-primary rounded-t-sm h-[55%] group-hover:bg-[#00358F] transition-all relative">
 <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">55%</div>
 </div>
 <span class="text-xs text-slate-400">Tue</span>
 </div>
 <!-- Bar Group 3 -->
-<div class="flex flex-col items-center gap-2 group w-1/12">
+<div class="flex flex-col items-center gap-2 group w-1/12 h-[200px] justify-end">
 <div class="w-full max-w-[24px] bg-primary rounded-t-sm h-[45%] group-hover:bg-[#00358F] transition-all relative">
 <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">45%</div>
 </div>
 <span class="text-xs text-slate-400">Wed</span>
 </div>
 <!-- Bar Group 4 -->
-<div class="flex flex-col items-center gap-2 group w-1/12">
+<div class="flex flex-col items-center gap-2 group w-1/12 h-[200px] justify-end">
 <div class="w-full max-w-[24px] bg-primary rounded-t-sm h-[70%] group-hover:bg-[#00358F] transition-all relative">
 <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">70%</div>
 </div>
 <span class="text-xs text-slate-400">Thu</span>
 </div>
 <!-- Bar Group 5 -->
-<div class="flex flex-col items-center gap-2 group w-1/12">
+<div class="flex flex-col items-center gap-2 group w-1/12 h-[200px] justify-end">
 <div class="w-full max-w-[24px] bg-primary rounded-t-sm h-[65%] group-hover:bg-[#00358F] transition-all relative">
 <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">65%</div>
 </div>
 <span class="text-xs text-slate-400">Fri</span>
 </div>
 <!-- Bar Group 6 -->
-<div class="flex flex-col items-center gap-2 group w-1/12">
+<div class="flex flex-col items-center gap-2 group w-1/12 h-[200px] justify-end">
 <div class="w-full max-w-[24px] bg-slate-300 dark:bg-slate-600 rounded-t-sm h-[25%] group-hover:bg-slate-400 transition-all relative">
 <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">25%</div>
 </div>
 <span class="text-xs text-slate-400">Sat</span>
 </div>
 <!-- Bar Group 7 -->
-<div class="flex flex-col items-center gap-2 group w-1/12">
+<div class="flex flex-col items-center gap-2 group w-1/12 h-[200px] justify-end">
 <div class="w-full max-w-[24px] bg-slate-300 dark:bg-slate-600 rounded-t-sm h-[30%] group-hover:bg-slate-400 transition-all relative">
 <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">30%</div>
 </div>
@@ -754,6 +673,80 @@ document.addEventListener('DOMContentLoaded', async () => {
                 el.textContent = data.total_votes?.toLocaleString() || '0';
             }
         });
+
+        // Render Active Elections Table
+        const electionsTableBody = document.querySelector('tbody.divide-y');
+        if (electionsTableBody && data.recent_elections && data.recent_elections.length > 0) {
+            electionsTableBody.innerHTML = data.recent_elections.map(election => {
+                const startDate = new Date(election.start_date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+                const endDate = new Date(election.end_date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+
+                // Determine status pill formatting
+                let statusHtml = '';
+                if (election.status === 'active') {
+                    statusHtml = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                        <span class="size-1.5 rounded-full bg-green-500 animate-pulse"></span>Live</span>`;
+                } else if (election.status === 'completed') {
+                    statusHtml = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+                        Completed</span>`;
+                } else {
+                    statusHtml = `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+                        Upcoming</span>`;
+                }
+
+                return `
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                    <td class="p-4 pl-6">
+                        <div class="flex items-center gap-3">
+                            <div class="size-8 rounded bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center">
+                                <span class="material-symbols-outlined text-lg">how_to_vote</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-900 dark:text-white">${election.title}</p>
+                                <p class="text-xs text-text-secondary w-48 truncate">${election.description || 'General Election'}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4 text-sm text-slate-600 dark:text-slate-300">${startDate}</td>
+                    <td class="p-4 text-sm text-slate-600 dark:text-slate-300">${endDate}</td>
+                    <td class="p-4">
+                        <span class="text-sm font-medium text-slate-900 dark:text-white">ID: ${election.id}</span>
+                    </td>
+                    <td class="p-4">${statusHtml}</td>
+                    <td class="p-4 pr-6 text-right">
+                        <button onclick="window.location.href='/monitoring.html'" class="text-primary hover:text-blue-700 transition-colors p-1" title="Monitor">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                    </td>
+                </tr>
+                `;
+            }).join('');
+        }
+
+        // Render Recent Activity (Mocked for now since API doesn't have an activity endpoint yet, but UI is dynamic)
+        const activityFeed = document.querySelector('.overflow-y-auto.pr-2.space-y-6');
+        if (activityFeed) {
+            const activities = [
+                { title: 'Dashboard Accessed', desc: `Admin ${session.name} logged in.`, time: 'Just now', icon: 'login', color: 'bg-primary' },
+                { title: 'Data Synced', desc: 'Real-time dashboard data updated via API.', time: 'Just now', icon: 'sync', color: 'bg-green-500' }
+            ];
+
+            activityFeed.innerHTML = activities.map((act, index) => `
+                <div class="flex gap-4">
+                    <div class="flex flex-col items-center">
+                        <div class="size-8 rounded-full ${act.color}/10 text-${act.color.replace('bg-', '')} flex items-center justify-center relative mt-1">
+                             <div class="size-2 rounded-full ${act.color} absolute"></div>
+                        </div>
+                        ${index !== activities.length - 1 ? '<div class="w-0.5 flex-1 bg-slate-200 dark:bg-slate-700 my-1"></div>' : ''}
+                    </div>
+                    <div class="pb-2 flex-1">
+                        <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">${act.title}</p>
+                        <p class="text-sm text-text-secondary dark:text-slate-400">${act.desc}</p>
+                        <p class="text-xs text-slate-400 mt-1">${act.time}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
 
     } catch (err) {
         console.error('Failed to fetch admin dashboard:', err);

@@ -52,87 +52,6 @@
         }
     </style>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-
-<style id="au-brand-overrides">
-  /* ===== AU Brand Colors Override ===== */
-  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
-
-  /* Active sidebar items get yellow left border */
-  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
-
-  /* Progress bars: yellow fill */
-  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
-  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Live/ENDS SOON badges: yellow instead of red */
-  .bg-red-500.rounded-full, .bg-red-500.px-2 {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Camera scan frame corners: yellow */
-  [class*="border-t-4"][class*="border-primary"],
-  [class*="border-b-4"][class*="border-primary"],
-  [class*="border-l-4"][class*="border-primary"],
-  [class*="border-r-4"][class*="border-primary"] {
-    border-color: #F5B400 !important;
-  }
-
-  /* Scan line glow: yellow */
-  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
-  [class*="animate-scanline"] div[class*="bg-primary"] {
-    background-color: #F5B400 !important;
-    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
-  }
-
-  /* Selected candidate card border: yellow */
-  [class*="border-primary"][class*="shadow-lg"] {
-    border-color: #F5B400 !important;
-    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
-  }
-
-  /* Selected candidate radio dot: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Verified check badges on candidates: yellow */
-  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* KPI/stat card accent lines at bottom */
-  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
-    background-color: #F5B400 !important;
-  }
-
-  /* Step badges: yellow-tinted bg */
-  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
-    background-color: #FFF5D6 !important;
-    color: #8B6D00 !important;
-  }
-
-  /* Capture button (verify screen): yellow ring */
-  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
-    background-color: #F5B400 !important;
-    color: #000 !important;
-  }
-
-  /* Stat card icon backgrounds: slightly yellow-tinted */
-  .bg-primary\/10 > .material-symbols-outlined {
-    color: #003DA5 !important;
-  }
-
-  /* University logo wrapper ring */
-  .rounded-lg.bg-primary\/10.text-primary {
-    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
-  }
-</style>
 </head>
 <body class="bg-background-light text-slate-900 font-display antialiased min-h-screen flex flex-col overflow-x-hidden">
 <!-- Top Navigation -->
@@ -176,8 +95,8 @@
 <span class="material-symbols-outlined text-[16px]">verified</span>
                     OFFICIAL CERTIFIED RESULTS
                 </div>
-<h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">2024 SUG Presidential Election</h2>
-<p class="text-neutral-500 text-base md:text-lg">Certified by the Adeleke University Electoral Committee (AUEC) • Final Count</p>
+<h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight" id="election-title">Loading Election Results...</h2>
+<p class="text-neutral-500 text-base md:text-lg" id="election-desc">Certified by the Adeleke University Electoral Committee (AUEC) • Final Count</p>
 </div>
 <div class="flex items-center gap-3">
 <button class="flex items-center gap-2 h-10 px-5 bg-white border border-neutral-300 text-neutral-700 text-sm font-bold rounded-lg hover:bg-neutral-50 transition-colors shadow-sm">
@@ -199,7 +118,7 @@
 </div>
 <p class="text-neutral-500 text-sm font-semibold uppercase tracking-wider mb-2">Total Eligible Voters</p>
 <div class="flex items-baseline gap-2">
-<span class="text-4xl font-black text-slate-900">15,420</span>
+<span class="text-4xl font-black text-slate-900" id="metric-eligible">--</span>
 </div>
 <div class="mt-4 flex items-center gap-2 text-sm text-neutral-500">
 <span class="inline-block w-2 h-2 rounded-full bg-neutral-300"></span>
@@ -213,13 +132,13 @@
 </div>
 <p class="text-neutral-500 text-sm font-semibold uppercase tracking-wider mb-2">Votes Cast</p>
 <div class="flex items-baseline gap-3">
-<span class="text-4xl font-black text-slate-900">12,850</span>
-<span class="text-sm font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
-                        +5.2% vs 2023
+<span class="text-4xl font-black text-slate-900" id="metric-votes">--</span>
+<span class="text-sm font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100" id="metric-votes-badge">
+                        Live Tracking
                     </span>
 </div>
-<div class="mt-4 w-full bg-neutral-100 rounded-full h-1.5">
-<div class="bg-primary h-1.5 rounded-full" style="width: 83.3%"></div>
+<div class="mt-4 w-full bg-neutral-100 rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full transition-all duration-1000 w-0" id="metric-votes-bar"></div>
 </div>
 </div>
 <!-- Card 3 -->
@@ -229,14 +148,14 @@
 </div>
 <p class="text-neutral-500 text-sm font-semibold uppercase tracking-wider mb-2">Voter Turnout</p>
 <div class="flex items-baseline gap-3">
-<span class="text-4xl font-black text-slate-900">83.3%</span>
-<span class="text-sm font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
-                        High Engagement
+<span class="text-4xl font-black text-slate-900" id="metric-turnout">--%</span>
+<span class="text-sm font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100" id="metric-turnout-badge">
+                        Calculating
                     </span>
 </div>
 <div class="mt-4 flex items-center gap-2 text-sm text-neutral-500">
 <span class="material-symbols-outlined text-sm">trending_up</span>
-<span>4.1% increase from last election</span>
+<span id="metric-turnout-desc">High Engagement Expected</span>
 </div>
 </div>
 </div>
@@ -255,71 +174,8 @@
 </div>
 </div>
 <!-- Chart Content -->
-<div class="flex flex-col gap-8">
-<!-- Candidate 1 -->
-<div class="group">
-<div class="flex items-end justify-between mb-2">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-neutral-100 overflow-hidden border border-neutral-200" data-alt="Candidate portrait photo">
-<img alt="David O." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDohbK4rKIU3a6oQgdfT9ehGjFQTpolT_NzAFEWiNjqPbYrjyC7OpQwbIWI4VyutZ74eeBfXyaEGXde3B-_jxCELpSxuiK3buRJMEAEzVUIZm07GMppAF6kkNj9VZpqEnbgotlr_TcYWwufOa3tvuFMQEAnTWz8Y32zd3MyGCiXjGGBuxUuyg5NO5mpwbD6am1X4d-9gDL9oPJ1F6dAK8jCkooS2O2tB2rgbzLlZmAsMv5jTQEte0pgDROR0nUlhqR6-JRLlf8CMd_R"/>
-</div>
-<div>
-<p class="font-bold text-slate-900 group-hover:text-primary transition-colors">David O.</p>
-<p class="text-xs text-neutral-500">Progressive Alliance</p>
-</div>
-</div>
-<div class="text-right">
-<p class="text-2xl font-bold text-slate-900">5,140</p>
-<p class="text-xs font-bold text-primary">40%</p>
-</div>
-</div>
-<div class="w-full bg-neutral-100 rounded-full h-3 overflow-hidden">
-<div class="bg-primary h-full rounded-full relative group-hover:bg-primary/90 transition-all duration-500 ease-out w-[40%]">
-<div class="absolute right-0 top-0 bottom-0 w-[2px] bg-white/30"></div>
-</div>
-</div>
-</div>
-<!-- Candidate 2 -->
-<div class="group">
-<div class="flex items-end justify-between mb-2">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-neutral-100 overflow-hidden border border-neutral-200" data-alt="Candidate portrait photo">
-<img alt="Sarah M." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSN1GYmK8jyjNPrhfwpWozRNSsqns63v0OG6xS7EuEsFMbx2rmaEup0ZZHGGCGNfG5qlQmZVRYQ1JthkIJ1n-Fa30A_fFpiK1bhjBmI61D9IFf72NcNmzUS6GgrexbFNibKxs0WdNzBoTM1VrGUfTdc3Ep9DoYk8rsObcvgciQ6MwKpMEfc0GPKOzBUzvW0oPvn0x3HiFJy8yyOo2a2pjrOp2iZyNyAtPz5UJOsxExnJjQ8ZyEV3DAqwLdbv-iuGRrwsqbbDdW5BJ3"/>
-</div>
-<div>
-<p class="font-bold text-slate-900 group-hover:text-primary transition-colors">Sarah M.</p>
-<p class="text-xs text-neutral-500">Student Voice</p>
-</div>
-</div>
-<div class="text-right">
-<p class="text-2xl font-bold text-slate-900">4,497</p>
-<p class="text-xs font-bold text-neutral-500">35%</p>
-</div>
-</div>
-<div class="w-full bg-neutral-100 rounded-full h-3 overflow-hidden">
-<div class="bg-neutral-400 h-full rounded-full relative group-hover:bg-neutral-500 transition-all duration-500 ease-out w-[35%]"></div>
-</div>
-</div>
-<!-- Candidate 3 -->
-<div class="group">
-<div class="flex items-end justify-between mb-2">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-neutral-100 overflow-hidden border border-neutral-200" data-alt="Candidate portrait photo">
-<img alt="Emmanuel K." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeKv-FnrXYISinC1OtLva5YRObY4cTWC6EbzXvsXSN0BUK8gz-l9HwF560-BS3iIItGyI-TZ8N_R0mQ3cHakMGe-R3C2Advj2NxKzDak6_I4LKzpEX5_LT6TDwd7JbH-h7iLEmWLh9tWqr1O_hr0VGcAgoa_bR3WbcdWaNU_50xs_h2oAVGXVrGuvT2mpu0OkfUq56xHBMRgS-zSQUq6hUVewlKV3P6HYLLF_sXfdGqWff_gFWhEJsJjepd_8LDWW_ezuy0sb1oUG1"/>
-</div>
-<div>
-<p class="font-bold text-slate-900 group-hover:text-primary transition-colors">Emmanuel K.</p>
-<p class="text-xs text-neutral-500">Unity Front</p>
-</div>
-</div>
-<div class="text-right">
-<p class="text-2xl font-bold text-slate-900">3,213</p>
-<p class="text-xs font-bold text-neutral-500">25%</p>
-</div>
-</div>
-<div class="w-full bg-neutral-100 rounded-full h-3 overflow-hidden">
-<div class="bg-neutral-300 h-full rounded-full relative group-hover:bg-neutral-400 transition-all duration-500 ease-out w-[25%]"></div>
-</div>
+<div class="flex flex-col gap-10" id="results-container">
+<!-- Dynamic Results will be injected here -->
 </div>
 </div>
 <div class="mt-8 pt-6 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-400">
@@ -573,35 +429,90 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const data = await apiCall(`/elections/${electionId}/results/`);
 
-        // Update turnout percentage if displayed
-        document.querySelectorAll('span, p, h3, h4').forEach(el => {
-            if (el.textContent.includes('%') && el.textContent.match(/\d+\.?\d*%/)) {
-                el.textContent = data.turnout + '%';
-            }
-        });
+        const titleEl = document.getElementById('election-title');
+        if (titleEl) titleEl.textContent = data.election?.title || 'Election Results';
 
-        // Update total votes display
-        document.querySelectorAll('span, p, h3, h4').forEach(el => {
-            if (el.textContent.match(/^\d{1,3}(,\d{3})*$/) || el.textContent.match(/^\d+$/)) {
-                const num = parseInt(el.textContent.replace(/,/g, ''));
-                if (num > 100) el.textContent = data.total_votes.toLocaleString();
-            }
-        });
+        // Update Key Metrics
+        const eligibleEl = document.getElementById('metric-eligible');
+        if (eligibleEl) {
+            // Approximation if eligible voters isn't directly passed
+            const eligible = data.eligible_voters || Math.round((data.total_votes / (data.turnout / 100))) || 0;
+            eligibleEl.textContent = eligible.toLocaleString();
+        }
+
+        const votesEl = document.getElementById('metric-votes');
+        if (votesEl) votesEl.textContent = data.total_votes.toLocaleString();
+
+        const turnoutEl = document.getElementById('metric-turnout');
+        if (turnoutEl) turnoutEl.textContent = data.turnout.toFixed(1) + '%';
+
+        setTimeout(() => {
+            const votesBar = document.getElementById('metric-votes-bar');
+            if (votesBar) votesBar.style.width = data.turnout + '%';
+        }, 100);
+
+        // Render dynamic candidates
+        const resultsContainer = document.getElementById('results-container');
+        if (resultsContainer && data.positions) {
+            let html = '';
+
+            data.positions.forEach(position => {
+                html += `
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6 border-b border-neutral-200 pb-2">${position.title}</h3>
+                    <div class="flex flex-col gap-6">
+                `;
+
+                // Sort candidates by votes
+                const sortedCandidates = [...position.candidates].sort((a, b) => b.votes - a.votes);
+                const colors = ['bg-primary', 'bg-neutral-500', 'bg-neutral-400', 'bg-neutral-300'];
+
+                sortedCandidates.forEach((cand, idx) => {
+                    const colorClass = colors[idx] || colors[colors.length - 1];
+                    const widthPercent = cand.percentage || 0;
+
+                    html += `
+                    <div class="group">
+                        <div class="flex items-end justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-neutral-100 overflow-hidden border border-neutral-200">
+                                    <img alt="Candidate" class="w-full h-full object-cover" src="${cand.photo_url || 'https://via.placeholder.com/150'}"/>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-900 group-hover:text-primary transition-colors">${cand.name}</p>
+                                    <p class="text-xs text-neutral-500">${cand.party || 'Independent'}</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-2xl font-bold text-slate-900">${cand.votes.toLocaleString()}</p>
+                                <p class="text-xs font-bold ${idx === 0 ? 'text-primary' : 'text-neutral-500'}">${widthPercent.toFixed(1)}%</p>
+                            </div>
+                        </div>
+                        <div class="w-full bg-neutral-100 rounded-full h-3 overflow-hidden">
+                            <div class="${colorClass} h-full rounded-full transition-all duration-1000 ease-out w-0 candidate-bar" data-width="${widthPercent}%"></div>
+                        </div>
+                    </div>
+                    `;
+                });
+
+                html += `</div></div>`;
+            });
+
+            resultsContainer.innerHTML = html;
+
+            // Animate candidate result bars
+            setTimeout(() => {
+                document.querySelectorAll('.candidate-bar').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-width');
+                });
+            }, 100);
+        }
 
     } catch (err) {
         console.error('Failed to fetch results:', err);
+        const titleEl = document.getElementById('election-title');
+        if (titleEl) titleEl.textContent = 'Results Unavailable';
     }
-
-    // Animate result bars
-    document.querySelectorAll('[class*="bg-primary"], [class*="bg-\\[#003DA5\\]"], [class*="bg-blue"]').forEach(bar => {
-        if (bar.style.width || bar.className.includes('w-[')) {
-            const width = bar.style.width || bar.className.match(/w-\[(\d+%?)\]/)?.[1];
-            if (width) {
-                bar.style.width = '0%';
-                setTimeout(() => { bar.style.transition = 'width 1.5s ease'; bar.style.width = width; }, 300);
-            }
-        }
-    });
 
     // Print button
     document.querySelectorAll('button').forEach(btn => {
