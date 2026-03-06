@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Update student name in welcome message
         document.querySelectorAll('h2, h3, .text-2xl, .text-3xl').forEach(el => {
             if (el.textContent.includes('John') || el.textContent.includes('Welcome')) {
-                el.innerHTML = el.innerHTML.replace(/John/g, user.name.split(' ')[0]);
+                el.innerHTML = el.innerHTML.replace(/John/g, user.first_name);
             }
         });
 
@@ -183,15 +183,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // News Items (elements with cursor-pointer)
-        else if (el.classList.contains('cursor-pointer') && 
-                 !el.closest('header') && 
-                 !el.closest('#floating-nav') && 
-                 el.id !== 'nav-toggle' && 
-                 el.id !== 'dark-mode-toggle') {
+        else if (el.classList.contains('cursor-pointer') &&
+            !el.closest('header') &&
+            !el.closest('#floating-nav') &&
+            el.id !== 'nav-toggle' &&
+            el.id !== 'dark-mode-toggle') {
             el.addEventListener('click', (e) => {
                 // Double check we haven't clicked inside the nav menu accidentally
                 if (e.target.closest('#floating-nav') || e.target.closest('#nav-toggle') || e.target.closest('#dark-mode-toggle')) return;
-                
+
                 e.preventDefault();
                 showToast("Opening full news article...");
             });

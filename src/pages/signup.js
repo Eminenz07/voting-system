@@ -44,23 +44,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sign Up action
     if (signUpBtn) {
         signUpBtn.addEventListener('click', async () => {
-            const name = inputs[0]?.value?.trim();
-            const matric = inputs[1]?.value?.trim();
+            const firstName = inputs[0]?.value?.trim();
+            const lastName = inputs[1]?.value?.trim();
+            const matric = inputs[2]?.value?.trim();
             const dept = deptSelect?.value;
-            // inputs[2] is the readonly Faculty input, so password is [3] and confirm is [4]
-            const password = inputs[3]?.value;
-            const confirmPassword = inputs[4]?.value;
+            // inputs[3] is the readonly Faculty input, so password is [4] and confirm is [5]
+            const password = inputs[4]?.value;
+            const confirmPassword = inputs[5]?.value;
 
-            if (!name) { showToast('Please enter your full name', 'error'); inputs[0].focus(); return; }
-            if (!matric) { showToast('Please enter your matric number', 'error'); inputs[1].focus(); return; }
+            if (!firstName) { showToast('Please enter your first name', 'error'); inputs[0].focus(); return; }
+            if (!lastName) { showToast('Please enter your surname', 'error'); inputs[1].focus(); return; }
+            if (!matric) { showToast('Please enter your matric number', 'error'); inputs[2].focus(); return; }
             if (!dept) { showToast('Please select a department', 'error'); return; }
-            if (!password || password.length < 6) { showToast('Password must be at least 6 characters', 'error'); inputs[3].focus(); return; }
-            if (password !== confirmPassword) { showToast('Passwords do not match', 'error'); inputs[4].focus(); return; }
-
-            // Parse name into first/last
-            const nameParts = name.split(' ');
-            const firstName = nameParts[0];
-            const lastName = nameParts.slice(1).join(' ') || '';
+            if (!password || password.length < 6) { showToast('Password must be at least 6 characters', 'error'); inputs[4].focus(); return; }
+            if (password !== confirmPassword) { showToast('Passwords do not match', 'error'); inputs[5].focus(); return; }
 
             signUpBtn.disabled = true;
             signUpBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span> Creating account...';

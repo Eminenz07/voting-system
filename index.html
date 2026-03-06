@@ -360,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('au-token', data.token);
                 setSession(data.user);
 
-                showToast('Welcome, ' + data.user.name.split(' ')[0] + '!', 'success');
+                showToast('Welcome, ' + data.user.first_name + '!', 'success');
 
                 // Redirect based on role
                 if (data.user.role === 'admin') {
