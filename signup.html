@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Sign Up - Adeleke University</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1978e5",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111821",
+            },
+            fontFamily: {
+              "display": ["Be Vietnam Pro", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap');
+    </style>
+
+<style id="au-brand-overrides">
+  /* ===== AU Brand Colors Override ===== */
+  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
+
+  /* Active sidebar items get yellow left border */
+  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
+
+  /* Progress bars: yellow fill */
+  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Live/ENDS SOON badges: yellow instead of red */
+  .bg-red-500.rounded-full, .bg-red-500.px-2 {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Camera scan frame corners: yellow */
+  [class*="border-t-4"][class*="border-primary"],
+  [class*="border-b-4"][class*="border-primary"],
+  [class*="border-l-4"][class*="border-primary"],
+  [class*="border-r-4"][class*="border-primary"] {
+    border-color: #F5B400 !important;
+  }
+
+  /* Scan line glow: yellow */
+  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
+  [class*="animate-scanline"] div[class*="bg-primary"] {
+    background-color: #F5B400 !important;
+    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
+  }
+
+  /* Selected candidate card border: yellow */
+  [class*="border-primary"][class*="shadow-lg"] {
+    border-color: #F5B400 !important;
+    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
+  }
+
+  /* Selected candidate radio dot: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Verified check badges on candidates: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* KPI/stat card accent lines at bottom */
+  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Step badges: yellow-tinted bg */
+  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
+    background-color: #FFF5D6 !important;
+    color: #8B6D00 !important;
+  }
+
+  /* Capture button (verify screen): yellow ring */
+  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Stat card icon backgrounds: slightly yellow-tinted */
+  .bg-primary\/10 > .material-symbols-outlined {
+    color: #003DA5 !important;
+  }
+
+  /* University logo wrapper ring */
+  .rounded-lg.bg-primary\/10.text-primary {
+    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
+  }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col items-center justify-center p-4">
+<!-- Main Container -->
+<div class="w-full max-w-[520px] bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700 overflow-hidden relative z-10">
+<!-- Header/Logo Section -->
+<div class="flex flex-col items-center pt-10 pb-6 px-8 text-center border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800">
+<div class="size-20 rounded-full flex items-center justify-center mb-4 bg-white shadow-sm border-4 border-white dark:border-slate-800">
+<img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-full object-contain overflow-hidden rounded-full" />
+</div>
+<h1 class="text-slate-900 dark:text-white text-2xl font-black tracking-tight mb-2">Adeleke University</h1>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold">Student E-Voting Portal</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Create your secure account to participate in elections.</p>
+</div>
+<!-- Form Section -->
+<form class="p-8 flex flex-col gap-5">
+<!-- Full Name -->
+<label class="block group">
+<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Full Name</span>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">person</span>
+<input class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="Enter your full name" type="text"/>
+</div>
+</label>
+<!-- Matric Number -->
+<label class="block group">
+<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Matric Number</span>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">badge</span>
+<input class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="e.g., 19/0123" type="text"/>
+</div>
+</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- Department -->
+<label class="block group">
+<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Department</span>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">category</span>
+<select class="w-full pl-11 pr-10 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium appearance-none cursor-pointer">
+<option disabled="" selected="" value="">Select Dept</option>
+<option value="cs">Computer Science</option>
+<option value="law">Law</option>
+<option value="mass_comm">Mass Comm</option>
+<option value="accounting">Accounting</option>
+</select>
+<span class="absolute right-4 text-slate-400 pointer-events-none material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+</label>
+<!-- Faculty (Auto-filled) -->
+<label class="block group opacity-75 cursor-not-allowed">
+<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Faculty</span>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">domain</span>
+<input class="w-full pl-11 pr-4 py-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-slate-500 dark:text-slate-400 focus:outline-none cursor-not-allowed text-sm font-medium" placeholder="Auto-filled" readonly="" type="text" value="Science"/>
+</div>
+</label>
+</div>
+<!-- Password -->
+<label class="block group">
+<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Password</span>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">lock</span>
+<input class="w-full pl-11 pr-10 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="Create a password" type="password"/>
+<button class="absolute right-4 text-slate-400 hover:text-primary transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</label>
+<!-- Confirm Password -->
+<label class="block group">
+<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Confirm Password</span>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">lock_reset</span>
+<input class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="Repeat password" type="password"/>
+</div>
+</label>
+<!-- Actions -->
+<div class="mt-4 flex flex-col gap-4">
+<button class="w-full py-3 px-6 bg-primary hover:bg-primary/90 text-white font-bold rounded-full shadow-lg shadow-primary/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="button">
+<span>Sign Up</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<div class="text-center">
+<span class="text-slate-500 dark:text-slate-400 text-sm">Already have an account?</span>
+<a class="text-primary hover:text-primary/80 font-bold text-sm ml-1 transition-colors" href="#">Login</a>
+</div>
+</div>
+</form>
+</div>
+<!-- Decorative Background Elements -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-0 overflow-hidden">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px]"></div>
+</div>
+<!-- Footer -->
+<footer class="mt-8 text-center text-slate-400 dark:text-slate-500 text-xs font-medium z-10">
+<p>© 2024 Adeleke University IT Support. All rights reserved.</p>
+<div class="flex gap-4 justify-center mt-2">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+</footer>
+
+<script>
+// ============================================
+// AU Voting System - Shared Frontend Logic
+// ============================================
+
+const API_BASE = 'http://localhost:8000/api';
+
+// --- Dark Mode ---
+function initDarkMode() {
+    const saved = localStorage.getItem('au-dark-mode');
+    if (saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+}
+
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('au-dark-mode', document.documentElement.classList.contains('dark'));
+    updateToggleIcon();
+}
+
+function updateToggleIcon() {
+    const btn = document.getElementById('dark-mode-toggle');
+    if (btn) {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.textContent = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
+        }
+    }
+}
+
+// --- API Client ---
+async function apiCall(endpoint, options = {}) {
+    const token = localStorage.getItem('au-token');
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    if (token) headers['Authorization'] = `Token ${token}`;
+
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+// --- Auth Helpers ---
+function getSession() {
+    try { return JSON.parse(localStorage.getItem('au-session')); } catch { return null; }
+}
+
+function setSession(data) {
+    localStorage.setItem('au-session', JSON.stringify(data));
+}
+
+function clearSession() {
+    localStorage.removeItem('au-session');
+    localStorage.removeItem('au-token');
+}
+
+function requireStudentAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'student') { window.location.href = '/'; return null; }
+    return s;
+}
+
+function requireAdminAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'admin') { window.location.href = '/'; return null; }
+    return s;
+}
+
+async function logout() {
+    try { await apiCall('/auth/logout/', { method: 'POST' }); } catch { }
+    clearSession();
+    window.location.href = '/';
+}
+
+// --- Toast Notifications ---
+function showToast(message, type) {
+    const colors = {
+        success: 'bg-green-600',
+        error: 'bg-red-600',
+        info: 'bg-primary'
+    };
+    const toast = document.createElement('div');
+    toast.className = 'fixed top-6 right-6 z-[200] ' + (colors[type] || colors.info) + ' text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-slide-in font-medium text-sm';
+    toast.innerHTML = '<span class="material-symbols-outlined text-lg">' +
+        (type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info') +
+        '</span>' + message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100px)'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+// --- Student Navigation (Floating FAB) ---
+function createStudentNav(currentPage) {
+    const pages = [
+        { href: '/dashboard.html', icon: 'space_dashboard', label: 'Dashboard', id: 'dashboard' },
+        { href: '/elections.html', icon: 'how_to_vote', label: 'Elections', id: 'elections' },
+        { href: '/results.html', icon: 'bar_chart', label: 'Election Results', id: 'results' },
+        { href: '/profile.html', icon: 'account_circle', label: 'My Profile', id: 'profile' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Admin Navigation (Floating FAB) ---
+function createAdminNav(currentPage) {
+    const pages = [
+        { href: '/admin.html', icon: 'admin_panel_settings', label: 'Dashboard', id: 'admin' },
+        { href: '/monitoring.html', icon: 'analytics', label: 'Live Monitoring', id: 'monitoring' },
+        { href: '/create-election.html', icon: 'add_circle', label: 'Create Election', id: 'create-election' },
+        { href: '/admin-results.html', icon: 'assessment', label: 'Results Report', id: 'admin-results' },
+        { href: '/admin-settings.html', icon: 'settings', label: 'Profile & Settings', id: 'admin-settings' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Floating Nav Builder (shared) ---
+function _createFloatingNav(pages, currentPage) {
+    const nav = document.createElement('div');
+    nav.id = 'floating-nav';
+    nav.innerHTML = `
+    <button id="nav-toggle" onclick="document.getElementById('floating-nav').classList.toggle('open')"
+      class="fixed bottom-6 left-6 z-[100] size-14 rounded-full bg-primary text-white shadow-xl shadow-primary/30 flex items-center justify-center hover:bg-[#002D7A] transition-all hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+    <div id="nav-panel" class="fixed bottom-24 left-6 z-[99] bg-white dark:bg-[#141414] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-3 w-64 transition-all origin-bottom-left scale-0 opacity-0">
+      <div class="flex items-center justify-between px-3 py-2 mb-2 border-b border-slate-100 dark:border-slate-800">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Navigation</span>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="size-8 rounded-lg flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-lg">${document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode'}</span>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-0.5 max-h-80 overflow-y-auto">
+        ${pages.map(p => `
+          <a href="${p.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${p.id === currentPage
+            ? 'bg-primary/10 text-primary'
+            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+        }">
+            <span class="material-symbols-outlined text-lg">${p.icon}</span>
+            ${p.label}
+          </a>
+        `).join('')}
+      </nav>
+    </div>
+  `;
+    document.body.appendChild(nav);
+
+    const style = document.createElement('style');
+    style.textContent = `
+    #floating-nav.open #nav-panel { transform: scale(1); opacity: 1; }
+    #floating-nav.open #nav-toggle { background: #ef4444; }
+    #floating-nav.open #nav-toggle span { font-size: 0; }
+    #floating-nav.open #nav-toggle span::after { content: 'close'; font-size: 24px; font-family: 'Material Symbols Outlined'; }
+    #nav-panel { transition: transform 0.2s ease, opacity 0.2s ease; }
+    .animate-slide-in { animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { opacity:0; transform: translateX(100px); } to { opacity:1; transform: translateX(0); } }
+  `;
+    document.head.appendChild(style);
+
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('floating-nav');
+        if (nav && !nav.contains(e.target)) nav.classList.remove('open');
+    });
+}
+
+// Init dark mode on every page
+initDarkMode();
+
+// Sign Up Page Logic
+document.addEventListener('DOMContentLoaded', () => {
+    createStudentNav('signup');
+
+    const form = document.querySelector('form');
+    const inputs = form?.querySelectorAll('input');
+    const selects = form?.querySelectorAll('select');
+    // Find the actual Sign Up button by text content
+    const signUpBtn = Array.from(form?.querySelectorAll('button') || []).find(b => b.textContent.includes('Sign Up'));
+
+    // Fix "Login" link
+    document.querySelectorAll('a').forEach(a => {
+        if (a.textContent.trim() === 'Login') a.href = '/';
+    });
+
+    // Department -> Faculty auto-fill
+    const deptFacultyMap = {
+        cs: 'Science',
+        law: 'Law',
+        mass_comm: 'Arts',
+        accounting: 'Management Sciences',
+    };
+    const deptSelect = selects?.[0];
+    const facultyInput = form?.querySelector('input[readonly]');
+    if (deptSelect && facultyInput) {
+        deptSelect.addEventListener('change', () => {
+            facultyInput.value = deptFacultyMap[deptSelect.value] || '';
+        });
+    }
+
+    // Password visibility toggles
+    form?.querySelectorAll('button[type="button"]').forEach(btn => {
+        if (btn === signUpBtn) return;
+        btn.addEventListener('click', () => {
+            const input = btn.closest('.relative')?.querySelector('input');
+            if (input) {
+                const isPassword = input.type === 'password';
+                input.type = isPassword ? 'text' : 'password';
+                btn.querySelector('.material-symbols-outlined').textContent = isPassword ? 'visibility_off' : 'visibility';
+            }
+        });
+    });
+
+    // Sign Up action
+    if (signUpBtn) {
+        signUpBtn.addEventListener('click', async () => {
+            const name = inputs[0]?.value?.trim();
+            const matric = inputs[1]?.value?.trim();
+            const dept = deptSelect?.value;
+            // inputs[2] is the readonly Faculty input, so password is [3] and confirm is [4]
+            const password = inputs[3]?.value;
+            const confirmPassword = inputs[4]?.value;
+
+            if (!name) { showToast('Please enter your full name', 'error'); inputs[0].focus(); return; }
+            if (!matric) { showToast('Please enter your matric number', 'error'); inputs[1].focus(); return; }
+            if (!dept) { showToast('Please select a department', 'error'); return; }
+            if (!password || password.length < 6) { showToast('Password must be at least 6 characters', 'error'); inputs[3].focus(); return; }
+            if (password !== confirmPassword) { showToast('Passwords do not match', 'error'); inputs[4].focus(); return; }
+
+            // Parse name into first/last
+            const nameParts = name.split(' ');
+            const firstName = nameParts[0];
+            const lastName = nameParts.slice(1).join(' ') || '';
+
+            signUpBtn.disabled = true;
+            signUpBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span> Creating account...';
+
+            try {
+                await apiCall('/auth/register/', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        matric,
+                        first_name: firstName,
+                        last_name: lastName,
+                        department: deptSelect.options[deptSelect.selectedIndex].text,
+                        faculty: deptFacultyMap[dept] || '',
+                        password,
+                        confirm_password: confirmPassword,
+                    }),
+                });
+
+                showToast('Account created! Please log in.', 'success');
+                setTimeout(() => window.location.href = '/', 1200);
+            } catch (err) {
+                showToast(err.message || 'Registration failed', 'error');
+                signUpBtn.disabled = false;
+                signUpBtn.textContent = 'Create Account';
+            }
+        });
+    }
+});
+
+</script>
+</body></html>

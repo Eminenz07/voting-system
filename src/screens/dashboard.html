@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Dashboard - Adeleke University Voting Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#003DA5",
+                        "primary-dark": "#102694",
+                        secondary: "#FFD700", // AU Yellow accent
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1e2330",
+                        "text-light": "#0e101b",
+                        "text-dark": "#f8f9fc",
+                        "text-muted-light": "#4e5a97",
+                        "text-muted-dark": "#94a3b8",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-display antialiased selection:bg-primary selection:text-white">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar Navigation -->
+
+<!-- Main Content -->
+<main class="flex h-full flex-1 flex-col overflow-y-auto bg-background-light dark:bg-background-dark relative">
+<!-- Mobile Header -->
+<header class="flex h-16 items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-4 lg:hidden sticky top-0 z-30">
+<div class="flex items-center gap-3">
+<button class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-8 rounded-full object-cover shadow-sm border border-slate-200 dark:border-slate-700 bg-white" />
+<span class="font-bold text-lg text-slate-900 dark:text-white">Adeleke University</span>
+</div>
+<div class="h-8 w-8 overflow-hidden rounded-full bg-slate-200" data-alt="Student profile portrait" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCok6kT5sWLLdg4PRLTFxUo3UUQjNxPwIZ92-yJvib9Cvm8SMVJWbgpc0IFbiLnXP_QpXMxDWhNqhBKwH0em5w_eVP1DVAvycGMXc7Ev1sVo74nxZeVN00_5R5HenIgMLmGPHtXYufHHZz6l_UdtHLgUTyTPfH75D7SOFlH5KgfQVRtK6lCOaiw8cwXC79zWlmiyGRbO_tpfxtFWZl13060p96BvGb7UPqrWsitNkimtKvS6G_xfsR1Q4f7lHRy8NOMc9td6QKFuu58');"></div>
+</header>
+<!-- Desktop Header & Welcome -->
+<div class="sticky top-0 z-20 hidden h-20 items-center justify-between bg-surface-light/90 dark:bg-background-dark/90 px-8 backdrop-blur-md lg:flex border-b border-transparent dark:border-slate-800">
+<div class="flex items-center gap-3 sm:gap-4">
+        <img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-12 sm:size-16 rounded-full object-cover border-2 sm:border-4 border-[#F5B400]/50 shadow-sm bg-white" />
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-[#003DA5] dark:text-white leading-tight tracking-tight">Adeleke University</h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-bold tracking-wide">Voting Portal</p>
+        </div>
+      </div>
+<div class="flex items-center gap-4">
+<button class="relative flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 h-2.5 w-2.5 rounded-full bg-red-500 border-2 border-white dark:border-slate-800"></span>
+</button>
+<button class="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#003DA5]/20 hover:bg-primary-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span>Support</span>
+</button>
+</div>
+</div>
+<div class="w-full max-w-[1400px] mx-auto p-4 lg:p-8 space-y-8 pb-24">
+<!-- Welcome Section -->
+<div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+<div class="space-y-2">
+<h1 class="text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+                            Welcome back, <span class="text-primary">John</span> 👋
+                        </h1>
+
+</div>
+</div>
+<!-- KPI Stats Cards -->
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+<!-- Stat Card 1 -->
+<div class="relative overflow-hidden rounded-2xl bg-white dark:bg-surface-dark p-6 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Voting Status</p>
+<p class="mt-2 text-2xl font-bold flex items-center gap-2" id="dashboard-voting-status">
+<span class="material-symbols-outlined filled text-xl" style="font-variation-settings: 'FILL' 1;" id="dashboard-voting-icon">...</span>
+                                    Loading
+                                </p>
+</div>
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400" id="dashboard-voting-bg">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="relative overflow-hidden rounded-2xl bg-white dark:bg-surface-dark p-6 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Votes Cast</p>
+<p class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">0/3</p>
+</div>
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-400">
+<span class="material-symbols-outlined">how_to_vote</span>
+</div>
+</div>
+<div class="mt-4 h-1.5 w-full rounded-full bg-slate-100 dark:bg-slate-700">
+<div class="h-1.5 w-[10%] rounded-full bg-primary"></div>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="relative overflow-hidden rounded-2xl bg-white dark:bg-surface-dark p-6 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Semester</p>
+<p class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">1st, 2023/24</p>
+</div>
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+</div>
+</div>
+<!-- Stat Card 4 (Action) -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary-dark p-6 shadow-lg shadow-primary/25 text-white">
+<div class="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-white/10 blur-2xl"></div>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<p class="text-sm font-medium text-white/80">Need Assistance?</p>
+<p class="mt-1 text-lg font-bold">Contact Support</p>
+</div>
+<button class="mt-4 w-full rounded-lg bg-white/20 py-2 text-sm font-semibold text-white backdrop-blur-sm hover:bg-white/30 transition-colors">
+                                Chat Now
+                            </button>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+<!-- Left Column: Active Elections -->
+<div class="lg:col-span-2 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">play_circle</span>
+                                Active Elections
+                            </h3>
+<a class="text-sm font-semibold text-primary hover:text-primary-dark transition-colors" href="#">View All</a>
+</div>
+<div id="dashboard-elections-container" class="flex flex-col gap-6">
+<!-- Active elections injected here via dashboard.js -->
+<div class="p-8 text-center bg-slate-50 dark:bg-slate-800/50 rounded-2xl animate-pulse">
+<p class="text-slate-500">Loading active elections...</p>
+</div>
+</div>
+</div>
+<!-- Right Column: News & Guidelines -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">newspaper</span>
+                                News &amp; Updates
+                            </h3>
+</div>
+<!-- News Scroller Container -->
+<div class="flex flex-col gap-4">
+<!-- News Item 1 -->
+<div class="group cursor-pointer rounded-xl bg-white dark:bg-surface-dark p-4 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800 hover:shadow-md transition-all">
+<div class="mb-3 h-32 w-full overflow-hidden rounded-lg bg-slate-100">
+<div class="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="University building facade" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDoYnfwzDNv77Y7gh2RbmYomMBsDwS7ItFalJnBNgfm35C4X7_mTxIEghNEoyMCSo-FnZyK8GNDJ0ijX2J_P0RC-zIr7u-yp0TIc0CFnDD1nv5SewefsxOueG7AAXXNiX9nvSyx0xVGJUNChTqTppoTe2EkinY65kxguHE9mAGtCnEz4fHEhqRD7zLZslts8w40uS5lLqik4H2KfevqDGU1s-LbCrpQfZ4izITgGl93F4fu-GmYW8jLDRuVyHSpT4Qvw0AZOBzWejug');"></div>
+</div>
+<div class="flex gap-2">
+<span class="inline-flex items-center rounded-md bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 text-xs font-medium text-yellow-800 dark:text-yellow-400 ring-1 ring-inset ring-yellow-600/20">New</span>
+<span class="text-xs font-medium text-slate-400">Oct 23, 2023</span>
+</div>
+<h4 class="mt-2 font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                    Election Guidelines 2023 Released
+                                </h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
+                                    The electoral committee has released the official guidelines for the 2023/2024 academic session elections.
+                                </p>
+</div>
+<!-- News Item 2 -->
+<div class="cursor-pointer rounded-xl bg-white dark:bg-surface-dark p-4 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800 hover:shadow-md transition-all">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-xs font-medium text-slate-400">Oct 20, 2023</span>
+<h4 class="mt-1 font-bold text-slate-900 dark:text-white hover:text-primary transition-colors">
+                                            Presidential Debate Recap
+                                        </h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400 line-clamp-3">
+                                            Missed the debate? Watch the highlights of the presidential candidates addressing student welfare issues.
+                                        </p>
+</div>
+</div>
+</div>
+<!-- Quick Links Card -->
+<div class="rounded-xl bg-slate-50 dark:bg-surface-dark/50 p-5 border border-slate-100 dark:border-slate-800">
+<h4 class="font-bold text-slate-900 dark:text-white mb-3">Quick Actions</h4>
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+                                            Electoral Laws
+                                        </a>
+</li>
+<li>
+<a class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">contact_support</span>
+                                            Report an Issue
+                                        </a>
+</li>
+<li>
+<a class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+                                            Verify Eligibility
+                                        </a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button (Mobile Only) -->
+<div class="fixed bottom-6 right-6 lg:hidden z-40">
+<button class="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-[#003DA5]/30 hover:bg-primary-dark transition-all">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</main>
+</div>
+</body></html>

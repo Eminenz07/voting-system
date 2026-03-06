@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Dashboard - Adeleke University Voting Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#003DA5",
+                        "primary-dark": "#102694",
+                        secondary: "#FFD700", // AU Yellow accent
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1e2330",
+                        "text-light": "#0e101b",
+                        "text-dark": "#f8f9fc",
+                        "text-muted-light": "#4e5a97",
+                        "text-muted-dark": "#94a3b8",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+
+<style id="au-brand-overrides">
+  /* ===== AU Brand Colors Override ===== */
+  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
+
+  /* Active sidebar items get yellow left border */
+  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
+
+  /* Progress bars: yellow fill */
+  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Live/ENDS SOON badges: yellow instead of red */
+  .bg-red-500.rounded-full, .bg-red-500.px-2 {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Camera scan frame corners: yellow */
+  [class*="border-t-4"][class*="border-primary"],
+  [class*="border-b-4"][class*="border-primary"],
+  [class*="border-l-4"][class*="border-primary"],
+  [class*="border-r-4"][class*="border-primary"] {
+    border-color: #F5B400 !important;
+  }
+
+  /* Scan line glow: yellow */
+  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
+  [class*="animate-scanline"] div[class*="bg-primary"] {
+    background-color: #F5B400 !important;
+    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
+  }
+
+  /* Selected candidate card border: yellow */
+  [class*="border-primary"][class*="shadow-lg"] {
+    border-color: #F5B400 !important;
+    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
+  }
+
+  /* Selected candidate radio dot: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Verified check badges on candidates: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* KPI/stat card accent lines at bottom */
+  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Step badges: yellow-tinted bg */
+  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
+    background-color: #FFF5D6 !important;
+    color: #8B6D00 !important;
+  }
+
+  /* Capture button (verify screen): yellow ring */
+  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Stat card icon backgrounds: slightly yellow-tinted */
+  .bg-primary\/10 > .material-symbols-outlined {
+    color: #003DA5 !important;
+  }
+
+  /* University logo wrapper ring */
+  .rounded-lg.bg-primary\/10.text-primary {
+    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
+  }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-display antialiased selection:bg-primary selection:text-white">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar Navigation -->
+
+<!-- Main Content -->
+<main class="flex h-full flex-1 flex-col overflow-y-auto bg-background-light dark:bg-background-dark relative">
+<!-- Mobile Header -->
+<header class="flex h-16 items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-4 lg:hidden sticky top-0 z-30">
+<div class="flex items-center gap-3">
+<button class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-8 rounded-full object-cover shadow-sm border border-slate-200 dark:border-slate-700 bg-white" />
+<span class="font-bold text-lg text-slate-900 dark:text-white">Adeleke University</span>
+</div>
+<div class="h-8 w-8 overflow-hidden rounded-full bg-slate-200" data-alt="Student profile portrait" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCok6kT5sWLLdg4PRLTFxUo3UUQjNxPwIZ92-yJvib9Cvm8SMVJWbgpc0IFbiLnXP_QpXMxDWhNqhBKwH0em5w_eVP1DVAvycGMXc7Ev1sVo74nxZeVN00_5R5HenIgMLmGPHtXYufHHZz6l_UdtHLgUTyTPfH75D7SOFlH5KgfQVRtK6lCOaiw8cwXC79zWlmiyGRbO_tpfxtFWZl13060p96BvGb7UPqrWsitNkimtKvS6G_xfsR1Q4f7lHRy8NOMc9td6QKFuu58');"></div>
+</header>
+<!-- Desktop Header & Welcome -->
+<div class="sticky top-0 z-20 hidden h-20 items-center justify-between bg-surface-light/90 dark:bg-background-dark/90 px-8 backdrop-blur-md lg:flex border-b border-transparent dark:border-slate-800">
+<div class="flex items-center gap-3 sm:gap-4">
+        <img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-12 sm:size-16 rounded-full object-cover border-2 sm:border-4 border-[#F5B400]/50 shadow-sm bg-white" />
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-[#003DA5] dark:text-white leading-tight tracking-tight">Adeleke University</h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-bold tracking-wide">Voting Portal</p>
+        </div>
+      </div>
+<div class="flex items-center gap-4">
+<button class="relative flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 h-2.5 w-2.5 rounded-full bg-red-500 border-2 border-white dark:border-slate-800"></span>
+</button>
+<button class="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#003DA5]/20 hover:bg-primary-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span>Support</span>
+</button>
+</div>
+</div>
+<div class="w-full max-w-[1400px] mx-auto p-4 lg:p-8 space-y-8 pb-24">
+<!-- Welcome Section -->
+<div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+<div class="space-y-2">
+<h1 class="text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+                            Welcome back, <span class="text-primary">John</span> 👋
+                        </h1>
+
+</div>
+</div>
+<!-- KPI Stats Cards -->
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+<!-- Stat Card 1 -->
+<div class="relative overflow-hidden rounded-2xl bg-white dark:bg-surface-dark p-6 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Voting Status</p>
+<p class="mt-2 text-2xl font-bold text-green-600 dark:text-green-400 flex items-center gap-2">
+<span class="material-symbols-outlined filled text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    Eligible
+                                </p>
+</div>
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-accent-light dark:bg-accent/10 text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="relative overflow-hidden rounded-2xl bg-white dark:bg-surface-dark p-6 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Votes Cast</p>
+<p class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">0/3</p>
+</div>
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-400">
+<span class="material-symbols-outlined">how_to_vote</span>
+</div>
+</div>
+<div class="mt-4 h-1.5 w-full rounded-full bg-slate-100 dark:bg-slate-700">
+<div class="h-1.5 w-[10%] rounded-full bg-primary"></div>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="relative overflow-hidden rounded-2xl bg-white dark:bg-surface-dark p-6 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800">
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Semester</p>
+<p class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">1st, 2023/24</p>
+</div>
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+</div>
+</div>
+<!-- Stat Card 4 (Action) -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-primary-dark p-6 shadow-lg shadow-primary/25 text-white">
+<div class="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-white/10 blur-2xl"></div>
+<div class="relative z-10 flex flex-col h-full justify-between">
+<div>
+<p class="text-sm font-medium text-white/80">Need Assistance?</p>
+<p class="mt-1 text-lg font-bold">Contact Support</p>
+</div>
+<button class="mt-4 w-full rounded-lg bg-white/20 py-2 text-sm font-semibold text-white backdrop-blur-sm hover:bg-white/30 transition-colors">
+                                Chat Now
+                            </button>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+<!-- Left Column: Active Elections -->
+<div class="lg:col-span-2 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">play_circle</span>
+                                Active Elections
+                            </h3>
+<a class="text-sm font-semibold text-primary hover:text-primary-dark transition-colors" href="#">View All</a>
+</div>
+<div id="dashboard-elections-container" class="flex flex-col gap-6">
+<!-- Active elections injected here via dashboard.js -->
+<div class="p-8 text-center bg-slate-50 dark:bg-slate-800/50 rounded-2xl animate-pulse">
+<p class="text-slate-500">Loading active elections...</p>
+</div>
+</div>
+</div>
+<!-- Right Column: News & Guidelines -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">newspaper</span>
+                                News &amp; Updates
+                            </h3>
+</div>
+<!-- News Scroller Container -->
+<div class="flex flex-col gap-4">
+<!-- News Item 1 -->
+<div class="group cursor-pointer rounded-xl bg-white dark:bg-surface-dark p-4 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800 hover:shadow-md transition-all">
+<div class="mb-3 h-32 w-full overflow-hidden rounded-lg bg-slate-100">
+<div class="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="University building facade" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDoYnfwzDNv77Y7gh2RbmYomMBsDwS7ItFalJnBNgfm35C4X7_mTxIEghNEoyMCSo-FnZyK8GNDJ0ijX2J_P0RC-zIr7u-yp0TIc0CFnDD1nv5SewefsxOueG7AAXXNiX9nvSyx0xVGJUNChTqTppoTe2EkinY65kxguHE9mAGtCnEz4fHEhqRD7zLZslts8w40uS5lLqik4H2KfevqDGU1s-LbCrpQfZ4izITgGl93F4fu-GmYW8jLDRuVyHSpT4Qvw0AZOBzWejug');"></div>
+</div>
+<div class="flex gap-2">
+<span class="inline-flex items-center rounded-md bg-yellow-50 dark:bg-yellow-900/20 px-2 py-1 text-xs font-medium text-yellow-800 dark:text-yellow-400 ring-1 ring-inset ring-yellow-600/20">New</span>
+<span class="text-xs font-medium text-slate-400">Oct 23, 2023</span>
+</div>
+<h4 class="mt-2 font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                    Election Guidelines 2023 Released
+                                </h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
+                                    The electoral committee has released the official guidelines for the 2023/2024 academic session elections.
+                                </p>
+</div>
+<!-- News Item 2 -->
+<div class="cursor-pointer rounded-xl bg-white dark:bg-surface-dark p-4 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800 hover:shadow-md transition-all">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-xs font-medium text-slate-400">Oct 20, 2023</span>
+<h4 class="mt-1 font-bold text-slate-900 dark:text-white hover:text-primary transition-colors">
+                                            Presidential Debate Recap
+                                        </h4>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400 line-clamp-3">
+                                            Missed the debate? Watch the highlights of the presidential candidates addressing student welfare issues.
+                                        </p>
+</div>
+</div>
+</div>
+<!-- Quick Links Card -->
+<div class="rounded-xl bg-slate-50 dark:bg-surface-dark/50 p-5 border border-slate-100 dark:border-slate-800">
+<h4 class="font-bold text-slate-900 dark:text-white mb-3">Quick Actions</h4>
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+                                            Electoral Laws
+                                        </a>
+</li>
+<li>
+<a class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">contact_support</span>
+                                            Report an Issue
+                                        </a>
+</li>
+<li>
+<a class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+                                            Verify Eligibility
+                                        </a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button (Mobile Only) -->
+<div class="fixed bottom-6 right-6 lg:hidden z-40">
+<button class="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-[#003DA5]/30 hover:bg-primary-dark transition-all">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</div>
+</main>
+</div>
+
+<script>
+// ============================================
+// AU Voting System - Shared Frontend Logic
+// ============================================
+
+const API_BASE = 'http://localhost:8000/api';
+
+// --- Dark Mode ---
+function initDarkMode() {
+    const saved = localStorage.getItem('au-dark-mode');
+    if (saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+}
+
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('au-dark-mode', document.documentElement.classList.contains('dark'));
+    updateToggleIcon();
+}
+
+function updateToggleIcon() {
+    const btn = document.getElementById('dark-mode-toggle');
+    if (btn) {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.textContent = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
+        }
+    }
+}
+
+// --- API Client ---
+async function apiCall(endpoint, options = {}) {
+    const token = localStorage.getItem('au-token');
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    if (token) headers['Authorization'] = `Token ${token}`;
+
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+// --- Auth Helpers ---
+function getSession() {
+    try { return JSON.parse(localStorage.getItem('au-session')); } catch { return null; }
+}
+
+function setSession(data) {
+    localStorage.setItem('au-session', JSON.stringify(data));
+}
+
+function clearSession() {
+    localStorage.removeItem('au-session');
+    localStorage.removeItem('au-token');
+}
+
+function requireStudentAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'student') { window.location.href = '/'; return null; }
+    return s;
+}
+
+function requireAdminAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'admin') { window.location.href = '/'; return null; }
+    return s;
+}
+
+async function logout() {
+    try { await apiCall('/auth/logout/', { method: 'POST' }); } catch { }
+    clearSession();
+    window.location.href = '/';
+}
+
+// --- Toast Notifications ---
+function showToast(message, type) {
+    const colors = {
+        success: 'bg-green-600',
+        error: 'bg-red-600',
+        info: 'bg-primary'
+    };
+    const toast = document.createElement('div');
+    toast.className = 'fixed top-6 right-6 z-[200] ' + (colors[type] || colors.info) + ' text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-slide-in font-medium text-sm';
+    toast.innerHTML = '<span class="material-symbols-outlined text-lg">' +
+        (type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info') +
+        '</span>' + message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100px)'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+// --- Student Navigation (Floating FAB) ---
+function createStudentNav(currentPage) {
+    const pages = [
+        { href: '/dashboard.html', icon: 'space_dashboard', label: 'Dashboard', id: 'dashboard' },
+        { href: '/elections.html', icon: 'how_to_vote', label: 'Elections', id: 'elections' },
+        { href: '/results.html', icon: 'bar_chart', label: 'Election Results', id: 'results' },
+        { href: '/profile.html', icon: 'account_circle', label: 'My Profile', id: 'profile' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Admin Navigation (Floating FAB) ---
+function createAdminNav(currentPage) {
+    const pages = [
+        { href: '/admin.html', icon: 'admin_panel_settings', label: 'Dashboard', id: 'admin' },
+        { href: '/monitoring.html', icon: 'analytics', label: 'Live Monitoring', id: 'monitoring' },
+        { href: '/create-election.html', icon: 'add_circle', label: 'Create Election', id: 'create-election' },
+        { href: '/admin-results.html', icon: 'assessment', label: 'Results Report', id: 'admin-results' },
+        { href: '/admin-settings.html', icon: 'settings', label: 'Profile & Settings', id: 'admin-settings' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Floating Nav Builder (shared) ---
+function _createFloatingNav(pages, currentPage) {
+    const nav = document.createElement('div');
+    nav.id = 'floating-nav';
+    nav.innerHTML = `
+    <button id="nav-toggle" onclick="document.getElementById('floating-nav').classList.toggle('open')"
+      class="fixed bottom-6 left-6 z-[100] size-14 rounded-full bg-primary text-white shadow-xl shadow-primary/30 flex items-center justify-center hover:bg-[#002D7A] transition-all hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+    <div id="nav-panel" class="fixed bottom-24 left-6 z-[99] bg-white dark:bg-[#141414] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-3 w-64 transition-all origin-bottom-left scale-0 opacity-0">
+      <div class="flex items-center justify-between px-3 py-2 mb-2 border-b border-slate-100 dark:border-slate-800">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Navigation</span>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="size-8 rounded-lg flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-lg">${document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode'}</span>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-0.5 max-h-80 overflow-y-auto">
+        ${pages.map(p => `
+          <a href="${p.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${p.id === currentPage
+            ? 'bg-primary/10 text-primary'
+            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+        }">
+            <span class="material-symbols-outlined text-lg">${p.icon}</span>
+            ${p.label}
+          </a>
+        `).join('')}
+      </nav>
+    </div>
+  `;
+    document.body.appendChild(nav);
+
+    const style = document.createElement('style');
+    style.textContent = `
+    #floating-nav.open #nav-panel { transform: scale(1); opacity: 1; }
+    #floating-nav.open #nav-toggle { background: #ef4444; }
+    #floating-nav.open #nav-toggle span { font-size: 0; }
+    #floating-nav.open #nav-toggle span::after { content: 'close'; font-size: 24px; font-family: 'Material Symbols Outlined'; }
+    #nav-panel { transition: transform 0.2s ease, opacity 0.2s ease; }
+    .animate-slide-in { animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { opacity:0; transform: translateX(100px); } to { opacity:1; transform: translateX(0); } }
+  `;
+    document.head.appendChild(style);
+
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('floating-nav');
+        if (nav && !nav.contains(e.target)) nav.classList.remove('open');
+    });
+}
+
+// Init dark mode on every page
+initDarkMode();
+
+// Dashboard Page Logic
+document.addEventListener('DOMContentLoaded', async () => {
+    createStudentNav('dashboard');
+    const session = requireStudentAuth();
+    if (!session) return;
+
+    // Fetch fresh user data from API
+    try {
+        const user = await apiCall('/auth/me/');
+        setSession(user);
+
+        // Update student name in welcome message
+        document.querySelectorAll('h2, h3, .text-2xl, .text-3xl').forEach(el => {
+            if (el.textContent.includes('John') || el.textContent.includes('Welcome')) {
+                el.innerHTML = el.innerHTML.replace(/John/g, user.name.split(' ')[0]);
+            }
+        });
+
+        // Update matric number display
+        document.querySelectorAll('span, p').forEach(el => {
+            if (el.textContent.includes('19/0234') || el.textContent.includes('Matric:')) {
+                el.textContent = el.textContent.replace(/19\/0234/, user.matric);
+            }
+        });
+
+        // Update name displays
+        document.querySelectorAll('span, p, div').forEach(el => {
+            if (el.textContent.trim() === 'John Doe') {
+                el.textContent = user.name;
+            }
+        });
+    } catch (err) {
+        console.error('Failed to fetch user data:', err);
+    }
+
+    // Fetch active elections from API
+    try {
+        const elections = await apiCall('/elections/');
+        // Store the first active election ID for ballot page
+        const activeElection = elections.find(e => e.status === 'active');
+        if (activeElection) {
+            localStorage.setItem('au-active-election', activeElection.id);
+        }
+
+        // Populate Dashboard Elections Container
+        const container = document.getElementById('dashboard-elections-container');
+        if (container) {
+            if (elections.length === 0) {
+                container.innerHTML = `
+                    <div class="p-8 text-center bg-slate-50 dark:bg-surface-dark/50 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
+                        <span class="material-symbols-outlined text-4xl text-slate-300 mb-2">event_busy</span>
+                        <p class="text-slate-500 font-medium">No active elections at the moment.</p>
+                    </div>
+                `;
+            } else {
+                // Showing only the first 2 active elections for the dashboard summary
+                container.innerHTML = elections.slice(0, 2).map(election => `
+                    <div class="group relative flex flex-col gap-4 overflow-hidden rounded-2xl bg-white dark:bg-surface-dark p-6 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800 transition-all hover:shadow-md hover:ring-primary/20 dark:hover:ring-primary/40">
+                        <div class="flex flex-col sm:flex-row gap-6">
+                            <div class="flex flex-1 flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="rounded-full bg-blue-100 dark:bg-blue-900/30 px-2.5 py-0.5 text-xs font-semibold text-blue-700 dark:text-blue-300">
+                                            ${election.status === 'active' ? 'Active Now' : election.status}
+                                        </span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-slate-900 dark:text-white">${election.title}</h4>
+                                    <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                                        ${election.description || 'Participate in this election to shape the future of Adeleke University.'}
+                                    </p>
+                                </div>
+                                <div class="mt-4 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-4">
+                                    <div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                                        <span class="material-symbols-outlined text-base">how_to_vote</span>
+                                        <span>Voting is Open</span>
+                                    </div>
+                                    <a href="/elections.html" class="rounded-lg bg-primary px-5 py-2 text-sm font-bold text-white shadow-lg shadow-[#003DA5]/20 hover:bg-primary-dark hover:shadow-xl transition-all">
+                                        Vote Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+    } catch (err) {
+        console.error('Failed to fetch elections:', err);
+        const container = document.getElementById('dashboard-elections-container');
+        if (container) {
+            container.innerHTML = `
+                <div class="p-8 text-center bg-red-50 dark:bg-red-900/10 rounded-2xl border-2 border-dashed border-red-200 dark:border-red-800 text-red-600">
+                    <span class="material-symbols-outlined text-4xl mb-2">error</span>
+                    <p class="font-medium">Failed to load active elections. Please refresh the page.</p>
+                </div>
+            `;
+        }
+    }
+
+    // Helper for Toast/Alert
+    function showToast(message) {
+        alert(message); // Simple alert for now
+    }
+
+    // Fix sidebar navigation links (if any remain)
+    const sidebarLinks = {
+        'Home': '/dashboard.html',
+        'Elections': '/elections.html',
+        'Results': '/results.html',
+        'Profile': '/profile.html',
+        'Settings': '/profile.html',
+    };
+    document.querySelectorAll('aside a, nav a').forEach(a => {
+        const text = a.textContent.trim();
+        if (sidebarLinks[text]) a.href = sidebarLinks[text];
+    });
+
+    // Wire up all buttons and interactive elements
+    document.querySelectorAll('a, button, .cursor-pointer').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+
+        // Navigation: Vote / View Elections
+        if (text.includes('vote now') || text === 'vote' || text.includes('view all')) {
+            el.addEventListener('click', (e) => { e.preventDefault(); window.location.href = '/elections.html'; });
+            if (el.tagName === 'A') el.href = '/elections.html';
+        }
+
+        // Navigation: Quick Actions
+        else if (text.includes('verify eligibility') || text.includes('eligible')) {
+            el.addEventListener('click', (e) => { e.preventDefault(); window.location.href = '/verify.html'; });
+            if (el.tagName === 'A') el.href = '/verify.html';
+        }
+
+        // Actions: Support & Chat 
+        else if (text.includes('support') || text.includes('chat now') || text.includes('report an issue') || el.querySelector('.material-symbols-outlined')?.textContent.includes('chat')) {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast("Connecting to Student Support... (Chat feature coming soon!)");
+            });
+            if (el.tagName === 'A') el.href = '#';
+        }
+
+        // Actions: Notifications
+        else if (el.querySelector('.material-symbols-outlined')?.textContent.includes('notifications')) {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast("You have 0 new notifications.");
+            });
+        }
+
+        // Actions: Set Reminder
+        else if (text.includes('set reminder')) {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast("Reminder added to your calendar!");
+                el.textContent = "Reminder Set";
+                el.classList.add('bg-green-50', 'text-green-600', 'border-green-200');
+            });
+        }
+
+        // Actions: Electoral Laws & Guidelines
+        else if (text.includes('electoral laws')) {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast("Downloading AUEC Official Electoral Guidelines PDF...");
+            });
+        }
+
+        // News Items (elements with cursor-pointer)
+        else if (el.classList.contains('cursor-pointer') && !el.closest('header')) {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast("Opening full news article...");
+            });
+        }
+
+        // Logout button
+        if (text.includes('log out') || text.includes('logout') || text.includes('sign out')) {
+            el.addEventListener('click', (e) => { e.preventDefault(); window.logout(); });
+            if (el.tagName === 'A') el.href = '#';
+        }
+    });
+});
+
+</script>
+</body></html>

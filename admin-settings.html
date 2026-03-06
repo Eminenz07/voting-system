@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AU Voting System - Admin Settings</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#003DA5",
+                        "accent": "#F5B400",
+                        "accent-dark": "#D49B00",
+                        "accent-light": "#FFF5D6",
+                        "primary-content": "#ffffff",
+                        "primary-dark": "#002D7A",
+                        "primary-light": "#E6EEF9",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#141414",
+                        "surface-border": "#2d3748",
+                        "border-dark": "#2d3748",
+                        "text-main": "#0A0A0A",
+                        "text-muted": "#64748b",
+                        "text-primary": "#0A0A0A",
+                        "text-secondary": "#4e5a97",
+                        "border-light": "#e2e8f0",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "sans": ["Be Vietnam Pro", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+
+<style id="au-brand-overrides">
+  /* ===== AU Brand Colors Override ===== */
+  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
+
+  /* Active sidebar items get yellow left border */
+  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
+
+  /* Progress bars: yellow fill */
+  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Live/ENDS SOON badges: yellow instead of red */
+  .bg-red-500.rounded-full, .bg-red-500.px-2 {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Camera scan frame corners: yellow */
+  [class*="border-t-4"][class*="border-primary"],
+  [class*="border-b-4"][class*="border-primary"],
+  [class*="border-l-4"][class*="border-primary"],
+  [class*="border-r-4"][class*="border-primary"] {
+    border-color: #F5B400 !important;
+  }
+
+  /* Scan line glow: yellow */
+  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
+  [class*="animate-scanline"] div[class*="bg-primary"] {
+    background-color: #F5B400 !important;
+    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
+  }
+
+  /* Selected candidate card border: yellow */
+  [class*="border-primary"][class*="shadow-lg"] {
+    border-color: #F5B400 !important;
+    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
+  }
+
+  /* Selected candidate radio dot: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Verified check badges on candidates: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* KPI/stat card accent lines at bottom */
+  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Step badges: yellow-tinted bg */
+  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
+    background-color: #FFF5D6 !important;
+    color: #8B6D00 !important;
+  }
+
+  /* Capture button (verify screen): yellow ring */
+  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Stat card icon backgrounds: slightly yellow-tinted */
+  .bg-primary\/10 > .material-symbols-outlined {
+    color: #003DA5 !important;
+  }
+
+  /* University logo wrapper ring */
+  .rounded-lg.bg-primary\/10.text-primary {
+    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
+  }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display selection:bg-primary selection:text-white overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-border-dark bg-white dark:bg-background-dark px-6 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-3 text-slate-900 dark:text-white">
+<div class="size-8 text-primary">
+<svg class="h-8 w-8" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 4C12.95 4 4 12.95 4 24H24V4Z" fill="currentColor"></path>
+<path d="M24 4V24H44C44 12.95 35.05 4 24 4Z" fill="currentColor" fill-opacity="0.6"></path>
+<path d="M24 44C35.05 44 44 35.05 44 24H24V44Z" fill="currentColor"></path>
+<path d="M24 44V24H4C4 35.05 12.95 44 24 44Z" fill="currentColor" fill-opacity="0.6"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">AU Voting System</h2>
+</div>
+<div class="hidden lg:flex items-center ml-10 gap-1">
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary px-3 py-2 rounded-lg text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary px-3 py-2 rounded-lg text-sm font-medium transition-colors" href="#">Elections</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary px-3 py-2 rounded-lg text-sm font-medium transition-colors" href="#">Voters</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary px-3 py-2 rounded-lg text-sm font-medium transition-colors" href="#">Results</a>
+<a class="text-primary bg-primary/10 px-3 py-2 rounded-lg text-sm font-medium" href="#">Settings</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex relative">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="bg-slate-100 dark:bg-surface-dark border-none text-slate-900 dark:text-white text-sm rounded-lg focus:ring-2 focus:ring-primary block w-64 pl-10 p-2.5 placeholder-slate-400" placeholder="Search records..." type="text"/>
+</div>
+<button class="relative p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-surface-dark rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+</button>
+<button class="flex items-center gap-3 pl-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border-2 border-primary/20" data-alt="Portrait of Dr. Samuel Adebayo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAp0f2lgdUbT20HJUrE0PNVnR-HXIGc8p7lwiETrh9Gmcs4i7ydxopQGYBoolSw7BAFg0oT9b39X_ZhzdFP0_KqO-40Doy-L-sLBFDixoEEOVj7Bp9Klmc4nyU650HK_fDTwJ-b53HQVGoeHegWbyw51z8cxbGdqTl9WBqifIyym3699xLKl-O120fyzsdlsdtE5mZNgNqidBPQ86W8xp7E3MfPtfFcN8nnhB6DySJiaY4UL_eGGrbjWfyybbuZNzF_56LcjgPIUoGm");'></div>
+</button>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto p-4 md:p-8 bg-slate-50 dark:bg-[#0d1017]">
+<div class="max-w-5xl mx-auto space-y-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">Admin Profile &amp; Settings</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Manage your account credentials and security preferences.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                            Cancel
+                        </button>
+<button class="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-dark shadow-lg shadow-primary/25 transition-all">
+                            Save Changes
+                        </button>
+</div>
+</div>
+<!-- Profile Card -->
+<div class="bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-border-dark shadow-sm p-6">
+<div class="flex flex-col md:flex-row gap-6 items-start md:items-center">
+<div class="relative group">
+<div class="w-24 h-24 rounded-full bg-cover bg-center border-4 border-slate-50 dark:border-background-dark shadow-md" data-alt="Profile picture of Dr. Samuel Adebayo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuColix4zOtyeQQpePl27EbU9qFd7zrUCbAiiksxsUH4c_RdJb1b1oJB4QC23S-s4JoVo0XAqCniTpweWytE4Jz1b2u1Elc6WDY_puffbrtv4nPu2SF8VmmRxux13oo3YfH_cSLQNXeCbYG9IkJ7mdwnzVX0hsJV53XjCuLX_z-cEf-SmbyrY5xDC9EjAoaBmUejv_1zdIGBNyMezlD47aGRr-Yu5BgLDlQF0X8h0siQtd1O7gzd4i3IWLVD9USYoucieYSGQILD4EcE");'></div>
+<button class="absolute bottom-0 right-0 p-1.5 bg-primary text-white rounded-full border-2 border-white dark:border-surface-dark hover:bg-primary-dark transition-colors" title="Change photo">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span>
+</button>
+</div>
+<div class="flex-1">
+<div class="flex flex-col md:flex-row md:items-center gap-2 mb-1">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Dr. Samuel Adebayo</h2>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
+                                    Active
+                                </span>
+</div>
+<p class="text-primary font-medium">Chief Electoral Officer</p>
+<div class="flex items-center gap-4 mt-3 text-sm text-slate-500 dark:text-slate-400">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+                                    s.adebayo@adeleke.edu.ng
+                                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">apartment</span>
+                                    Administration Block A
+                                </span>
+</div>
+</div>
+<div class="w-full md:w-auto p-4 bg-slate-50 dark:bg-background-dark/50 rounded-lg border border-slate-100 dark:border-border-dark">
+<div class="text-xs text-slate-500 dark:text-slate-400 mb-1">Last login</div>
+<div class="text-sm font-medium text-slate-900 dark:text-white">Today at 09:42 AM</div>
+<div class="text-xs text-slate-400 mt-1">IP: 192.168.1.42</div>
+</div>
+</div>
+</div>
+<!-- Security Credentials Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Settings Form -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Password Change -->
+<section class="bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-border-dark shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-border-dark bg-slate-50/50 dark:bg-white/5">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Password &amp; Authentication</h3>
+</div>
+<div class="p-6 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Current Password</label>
+<input class="w-full rounded-lg bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-border-dark text-slate-900 dark:text-white text-sm focus:ring-primary focus:border-primary p-2.5" type="password" value="**********"/>
+</div>
+<div class="hidden md:block"></div> <!-- Spacer -->
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">New Password</label>
+<input class="w-full rounded-lg bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-border-dark text-slate-900 dark:text-white text-sm focus:ring-primary focus:border-primary p-2.5" placeholder="Enter new password" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Confirm New Password</label>
+<input class="w-full rounded-lg bg-slate-50 dark:bg-background-dark border-slate-200 dark:border-border-dark text-slate-900 dark:text-white text-sm focus:ring-primary focus:border-primary p-2.5" placeholder="Confirm new password" type="password"/>
+</div>
+</div>
+<div class="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-900/30 rounded-lg p-4 flex gap-3">
+<span class="material-symbols-outlined text-yellow-600 dark:text-yellow-500 shrink-0">info</span>
+<div class="text-sm text-yellow-800 dark:text-yellow-200">
+<p class="font-medium mb-1">Password Requirements</p>
+<ul class="list-disc list-inside space-y-1 opacity-90">
+<li>Minimum 12 characters</li>
+<li>At least one special character</li>
+<li>At least one number and uppercase letter</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="px-6 py-4 bg-slate-50 dark:bg-white/5 border-t border-slate-200 dark:border-border-dark flex justify-end">
+<button class="text-sm font-medium text-primary hover:text-primary-dark">Update Password</button>
+</div>
+</section>
+<!-- 2FA Section -->
+<section class="bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-border-dark shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-border-dark bg-slate-50/50 dark:bg-white/5 flex justify-between items-center">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Two-Factor Authentication</h3>
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 uppercase tracking-wide">Enabled</span>
+</div>
+<div class="p-6">
+<div class="flex items-start justify-between">
+<div class="max-w-xl">
+<p class="text-sm text-slate-600 dark:text-slate-300 mb-4">
+                                            Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.
+                                        </p>
+<div class="flex items-center gap-4 p-4 rounded-lg border border-slate-200 dark:border-border-dark bg-slate-50 dark:bg-background-dark">
+<div class="size-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">phonelink_lock</span>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900 dark:text-white">Authenticator App</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Google Authenticator, Authy, or similar</p>
+</div>
+<button class="ml-auto text-sm text-slate-500 hover:text-primary underline">Configure</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Login History -->
+<div class="lg:col-span-1 space-y-6">
+<div class="bg-white dark:bg-surface-dark rounded-xl border border-slate-200 dark:border-border-dark shadow-sm h-full">
+<div class="px-6 py-4 border-b border-slate-200 dark:border-border-dark bg-slate-50/50 dark:bg-white/5 flex justify-between items-center">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Recent Activity</h3>
+<button class="text-xs text-primary hover:underline">View All</button>
+</div>
+<div class="divide-y divide-slate-100 dark:divide-border-dark">
+<!-- Activity Item -->
+<div class="p-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<div class="flex items-start gap-3">
+<div class="mt-1 p-1.5 rounded bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined text-[18px]">login</span>
+</div>
+<div>
+<p class="text-sm font-medium text-slate-900 dark:text-white">Successful Login</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Chrome on Windows • 192.168.1.42</p>
+<p class="text-xs text-slate-400 mt-1">Today at 09:42 AM</p>
+</div>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="p-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<div class="flex items-start gap-3">
+<div class="mt-1 p-1.5 rounded bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[18px]">edit_document</span>
+</div>
+<div>
+<p class="text-sm font-medium text-slate-900 dark:text-white">Updated Election Settings</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Modified "Student Union 2024"</p>
+<p class="text-xs text-slate-400 mt-1">Yesterday at 4:15 PM</p>
+</div>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="p-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<div class="flex items-start gap-3">
+<div class="mt-1 p-1.5 rounded bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined text-[18px]">login</span>
+</div>
+<div>
+<p class="text-sm font-medium text-slate-900 dark:text-white">Successful Login</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Safari on iPhone • 10.0.0.12</p>
+<p class="text-xs text-slate-400 mt-1">Oct 24 at 08:30 AM</p>
+</div>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="p-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<div class="flex items-start gap-3">
+<div class="mt-1 p-1.5 rounded bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+</div>
+<div>
+<p class="text-sm font-medium text-slate-900 dark:text-white">Failed Login Attempt</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Unknown Device • 45.32.11.8</p>
+<p class="text-xs text-slate-400 mt-1">Oct 23 at 11:20 PM</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-white/5 border-t border-slate-200 dark:border-border-dark rounded-b-xl">
+<button class="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors border border-dashed border-slate-300 dark:border-slate-600 rounded-lg">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                                    Download Full Report
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="border border-red-200 dark:border-red-900/30 rounded-xl overflow-hidden">
+<div class="bg-red-50 dark:bg-red-900/10 px-6 py-4 border-b border-red-100 dark:border-red-900/30">
+<h3 class="text-red-700 dark:text-red-400 text-lg font-bold">Danger Zone</h3>
+</div>
+<div class="bg-white dark:bg-surface-dark p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+<div>
+<p class="text-slate-900 dark:text-white font-medium">Deactivate Admin Account</p>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Once you deactivate this account, you will lose access to all admin privileges immediately.</p>
+</div>
+<button class="whitespace-nowrap px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition-colors shadow-sm">
+                            Deactivate Account
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+<script>
+// ============================================
+// AU Voting System - Shared Frontend Logic
+// ============================================
+
+const API_BASE = 'http://localhost:8000/api';
+
+// --- Dark Mode ---
+function initDarkMode() {
+    const saved = localStorage.getItem('au-dark-mode');
+    if (saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+}
+
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('au-dark-mode', document.documentElement.classList.contains('dark'));
+    updateToggleIcon();
+}
+
+function updateToggleIcon() {
+    const btn = document.getElementById('dark-mode-toggle');
+    if (btn) {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.textContent = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
+        }
+    }
+}
+
+// --- API Client ---
+async function apiCall(endpoint, options = {}) {
+    const token = localStorage.getItem('au-token');
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    if (token) headers['Authorization'] = `Token ${token}`;
+
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+// --- Auth Helpers ---
+function getSession() {
+    try { return JSON.parse(localStorage.getItem('au-session')); } catch { return null; }
+}
+
+function setSession(data) {
+    localStorage.setItem('au-session', JSON.stringify(data));
+}
+
+function clearSession() {
+    localStorage.removeItem('au-session');
+    localStorage.removeItem('au-token');
+}
+
+function requireStudentAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'student') { window.location.href = '/'; return null; }
+    return s;
+}
+
+function requireAdminAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'admin') { window.location.href = '/'; return null; }
+    return s;
+}
+
+async function logout() {
+    try { await apiCall('/auth/logout/', { method: 'POST' }); } catch { }
+    clearSession();
+    window.location.href = '/';
+}
+
+// --- Toast Notifications ---
+function showToast(message, type) {
+    const colors = {
+        success: 'bg-green-600',
+        error: 'bg-red-600',
+        info: 'bg-primary'
+    };
+    const toast = document.createElement('div');
+    toast.className = 'fixed top-6 right-6 z-[200] ' + (colors[type] || colors.info) + ' text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-slide-in font-medium text-sm';
+    toast.innerHTML = '<span class="material-symbols-outlined text-lg">' +
+        (type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info') +
+        '</span>' + message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100px)'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+// --- Student Navigation (Floating FAB) ---
+function createStudentNav(currentPage) {
+    const pages = [
+        { href: '/dashboard.html', icon: 'space_dashboard', label: 'Dashboard', id: 'dashboard' },
+        { href: '/elections.html', icon: 'how_to_vote', label: 'Elections', id: 'elections' },
+        { href: '/results.html', icon: 'bar_chart', label: 'Election Results', id: 'results' },
+        { href: '/profile.html', icon: 'account_circle', label: 'My Profile', id: 'profile' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Admin Navigation (Floating FAB) ---
+function createAdminNav(currentPage) {
+    const pages = [
+        { href: '/admin.html', icon: 'admin_panel_settings', label: 'Dashboard', id: 'admin' },
+        { href: '/monitoring.html', icon: 'analytics', label: 'Live Monitoring', id: 'monitoring' },
+        { href: '/create-election.html', icon: 'add_circle', label: 'Create Election', id: 'create-election' },
+        { href: '/admin-results.html', icon: 'assessment', label: 'Results Report', id: 'admin-results' },
+        { href: '/admin-settings.html', icon: 'settings', label: 'Profile & Settings', id: 'admin-settings' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Floating Nav Builder (shared) ---
+function _createFloatingNav(pages, currentPage) {
+    const nav = document.createElement('div');
+    nav.id = 'floating-nav';
+    nav.innerHTML = `
+    <button id="nav-toggle" onclick="document.getElementById('floating-nav').classList.toggle('open')"
+      class="fixed bottom-6 left-6 z-[100] size-14 rounded-full bg-primary text-white shadow-xl shadow-primary/30 flex items-center justify-center hover:bg-[#002D7A] transition-all hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+    <div id="nav-panel" class="fixed bottom-24 left-6 z-[99] bg-white dark:bg-[#141414] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-3 w-64 transition-all origin-bottom-left scale-0 opacity-0">
+      <div class="flex items-center justify-between px-3 py-2 mb-2 border-b border-slate-100 dark:border-slate-800">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Navigation</span>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="size-8 rounded-lg flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-lg">${document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode'}</span>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-0.5 max-h-80 overflow-y-auto">
+        ${pages.map(p => `
+          <a href="${p.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${p.id === currentPage
+            ? 'bg-primary/10 text-primary'
+            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+        }">
+            <span class="material-symbols-outlined text-lg">${p.icon}</span>
+            ${p.label}
+          </a>
+        `).join('')}
+      </nav>
+    </div>
+  `;
+    document.body.appendChild(nav);
+
+    const style = document.createElement('style');
+    style.textContent = `
+    #floating-nav.open #nav-panel { transform: scale(1); opacity: 1; }
+    #floating-nav.open #nav-toggle { background: #ef4444; }
+    #floating-nav.open #nav-toggle span { font-size: 0; }
+    #floating-nav.open #nav-toggle span::after { content: 'close'; font-size: 24px; font-family: 'Material Symbols Outlined'; }
+    #nav-panel { transition: transform 0.2s ease, opacity 0.2s ease; }
+    .animate-slide-in { animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { opacity:0; transform: translateX(100px); } to { opacity:1; transform: translateX(0); } }
+  `;
+    document.head.appendChild(style);
+
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('floating-nav');
+        if (nav && !nav.contains(e.target)) nav.classList.remove('open');
+    });
+}
+
+// Init dark mode on every page
+initDarkMode();
+
+// Admin Settings Page Logic
+document.addEventListener('DOMContentLoaded', async () => {
+    createAdminNav('admin-settings');
+    const session = requireAdminAuth();
+    if (!session) return;
+
+    // Fix sidebar navigation links
+    document.querySelectorAll('aside a, nav a').forEach(a => {
+        const text = a.textContent.trim().toLowerCase();
+        if (text.includes('dashboard') || text === 'dashboard') a.href = '/admin.html';
+        else if (text.includes('create election')) a.href = '/create-election.html';
+        else if (text.includes('live monitoring') || text.includes('monitoring')) a.href = '/monitoring.html';
+        else if (text.includes('results') || text.includes('report')) a.href = '/admin-results.html';
+        else if (text.includes('settings')) a.href = '/admin-settings.html';
+        else if (text.includes('log out') || text.includes('logout')) {
+            a.href = '#';
+            a.addEventListener('click', (e) => { e.preventDefault(); logout(); });
+        }
+    });
+
+    // Fetch profile from API
+    try {
+        const user = await apiCall('/auth/profile/');
+
+        // Update admin name displays
+        document.querySelectorAll('h2, h3, h4, p, span').forEach(el => {
+            if (el.textContent.includes('Dr. Adebayo') || el.textContent.includes('Admin Name')) {
+                el.textContent = el.textContent.replace(/Dr\. Adebayo|Admin Name/g, user.name);
+            }
+        });
+    } catch (err) {
+        console.error('Failed to fetch profile:', err);
+    }
+
+    // Save / Cancel buttons
+    document.querySelectorAll('button').forEach(btn => {
+        const text = btn.textContent.trim().toLowerCase();
+
+        if (text.includes('save') || text.includes('update profile')) {
+            btn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                btn.disabled = true;
+                btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span> Saving...';
+
+                try {
+                    await apiCall('/auth/profile/', {
+                        method: 'PUT',
+                        body: JSON.stringify({
+                            first_name: session.name?.split(' ')[0] || '',
+                            last_name: session.name?.split(' ').slice(1).join(' ') || '',
+                        }),
+                    });
+                    showToast('Settings saved successfully!', 'success');
+                } catch (err) {
+                    showToast(err.message || 'Failed to save settings', 'error');
+                }
+                btn.disabled = false;
+                btn.textContent = 'Save Changes';
+            });
+        }
+
+        if (text.includes('cancel')) {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Changes discarded', 'info');
+            });
+        }
+
+        // Password update
+        if (text.includes('update password') || text.includes('change password')) {
+            btn.addEventListener('click', () => showToast('Password update coming soon', 'info'));
+        }
+
+        // 2FA
+        if (text.includes('enable 2fa') || text.includes('two-factor') || text.includes('configure')) {
+            btn.addEventListener('click', () => showToast('Two-factor authentication coming soon', 'info'));
+        }
+
+        // Deactivate
+        if (text.includes('deactivate')) {
+            btn.addEventListener('click', () => showToast('Account deactivation requires super admin approval', 'error'));
+        }
+
+        // Download report
+        if (text.includes('download') || text.includes('export')) {
+            btn.addEventListener('click', () => window.print());
+        }
+    });
+});
+
+</script>
+</body></html>

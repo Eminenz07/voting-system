@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Profile - Adeleke University Voting Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#003DA5",
+                        "primary-dark": "#102694",
+                        secondary: "#FFD700",
+                        "accent": "#F5B400",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1e2330",
+                        "text-light": "#0e101b",
+                        "text-dark": "#f8f9fc",
+                        "text-muted-light": "#4e5a97",
+                        "text-muted-dark": "#94a3b8",
+                        "text-primary": "#0A0A0A",
+                        "text-secondary": "#4e5a97",
+                        "border-light": "#e2e8f0",
+                        "border-dark": "#2d3748",
+                        "surface-border": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "sans": ["Be Vietnam Pro", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+<style id="au-brand-overrides">
+  /* ===== AU Brand Colors Override ===== */
+  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
+
+  /* Active sidebar items get yellow left border */
+  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
+
+  /* Progress bars: yellow fill */
+  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Live/ENDS SOON badges: yellow instead of red */
+  .bg-red-500.rounded-full, .bg-red-500.px-2 {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Camera scan frame corners: yellow */
+  [class*="border-t-4"][class*="border-primary"],
+  [class*="border-b-4"][class*="border-primary"],
+  [class*="border-l-4"][class*="border-primary"],
+  [class*="border-r-4"][class*="border-primary"] {
+    border-color: #F5B400 !important;
+  }
+
+  /* Scan line glow: yellow */
+  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
+  [class*="animate-scanline"] div[class*="bg-primary"] {
+    background-color: #F5B400 !important;
+    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
+  }
+
+  /* Selected candidate card border: yellow */
+  [class*="border-primary"][class*="shadow-lg"] {
+    border-color: #F5B400 !important;
+    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
+  }
+
+  /* Selected candidate radio dot: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Verified check badges on candidates: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* KPI/stat card accent lines at bottom */
+  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Step badges: yellow-tinted bg */
+  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
+    background-color: #FFF5D6 !important;
+    color: #8B6D00 !important;
+  }
+
+  /* Capture button (verify screen): yellow ring */
+  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Stat card icon backgrounds: slightly yellow-tinted */
+  .bg-primary\/10 > .material-symbols-outlined {
+    color: #003DA5 !important;
+  }
+
+  /* University logo wrapper ring */
+  .rounded-lg.bg-primary\/10.text-primary {
+    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
+  }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-display antialiased selection:bg-primary selection:text-white">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Main Content -->
+<main class="flex h-full flex-1 flex-col overflow-y-auto bg-background-light dark:bg-background-dark relative">
+<!-- Mobile Header -->
+<header class="flex h-16 items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-4 lg:hidden sticky top-0 z-30">
+<div class="flex items-center gap-3">
+<img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-8 rounded-full object-cover shadow-sm border border-slate-200 dark:border-slate-700 bg-white" />
+<span class="font-bold text-lg text-slate-900 dark:text-white">Adeleke University</span>
+</div>
+</header>
+<!-- Desktop Header -->
+<div class="sticky top-0 z-20 hidden h-20 items-center justify-between bg-surface-light/90 dark:bg-background-dark/90 px-8 backdrop-blur-md lg:flex border-b border-transparent dark:border-slate-800">
+<div class="flex items-center gap-3 sm:gap-4">
+        <img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-12 sm:size-16 rounded-full object-cover border-2 sm:border-4 border-[#F5B400]/50 shadow-sm bg-white" />
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-[#003DA5] dark:text-white leading-tight tracking-tight">Adeleke University</h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-bold tracking-wide">Voting Portal</p>
+        </div>
+      </div>
+<div class="flex items-center gap-4">
+<button class="relative flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 h-2.5 w-2.5 rounded-full bg-red-500 border-2 border-white dark:border-slate-800"></span>
+</button>
+<button class="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#003DA5]/20 hover:bg-primary-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span>Support</span>
+</button>
+</div>
+</div>
+<!-- Profile Content -->
+<div class="w-full max-w-[1400px] mx-auto p-4 lg:p-8 space-y-8 pb-24">
+<!-- Profile Header Card -->
+<section class="rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border overflow-hidden shadow-sm">
+<!-- Cover Area -->
+<div class="h-32 w-full bg-gradient-to-r from-blue-900 to-primary/40 relative">
+<div class="absolute inset-0 bg-black/10"></div>
+</div>
+<div class="px-6 pb-6">
+<div class="flex flex-col md:flex-row gap-6 -mt-12 items-start md:items-end relative z-10">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-32 border-4 border-white dark:border-surface-dark shadow-lg" data-alt="Large profile picture of Oluwaseun Adeleke" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAM_7UwFZCJfAHI0RNkSsSKLmLI4LiCGkqbvItZrzxDQEoYsjLrlJOKn3wiM8lEpg4s_Ai2ukEnkQJEXwWyNHJL8exWedOhzCsJbeoE5DOYhglzuccWf2sNJBgZRdO81DVw5Qq_CfPLxSrSGdFzH81hu656jas1FUIvWsVWAe6cyX6CoVXDgyzYgogeCFHuzv7oPy1nE1BsaqPBzMzS59XhysSWD3fyWm0ib5XVOeinYTfPfOXwyNyHf6Ib_Dnqe46lGcNlxZWI1k7r");'></div>
+<div class="flex flex-col flex-1 pb-2">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-2xl font-bold leading-tight">Oluwaseun Adeleke</h1>
+<div class="flex flex-wrap gap-x-4 gap-y-1 mt-1 text-slate-500 dark:text-slate-400 text-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">school</span>
+                                            Computer Science
+                                        </span>
+<span class="hidden md:inline">•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">stairs</span>
+                                            Level 400
+                                        </span>
+<span class="hidden md:inline">•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+                                            19/0874
+                                        </span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-300 dark:border-surface-border text-sm font-medium hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+                                        Edit Profile
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column: Personal Info -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<!-- Security & Identity Section -->
+<section class="rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+                                Security &amp; Identity
+                            </h2>
+<span class="px-3 py-1 rounded-full bg-green-500/10 text-green-500 text-xs font-bold border border-green-500/20">Active Student</span>
+</div>
+<!-- Verification Details -->
+<div id="verification-section">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+<div class="p-4 rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-surface-border">
+<p class="text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider font-semibold mb-1">Verification Status</p>
+<div id="verification-status" class="flex items-center gap-2 text-slate-900 dark:text-white font-medium">
+<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
+                                    Biometrically Verified
+                                </div>
+</div>
+<div class="p-4 rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-surface-border">
+<p class="text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider font-semibold mb-1">Eligibility</p>
+<div id="eligibility-status" class="flex items-center gap-2 text-slate-900 dark:text-white font-medium">
+<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
+                                    Eligible to Vote
+                                </div>
+</div>
+</div>
+<!-- Verify Identity Button (shown when not verified) -->
+<div id="verify-action" class="mb-8 hidden">
+<a href="/verify.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+Verify Your Identity
+</a>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Complete identity verification to be eligible to vote in elections.</p>
+</div>
+<div id="verified-info" class="mb-8 hidden"></div>
+</div>
+<!-- Digital ID Card -->
+<div class="mb-8">
+<h3 class="text-sm font-semibold mb-4 text-slate-900 dark:text-slate-200">Digital Student Identification</h3>
+<div class="relative overflow-hidden rounded-xl aspect-[1.586/1] w-full max-w-md mx-auto shadow-2xl bg-gradient-to-br from-[#0f141a] to-[#1e2732] border border-white/10 group">
+<!-- Background Pattern -->
+<div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
+<div class="absolute -right-10 -top-10 size-40 bg-primary/20 rounded-full blur-3xl"></div>
+<div class="absolute -left-10 -bottom-10 size-40 bg-blue-500/20 rounded-full blur-3xl"></div>
+<!-- Card Content -->
+<div class="relative h-full flex flex-col p-6 justify-between z-10">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm">
+<span class="material-symbols-outlined text-white text-[24px]">school</span>
+</div>
+<div>
+<div class="text-[10px] text-white/60 uppercase tracking-widest">Adeleke University</div>
+<div class="text-xs font-bold text-white">Student Identity Card</div>
+</div>
+</div>
+<div class="size-12 bg-white p-1 rounded-md">
+<img alt="QR Code" class="w-full h-full object-contain mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJHq5BqtgOEuPaZ1v9m6Hm4Y5-sk5LYthesVrXGm9MUMXUZMClirARdggGr_Xod4j0J_UavgMMeGdCULnVlEmsrrchBtJVJ640KlR7OViEV5cPb7dWK8kk32-tuALA7bJ1N6dd7zPfSVe4ZNsuMcc6e8H2c7h878Ko5p2rgMM5LM4EPVWYpVbPlufJtvRewml_-2Yyp7LUPGuNKsdNtcaRHPnEJ_VBYDb_OuC8n2aWaJPVP08Ff0r1KS_54dLH2pzYVzaVz4zk7I7k"/>
+</div>
+</div>
+<div class="flex gap-4 items-end mt-4">
+<div class="size-20 rounded-lg bg-cover bg-center border-2 border-white/20 shadow-inner" data-alt="Student photo on ID card" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBZQXOFBqcq15TJGTwSS2DfnuZkFyx6mYv66aGRyVgYSpYFJ_Efad2dI4O1i8mdPhfi_XLzwZ6s0i2-YLtAqts5l0IciDFYy6bPlS5N_wlGJCqB_xBqm20W_AzcEh9qtyw1ijHGdLMbEY16T-UUX00D4Xp3kUPoiBZUmiI4lSn8AmzcyuT6o9pnzzeJkEwdA9iWtQr9IT_70pHTiiQqWqC1QiiacezF4xJwm8NU4lU4PVdhpJGzXfnvmx718BJf3yOQn7EVdl3V8-iv");'></div>
+<div class="flex-1 pb-1">
+<div class="text-lg font-bold text-white leading-tight">Oluwaseun Adeleke</div>
+<div class="text-xs text-white/70 mt-1">Computer Science</div>
+<div class="text-xs text-primary font-mono mt-0.5">ID: 19/0874</div>
+</div>
+</div>
+<div class="pt-4 mt-2 border-t border-white/10 flex justify-between items-end">
+<div class="flex flex-col">
+<span class="text-[9px] text-white/40 uppercase">Expires</span>
+<span class="text-xs font-medium text-white">AUG 2024</span>
+</div>
+<div class="h-6 w-10 bg-gradient-to-br from-yellow-200 to-yellow-500 rounded flex items-center justify-center opacity-80">
+<div class="size-4 rounded-full border border-yellow-700/30"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FaceID Toggle removed -->
+</section>
+</div>
+<!-- Right Column: Stats & Actions -->
+<div class="flex flex-col gap-6">
+<!-- Voting Stats -->
+<section class="rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border p-6 shadow-sm">
+<h3 class="text-base font-bold mb-4">Voting History</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-surface-border">
+<div>
+<p class="text-sm font-medium">Departmental Pres.</p>
+<p class="text-xs text-slate-500">2023 Session</p>
+</div>
+<span class="px-2 py-1 bg-green-500/10 text-green-500 text-xs rounded font-medium">Voted</span>
+</div>
+<div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-surface-border">
+<div>
+<p class="text-sm font-medium">Student Union Gov.</p>
+<p class="text-xs text-slate-500">2023 Session</p>
+</div>
+<span class="px-2 py-1 bg-green-500/10 text-green-500 text-xs rounded font-medium">Voted</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium">Faculty Rep.</p>
+<p class="text-xs text-slate-500">2022 Session</p>
+</div>
+<span class="px-2 py-1 bg-slate-500/10 text-slate-500 text-xs rounded font-medium">Missed</span>
+</div>
+</div>
+<button class="w-full mt-6 py-2 text-sm text-primary font-medium hover:bg-primary/5 rounded-lg transition-colors">View Full History</button>
+</section>
+<!-- Account Actions -->
+<section class="rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border p-6 shadow-sm">
+<h3 class="text-base font-bold mb-4">Account Settings</h3>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400">lock</span>
+<span class="text-sm font-medium">Change Password</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400">notifications</span>
+<span class="text-sm font-medium">Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400">devices</span>
+<span class="text-sm font-medium">Active Sessions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-500/10 text-red-600 dark:text-red-400 transition-colors mt-2 font-bold bg-red-50/50" href="#" id="profile-logout-btn">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Log Out</span>
+</a>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+<script>
+// ============================================
+// AU Voting System - Shared Frontend Logic
+// ============================================
+
+const API_BASE = 'http://localhost:8000/api';
+
+// --- Dark Mode ---
+function initDarkMode() {
+    const saved = localStorage.getItem('au-dark-mode');
+    if (saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+}
+
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('au-dark-mode', document.documentElement.classList.contains('dark'));
+    updateToggleIcon();
+}
+
+function updateToggleIcon() {
+    const btn = document.getElementById('dark-mode-toggle');
+    if (btn) {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.textContent = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
+        }
+    }
+}
+
+// --- API Client ---
+async function apiCall(endpoint, options = {}) {
+    const token = localStorage.getItem('au-token');
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    if (token) headers['Authorization'] = `Token ${token}`;
+
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+// --- Auth Helpers ---
+function getSession() {
+    try { return JSON.parse(localStorage.getItem('au-session')); } catch { return null; }
+}
+
+function setSession(data) {
+    localStorage.setItem('au-session', JSON.stringify(data));
+}
+
+function clearSession() {
+    localStorage.removeItem('au-session');
+    localStorage.removeItem('au-token');
+}
+
+function requireStudentAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'student') { window.location.href = '/'; return null; }
+    return s;
+}
+
+function requireAdminAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'admin') { window.location.href = '/'; return null; }
+    return s;
+}
+
+async function logout() {
+    try { await apiCall('/auth/logout/', { method: 'POST' }); } catch { }
+    clearSession();
+    window.location.href = '/';
+}
+
+// --- Toast Notifications ---
+function showToast(message, type) {
+    const colors = {
+        success: 'bg-green-600',
+        error: 'bg-red-600',
+        info: 'bg-primary'
+    };
+    const toast = document.createElement('div');
+    toast.className = 'fixed top-6 right-6 z-[200] ' + (colors[type] || colors.info) + ' text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-slide-in font-medium text-sm';
+    toast.innerHTML = '<span class="material-symbols-outlined text-lg">' +
+        (type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info') +
+        '</span>' + message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100px)'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+// --- Student Navigation (Floating FAB) ---
+function createStudentNav(currentPage) {
+    const pages = [
+        { href: '/dashboard.html', icon: 'space_dashboard', label: 'Dashboard', id: 'dashboard' },
+        { href: '/elections.html', icon: 'how_to_vote', label: 'Elections', id: 'elections' },
+        { href: '/results.html', icon: 'bar_chart', label: 'Election Results', id: 'results' },
+        { href: '/profile.html', icon: 'account_circle', label: 'My Profile', id: 'profile' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Admin Navigation (Floating FAB) ---
+function createAdminNav(currentPage) {
+    const pages = [
+        { href: '/admin.html', icon: 'admin_panel_settings', label: 'Dashboard', id: 'admin' },
+        { href: '/monitoring.html', icon: 'analytics', label: 'Live Monitoring', id: 'monitoring' },
+        { href: '/create-election.html', icon: 'add_circle', label: 'Create Election', id: 'create-election' },
+        { href: '/admin-results.html', icon: 'assessment', label: 'Results Report', id: 'admin-results' },
+        { href: '/admin-settings.html', icon: 'settings', label: 'Profile & Settings', id: 'admin-settings' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Floating Nav Builder (shared) ---
+function _createFloatingNav(pages, currentPage) {
+    const nav = document.createElement('div');
+    nav.id = 'floating-nav';
+    nav.innerHTML = `
+    <button id="nav-toggle" onclick="document.getElementById('floating-nav').classList.toggle('open')"
+      class="fixed bottom-6 left-6 z-[100] size-14 rounded-full bg-primary text-white shadow-xl shadow-primary/30 flex items-center justify-center hover:bg-[#002D7A] transition-all hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+    <div id="nav-panel" class="fixed bottom-24 left-6 z-[99] bg-white dark:bg-[#141414] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-3 w-64 transition-all origin-bottom-left scale-0 opacity-0">
+      <div class="flex items-center justify-between px-3 py-2 mb-2 border-b border-slate-100 dark:border-slate-800">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Navigation</span>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="size-8 rounded-lg flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-lg">${document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode'}</span>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-0.5 max-h-80 overflow-y-auto">
+        ${pages.map(p => `
+          <a href="${p.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${p.id === currentPage
+            ? 'bg-primary/10 text-primary'
+            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+        }">
+            <span class="material-symbols-outlined text-lg">${p.icon}</span>
+            ${p.label}
+          </a>
+        `).join('')}
+      </nav>
+    </div>
+  `;
+    document.body.appendChild(nav);
+
+    const style = document.createElement('style');
+    style.textContent = `
+    #floating-nav.open #nav-panel { transform: scale(1); opacity: 1; }
+    #floating-nav.open #nav-toggle { background: #ef4444; }
+    #floating-nav.open #nav-toggle span { font-size: 0; }
+    #floating-nav.open #nav-toggle span::after { content: 'close'; font-size: 24px; font-family: 'Material Symbols Outlined'; }
+    #nav-panel { transition: transform 0.2s ease, opacity 0.2s ease; }
+    .animate-slide-in { animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { opacity:0; transform: translateX(100px); } to { opacity:1; transform: translateX(0); } }
+  `;
+    document.head.appendChild(style);
+
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('floating-nav');
+        if (nav && !nav.contains(e.target)) nav.classList.remove('open');
+    });
+}
+
+// Init dark mode on every page
+initDarkMode();
+
+// Profile Page Logic
+document.addEventListener('DOMContentLoaded', async () => {
+    createStudentNav('profile');
+    const session = requireStudentAuth();
+    if (!session) return;
+
+    // Fetch profile from API
+    try {
+        const user = await apiCall('/auth/profile/');
+        setSession(user);
+
+        // Update displayed name
+        document.querySelectorAll('h2, h3, h4, p, span').forEach(el => {
+            if (el.textContent.includes('John Doe') || el.textContent.includes('Student Name')) {
+                el.textContent = el.textContent.replace(/John Doe|Student Name/g, user.name);
+            }
+        });
+
+        // Update name on profile card and ID card
+        const nameEl = document.querySelector('h1');
+        if (nameEl) nameEl.textContent = user.name;
+
+        // Update matric
+        document.querySelectorAll('span, p, div').forEach(el => {
+            if (el.textContent.trim() === '19/0874' || el.textContent.includes('MAT/')) {
+                el.textContent = el.textContent.replace(/19\/0874|MAT\/\S+/g, user.matric);
+            }
+        });
+
+        // Update department
+        document.querySelectorAll('span, p, div').forEach(el => {
+            if (el.textContent.trim() === 'Computer Science' && user.department) {
+                el.textContent = user.department;
+            }
+        });
+
+        // Update verification status section
+        const verifyStatus = document.getElementById('verification-status');
+        const eligibilityStatus = document.getElementById('eligibility-status');
+        const verifyAction = document.getElementById('verify-action');
+
+        if (user.is_verified) {
+            // Verified - show green check
+            if (verifyStatus) verifyStatus.innerHTML = '<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span> Verified';
+            if (eligibilityStatus) eligibilityStatus.innerHTML = '<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span> Eligible to Vote';
+
+            // Add reset button for testing
+            const verifiedInfo = document.getElementById('verified-info');
+            if (verifiedInfo) {
+                verifiedInfo.classList.remove('hidden');
+                verifiedInfo.innerHTML = `
+                    <button id="reset-verify-btn" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-red-300 dark:border-red-800 text-red-600 dark:text-red-400 text-xs font-medium hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors">
+                        <span class="material-symbols-outlined text-[16px]">restart_alt</span>
+                        Reset Verification (Testing)
+                    </button>`;
+                document.getElementById('reset-verify-btn').addEventListener('click', async () => {
+                    try {
+                        await apiCall('/auth/unverify/', { method: 'POST' });
+                        const s = getSession();
+                        if (s) { s.is_verified = false; setSession(s); }
+                        showToast('Verification reset!', 'info');
+                        setTimeout(() => window.location.reload(), 800);
+                    } catch (err) {
+                        showToast(err.message || 'Reset failed', 'error');
+                    }
+                });
+            }
+        } else {
+            // Not verified - show warning + verify button
+            if (verifyStatus) verifyStatus.innerHTML = '<span class="material-symbols-outlined text-amber-500 text-[20px]">warning</span> Not Verified';
+            if (eligibilityStatus) eligibilityStatus.innerHTML = '<span class="material-symbols-outlined text-amber-500 text-[20px]">block</span> Not Eligible';
+            if (verifyAction) verifyAction.classList.remove('hidden');
+        }
+
+    } catch (err) {
+        console.error('Failed to fetch profile:', err);
+    }
+
+    // Edit profile button
+    document.querySelectorAll('button').forEach(btn => {
+        if (btn.textContent.toLowerCase().includes('edit')) {
+            btn.addEventListener('click', () => showToast('Profile editing coming soon', 'info'));
+        }
+    });
+
+    // Account action buttons
+    document.querySelectorAll('div[class*="cursor-pointer"], button, a').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (text === 'log out' || text === 'logout') {
+            el.addEventListener('click', (e) => { e.preventDefault(); logout(); });
+        } else if (text.includes('change password')) {
+            el.addEventListener('click', () => showToast('Password change coming soon', 'info'));
+        } else if (text.includes('notification')) {
+            el.addEventListener('click', () => showToast('Notification settings coming soon', 'info'));
+        }
+    });
+
+    // Logout
+    document.querySelectorAll('a, button').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (text.includes('log out') || text.includes('logout') || text.includes('sign out')) {
+            el.addEventListener('click', (e) => { e.preventDefault(); logout(); });
+            if (el.tagName === 'A') el.href = '#';
+        }
+    });
+});
+
+</script>
+</body></html>

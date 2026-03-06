@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Profile - Adeleke University Voting Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#003DA5",
+                        "primary-dark": "#102694",
+                        secondary: "#FFD700",
+                        "accent": "#F5B400",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1e2330",
+                        "text-light": "#0e101b",
+                        "text-dark": "#f8f9fc",
+                        "text-muted-light": "#4e5a97",
+                        "text-muted-dark": "#94a3b8",
+                        "text-primary": "#0A0A0A",
+                        "text-secondary": "#4e5a97",
+                        "border-light": "#e2e8f0",
+                        "border-dark": "#2d3748",
+                        "surface-border": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "sans": ["Be Vietnam Pro", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-display antialiased selection:bg-primary selection:text-white">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Main Content -->
+<main class="flex h-full flex-1 flex-col overflow-y-auto bg-background-light dark:bg-background-dark relative">
+<!-- Mobile Header -->
+<header class="flex h-16 items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-4 lg:hidden sticky top-0 z-30">
+<div class="flex items-center gap-3">
+<img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-8 rounded-full object-cover shadow-sm border border-slate-200 dark:border-slate-700 bg-white" />
+<span class="font-bold text-lg text-slate-900 dark:text-white">Adeleke University</span>
+</div>
+</header>
+<!-- Desktop Header -->
+<div class="sticky top-0 z-20 hidden h-20 items-center justify-between bg-surface-light/90 dark:bg-background-dark/90 px-8 backdrop-blur-md lg:flex border-b border-transparent dark:border-slate-800">
+<div class="flex items-center gap-3 sm:gap-4">
+        <img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-12 sm:size-16 rounded-full object-cover border-2 sm:border-4 border-[#F5B400]/50 shadow-sm bg-white" />
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-[#003DA5] dark:text-white leading-tight tracking-tight">Adeleke University</h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-bold tracking-wide">Voting Portal</p>
+        </div>
+      </div>
+<div class="flex items-center gap-4">
+<button class="relative flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 h-2.5 w-2.5 rounded-full bg-red-500 border-2 border-white dark:border-slate-800"></span>
+</button>
+<button class="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#003DA5]/20 hover:bg-primary-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span>Support</span>
+</button>
+</div>
+</div>
+<!-- Profile Content -->
+<div class="w-full max-w-[1400px] mx-auto p-4 lg:p-8 space-y-8 pb-24">
+<!-- Profile Header Card -->
+<section class="rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border overflow-hidden shadow-sm">
+<!-- Cover Area -->
+<div class="h-32 w-full bg-gradient-to-r from-blue-900 to-primary/40 relative">
+<div class="absolute inset-0 bg-black/10"></div>
+</div>
+<div class="px-6 pb-6">
+<div class="flex flex-col md:flex-row gap-6 -mt-12 items-start md:items-end relative z-10">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-32 border-4 border-white dark:border-surface-dark shadow-lg" data-alt="Large profile picture of Oluwaseun Adeleke" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAM_7UwFZCJfAHI0RNkSsSKLmLI4LiCGkqbvItZrzxDQEoYsjLrlJOKn3wiM8lEpg4s_Ai2ukEnkQJEXwWyNHJL8exWedOhzCsJbeoE5DOYhglzuccWf2sNJBgZRdO81DVw5Qq_CfPLxSrSGdFzH81hu656jas1FUIvWsVWAe6cyX6CoVXDgyzYgogeCFHuzv7oPy1nE1BsaqPBzMzS59XhysSWD3fyWm0ib5XVOeinYTfPfOXwyNyHf6Ib_Dnqe46lGcNlxZWI1k7r");'></div>
+<div class="flex flex-col flex-1 pb-2">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-2xl font-bold leading-tight">Oluwaseun Adeleke</h1>
+<div class="flex flex-wrap gap-x-4 gap-y-1 mt-1 text-slate-500 dark:text-slate-400 text-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">school</span>
+                                            Computer Science
+                                        </span>
+<span class="hidden md:inline">•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">stairs</span>
+                                            Level 400
+                                        </span>
+<span class="hidden md:inline">•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+                                            19/0874
+                                        </span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-300 dark:border-surface-border text-sm font-medium hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+                                        Edit Profile
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column: Personal Info -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<!-- Security & Identity Section -->
+<section class="rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+                                Security &amp; Identity
+                            </h2>
+<span class="px-3 py-1 rounded-full bg-green-500/10 text-green-500 text-xs font-bold border border-green-500/20">Active Student</span>
+</div>
+<!-- Verification Details -->
+<div id="verification-section">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+<div class="p-4 rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-surface-border">
+<p class="text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider font-semibold mb-1">Verification Status</p>
+<div id="verification-status" class="flex items-center gap-2 text-slate-900 dark:text-white font-medium">
+<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
+                                    Biometrically Verified
+                                </div>
+</div>
+<div class="p-4 rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-surface-border">
+<p class="text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider font-semibold mb-1">Eligibility</p>
+<div id="eligibility-status" class="flex items-center gap-2 text-slate-900 dark:text-white font-medium">
+<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
+                                    Eligible to Vote
+                                </div>
+</div>
+</div>
+<!-- Verify Identity Button (shown when not verified) -->
+<div id="verify-action" class="mb-8 hidden">
+<a href="/verify.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+Verify Your Identity
+</a>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Complete identity verification to be eligible to vote in elections.</p>
+</div>
+<div id="verified-info" class="mb-8 hidden"></div>
+</div>
+<!-- Digital ID Card -->
+<div class="mb-8">
+<h3 class="text-sm font-semibold mb-4 text-slate-900 dark:text-slate-200">Digital Student Identification</h3>
+<div class="relative overflow-hidden rounded-xl aspect-[1.586/1] w-full max-w-md mx-auto shadow-2xl bg-gradient-to-br from-[#0f141a] to-[#1e2732] border border-white/10 group">
+<!-- Background Pattern -->
+<div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
+<div class="absolute -right-10 -top-10 size-40 bg-primary/20 rounded-full blur-3xl"></div>
+<div class="absolute -left-10 -bottom-10 size-40 bg-blue-500/20 rounded-full blur-3xl"></div>
+<!-- Card Content -->
+<div class="relative h-full flex flex-col p-6 justify-between z-10">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm">
+<span class="material-symbols-outlined text-white text-[24px]">school</span>
+</div>
+<div>
+<div class="text-[10px] text-white/60 uppercase tracking-widest">Adeleke University</div>
+<div class="text-xs font-bold text-white">Student Identity Card</div>
+</div>
+</div>
+<div class="size-12 bg-white p-1 rounded-md">
+<img alt="QR Code" class="w-full h-full object-contain mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJHq5BqtgOEuPaZ1v9m6Hm4Y5-sk5LYthesVrXGm9MUMXUZMClirARdggGr_Xod4j0J_UavgMMeGdCULnVlEmsrrchBtJVJ640KlR7OViEV5cPb7dWK8kk32-tuALA7bJ1N6dd7zPfSVe4ZNsuMcc6e8H2c7h878Ko5p2rgMM5LM4EPVWYpVbPlufJtvRewml_-2Yyp7LUPGuNKsdNtcaRHPnEJ_VBYDb_OuC8n2aWaJPVP08Ff0r1KS_54dLH2pzYVzaVz4zk7I7k"/>
+</div>
+</div>
+<div class="flex gap-4 items-end mt-4">
+<div class="size-20 rounded-lg bg-cover bg-center border-2 border-white/20 shadow-inner" data-alt="Student photo on ID card" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBZQXOFBqcq15TJGTwSS2DfnuZkFyx6mYv66aGRyVgYSpYFJ_Efad2dI4O1i8mdPhfi_XLzwZ6s0i2-YLtAqts5l0IciDFYy6bPlS5N_wlGJCqB_xBqm20W_AzcEh9qtyw1ijHGdLMbEY16T-UUX00D4Xp3kUPoiBZUmiI4lSn8AmzcyuT6o9pnzzeJkEwdA9iWtQr9IT_70pHTiiQqWqC1QiiacezF4xJwm8NU4lU4PVdhpJGzXfnvmx718BJf3yOQn7EVdl3V8-iv");'></div>
+<div class="flex-1 pb-1">
+<div class="text-lg font-bold text-white leading-tight">Oluwaseun Adeleke</div>
+<div class="text-xs text-white/70 mt-1">Computer Science</div>
+<div class="text-xs text-primary font-mono mt-0.5">ID: 19/0874</div>
+</div>
+</div>
+<div class="pt-4 mt-2 border-t border-white/10 flex justify-between items-end">
+<div class="flex flex-col">
+<span class="text-[9px] text-white/40 uppercase">Expires</span>
+<span class="text-xs font-medium text-white">AUG 2024</span>
+</div>
+<div class="h-6 w-10 bg-gradient-to-br from-yellow-200 to-yellow-500 rounded flex items-center justify-center opacity-80">
+<div class="size-4 rounded-full border border-yellow-700/30"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FaceID Toggle removed -->
+</section>
+</div>
+<!-- Right Column: Stats & Actions -->
+<div class="flex flex-col gap-6">
+<!-- Voting Stats -->
+<section class="rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border p-6 shadow-sm">
+<h3 class="text-base font-bold mb-4">Voting History</h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-surface-border">
+<div>
+<p class="text-sm font-medium">Departmental Pres.</p>
+<p class="text-xs text-slate-500">2023 Session</p>
+</div>
+<span class="px-2 py-1 bg-green-500/10 text-green-500 text-xs rounded font-medium">Voted</span>
+</div>
+<div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-surface-border">
+<div>
+<p class="text-sm font-medium">Student Union Gov.</p>
+<p class="text-xs text-slate-500">2023 Session</p>
+</div>
+<span class="px-2 py-1 bg-green-500/10 text-green-500 text-xs rounded font-medium">Voted</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="text-sm font-medium">Faculty Rep.</p>
+<p class="text-xs text-slate-500">2022 Session</p>
+</div>
+<span class="px-2 py-1 bg-slate-500/10 text-slate-500 text-xs rounded font-medium">Missed</span>
+</div>
+</div>
+<button class="w-full mt-6 py-2 text-sm text-primary font-medium hover:bg-primary/5 rounded-lg transition-colors">View Full History</button>
+</section>
+<!-- Account Actions -->
+<section class="rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-surface-border p-6 shadow-sm">
+<h3 class="text-base font-bold mb-4">Account Settings</h3>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400">lock</span>
+<span class="text-sm font-medium">Change Password</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400">notifications</span>
+<span class="text-sm font-medium">Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-white/5 text-slate-700 dark:text-slate-300 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400">devices</span>
+<span class="text-sm font-medium">Active Sessions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-500/10 text-red-600 dark:text-red-400 transition-colors mt-2 font-bold bg-red-50/50" href="#" id="profile-logout-btn">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Log Out</span>
+</a>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

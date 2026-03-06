@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AU e-Vote Portal - Election Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#003DA5",
+                        "accent": "#F5B400",
+                        "accent-dark": "#D49B00",
+                        "accent-light": "#FFF5D6",
+                        "primary-content": "#ffffff",
+                        "primary-dark": "#002D7A",
+                        "primary-light": "#E6EEF9",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#141414",
+                        "surface-border": "#2d3748",
+                        "border-dark": "#2d3748",
+                        "text-main": "#0A0A0A",
+                        "text-muted": "#64748b",
+                        "text-primary": "#0A0A0A",
+                        "text-secondary": "#4e5a97",
+                        "border-light": "#e2e8f0",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "sans": ["Be Vietnam Pro", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .watermark-pattern {
+            background-image: radial-gradient(#003DA5 0.5px, transparent 0.5px), radial-gradient(#003DA5 0.5px, #f6f7f8 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.03;
+        }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background-light text-slate-900 font-display antialiased min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-white border-b border-neutral-200 shadow-sm">
+<div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-3 sm:gap-4">
+<img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-10 sm:size-12 rounded-full object-cover border-2 border-[#F5B400]/50 shadow-sm bg-white" />
+<div>
+<h1 class="text-[#003DA5] text-lg font-black leading-tight tracking-tight">Adeleke University</h1>
+<span class="text-xs text-neutral-500 font-bold tracking-wide">Voting Portal</span>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-neutral-600 hover:text-primary text-sm font-medium transition-colors" href="#">Current Elections</a>
+<a class="text-primary text-sm font-medium" href="#">Results</a>
+<a class="text-neutral-600 hover:text-primary text-sm font-medium transition-colors" href="#">Candidates</a>
+<a class="text-neutral-600 hover:text-primary text-sm font-medium transition-colors" href="#">Analytics</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex flex-col items-end mr-2">
+<span class="text-sm font-bold text-slate-900">Dr. Sarah A.</span>
+<span class="text-xs text-neutral-500">Election Monitor</span>
+</div>
+<div class="relative group">
+<div class="h-10 w-10 rounded-full bg-neutral-200 border-2 border-white shadow-sm overflow-hidden bg-cover bg-center cursor-pointer" data-alt="User profile photo avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCTfR8v6AoXMQkkUFyR89sTSm03ZyWUvHuP_jCQKRSzYo6tOARsggYRBXKJ51t9FHdbOhr3qVZ_xCCums1O1n99fmOiljMm9pLlpO0VX57nqCUhHIKobMETs-1igHW8Of1hpavue-Vb-U15CtXoZFZfk2TT2gciKYs-BEmKZuIuEcvmeFc77TZNnT84uLhLUfOFxje3d22uEyDVFBGMmE4gIJPNzlngj1Wnz6OjNCEgnnIlITZgxJfDdpw-VW2PJgFyUFFPaGGkC41p');"></div>
+</div>
+<button class="hidden sm:flex items-center justify-center h-9 w-9 rounded-full text-neutral-500 hover:bg-neutral-100 transition-colors">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-[1200px] mx-auto px-6 py-8 relative">
+<!-- Watermark Background Layer -->
+<div class="absolute inset-0 watermark-pattern pointer-events-none z-0"></div>
+<!-- Header Section -->
+<div class="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 border-b border-neutral-200 pb-8">
+<div class="flex flex-col gap-2">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold w-fit border border-green-200">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                    OFFICIAL CERTIFIED RESULTS
+                </div>
+<h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight" id="election-title">Loading Election Results...</h2>
+<p class="text-neutral-500 text-base md:text-lg" id="election-desc">Certified by the Adeleke University Electoral Committee (AUEC) • Final Count</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 h-10 px-5 bg-white border border-neutral-300 text-neutral-700 text-sm font-bold rounded-lg hover:bg-neutral-50 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">print</span>
+                    Print
+                </button>
+<button class="flex items-center gap-2 h-10 px-5 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-md shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                    Download Report
+                </button>
+</div>
+</div>
+<!-- Key Metrics Grid -->
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<!-- Card 1 -->
+<div class="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">groups</span>
+</div>
+<p class="text-neutral-500 text-sm font-semibold uppercase tracking-wider mb-2">Total Eligible Voters</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-black text-slate-900" id="metric-eligible">--</span>
+</div>
+<div class="mt-4 flex items-center gap-2 text-sm text-neutral-500">
+<span class="inline-block w-2 h-2 rounded-full bg-neutral-300"></span>
+<span>Registered students</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">ballot</span>
+</div>
+<p class="text-neutral-500 text-sm font-semibold uppercase tracking-wider mb-2">Votes Cast</p>
+<div class="flex items-baseline gap-3">
+<span class="text-4xl font-black text-slate-900" id="metric-votes">--</span>
+<span class="text-sm font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100" id="metric-votes-badge">
+                        Live Tracking
+                    </span>
+</div>
+<div class="mt-4 w-full bg-neutral-100 rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full transition-all duration-1000 w-0" id="metric-votes-bar"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">pie_chart</span>
+</div>
+<p class="text-neutral-500 text-sm font-semibold uppercase tracking-wider mb-2">Voter Turnout</p>
+<div class="flex items-baseline gap-3">
+<span class="text-4xl font-black text-slate-900" id="metric-turnout">--%</span>
+<span class="text-sm font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100" id="metric-turnout-badge">
+                        Calculating
+                    </span>
+</div>
+<div class="mt-4 flex items-center gap-2 text-sm text-neutral-500">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span id="metric-turnout-desc">High Engagement Expected</span>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Bar Chart -->
+<div class="lg:col-span-2 bg-white rounded-xl border border-neutral-200 shadow-sm p-6 md:p-8">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+<div>
+<h3 class="text-xl font-bold text-slate-900">Candidate Performance</h3>
+<p class="text-neutral-500 text-sm">Percentage of total valid votes cast per candidate</p>
+</div>
+<div class="flex items-center gap-2 text-sm bg-neutral-50 p-1 rounded-lg border border-neutral-200">
+<button class="px-3 py-1.5 bg-white text-slate-900 shadow-sm rounded-md font-medium border border-neutral-200">Chart</button>
+<button class="px-3 py-1.5 text-neutral-500 hover:text-slate-900 font-medium">Table</button>
+</div>
+</div>
+<!-- Chart Content -->
+<div class="flex flex-col gap-10" id="results-container">
+<!-- Dynamic Results will be injected here -->
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-400">
+<span>Data last updated: 2 mins ago</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                        Encrypted &amp; Verified Blockchain Ledger
+                    </span>
+</div>
+</div>
+<!-- Side Panel Details -->
+<div class="flex flex-col gap-6">
+<!-- Faculty Breakdown -->
+<div class="bg-white rounded-xl border border-neutral-200 shadow-sm p-6">
+<h3 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">domain</span>
+                        Top Faculties Participation
+                    </h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-neutral-600">Science</span>
+<span class="text-sm font-bold text-slate-900">92%</span>
+</div>
+<div class="w-full bg-neutral-100 rounded-full h-2">
+<div class="bg-primary/80 h-2 rounded-full w-[92%]"></div>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="text-sm font-medium text-neutral-600">Law</span>
+<span class="text-sm font-bold text-slate-900">88%</span>
+</div>
+<div class="w-full bg-neutral-100 rounded-full h-2">
+<div class="bg-primary/60 h-2 rounded-full w-[88%]"></div>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="text-sm font-medium text-neutral-600">Arts</span>
+<span class="text-sm font-bold text-slate-900">75%</span>
+</div>
+<div class="w-full bg-neutral-100 rounded-full h-2">
+<div class="bg-primary/40 h-2 rounded-full w-[75%]"></div>
+</div>
+</div>
+</div>
+<!-- Electoral Committee Info -->
+<div class="bg-neutral-50 rounded-xl border border-neutral-200 p-6">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 bg-white rounded-lg border border-neutral-200 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-neutral-400">gavel</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900 mb-1">AUEC Certified</h4>
+<p class="text-xs text-neutral-500 leading-relaxed">
+                                 This result has been digitally signed and verified by the Adeleke University Electoral Committee. Any disputes must be filed within 24 hours.
+                             </p>
+<a class="text-xs font-bold text-primary mt-3 inline-block hover:underline" href="#">View Certification Hash</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto border-t border-neutral-200 bg-white py-8">
+<div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-neutral-400">© 2024 Adeleke University. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-xs text-neutral-500 hover:text-primary" href="#">Privacy Policy</a>
+<a class="text-xs text-neutral-500 hover:text-primary" href="#">Terms of Service</a>
+<a class="text-xs text-neutral-500 hover:text-primary" href="#">Support</a>
+</div>
+</div>
+</footer>
+</body></html>

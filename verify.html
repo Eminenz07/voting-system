@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Adeleke University Voting - ID Verification</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#003DA5",
+                        "accent": "#F5B400",
+                        "accent-dark": "#D49B00",
+                        "accent-light": "#FFF5D6",
+                        "primary-content": "#ffffff",
+                        "primary-dark": "#002D7A",
+                        "primary-light": "#E6EEF9",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#141414",
+                        "text-main": "#0A0A0A", // Slate 900
+                        "text-main-dark": "#f1f5f9", // Slate 100
+                        "text-muted": "#64748b", // Slate 500
+                        "text-muted-dark": "#94a3b8", // Slate 400
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Framing Guide Overlay */
+        .camera-overlay {
+            background: rgba(0, 0, 0, 0.6);
+            mask-image: linear-gradient(to bottom, black 0%, black 15%, transparent 15%, transparent 85%, black 85%, black 100%),
+                        linear-gradient(to right, black 0%, black 10%, transparent 10%, transparent 90%, black 90%, black 100%);
+            mask-composite: add;
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 15%, transparent 15%, transparent 85%, black 85%, black 100%),
+                                linear-gradient(to right, black 0%, black 10%, transparent 10%, transparent 90%, black 90%, black 100%);
+            -webkit-mask-composite: source-over; /* Simplified for wider support, ideally use complex paths or SVG for perfect cutout */
+        }
+        
+        /* Better Framing Guide using box-shadow trick */
+        .framing-guide {
+            box-shadow: 0 0 0 9999px rgba(17, 20, 33, 0.75);
+        }
+    </style>
+
+<style id="au-brand-overrides">
+  /* ===== AU Brand Colors Override ===== */
+  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
+
+  /* Active sidebar items get yellow left border */
+  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
+
+  /* Progress bars: yellow fill */
+  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Live/ENDS SOON badges: yellow instead of red */
+  .bg-red-500.rounded-full, .bg-red-500.px-2 {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Camera scan frame corners: yellow */
+  [class*="border-t-4"][class*="border-primary"],
+  [class*="border-b-4"][class*="border-primary"],
+  [class*="border-l-4"][class*="border-primary"],
+  [class*="border-r-4"][class*="border-primary"] {
+    border-color: #F5B400 !important;
+  }
+
+  /* Scan line glow: yellow */
+  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
+  [class*="animate-scanline"] div[class*="bg-primary"] {
+    background-color: #F5B400 !important;
+    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
+  }
+
+  /* Selected candidate card border: yellow */
+  [class*="border-primary"][class*="shadow-lg"] {
+    border-color: #F5B400 !important;
+    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
+  }
+
+  /* Selected candidate radio dot: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Verified check badges on candidates: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* KPI/stat card accent lines at bottom */
+  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Step badges: yellow-tinted bg */
+  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
+    background-color: #FFF5D6 !important;
+    color: #8B6D00 !important;
+  }
+
+  /* Capture button (verify screen): yellow ring */
+  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Stat card icon backgrounds: slightly yellow-tinted */
+  .bg-primary\/10 > .material-symbols-outlined {
+    color: #003DA5 !important;
+  }
+
+  /* University logo wrapper ring */
+  .rounded-lg.bg-primary\/10.text-primary {
+    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
+  }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-text-main-dark min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-gray-200 dark:border-gray-800 bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur-sm px-6 py-4 lg:px-10">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center size-10 rounded-lg bg-primary/10 text-primary ring-2 ring-[#F5B400]/30 ring-2 ring-[#F5B400]/30">
+<span class="material-symbols-outlined text-[24px]">school</span>
+</div>
+<div class="hidden sm:block">
+<h2 class="text-lg font-bold leading-tight tracking-tight">Adeleke University</h2>
+<p class="text-xs font-medium text-text-muted dark:text-text-muted-dark">Official Voting Portal</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 text-green-700 dark:text-green-400 border border-green-500/20">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="text-xs font-bold uppercase tracking-wide">Secure Connection</span>
+</div>
+<button class="flex items-center justify-center size-10 rounded-lg bg-background-light dark:bg-surface-dark hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-text-main dark:text-text-main-dark">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+<!-- Center Card Container (Mobile-first width on desktop) -->
+<div class="w-full max-w-[520px] bg-surface-light dark:bg-surface-dark rounded-2xl shadow-xl dark:shadow-black/20 overflow-hidden flex flex-col">
+<!-- Step Indicator -->
+<div class="p-6 pb-2">
+<div class="flex items-center justify-between mb-3">
+<p class="text-sm font-semibold text-text-muted dark:text-text-muted-dark uppercase tracking-wider">Step 1 of 3</p>
+<span class="text-xs font-bold text-[#8B6D00] bg-[#FFF5D6] px-2 py-1 rounded font-bold">Identity Verification</span>
+</div>
+<div class="relative h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+<div class="absolute left-0 top-0 h-full w-1/3 bg-[#F5B400] rounded-full transition-all duration-500"></div>
+</div>
+</div>
+<!-- Instructions -->
+<div class="px-6 pt-4 pb-2 text-center">
+<h1 class="text-2xl sm:text-3xl font-bold mb-2 tracking-tight">Scan Student ID</h1>
+<p class="text-text-muted dark:text-text-muted-dark text-base leading-relaxed">
+                    Position the front of your Student ID card within the frame. Ensure text is readable and glare-free.
+                </p>
+</div>
+<!-- Camera Viewport / Upload Area -->
+<div class="p-6 flex justify-center">
+<div class="relative w-full aspect-[4/3] bg-black rounded-xl overflow-hidden group cursor-pointer shadow-inner">
+<!-- Simulated Camera Feed (Placeholder Image) -->
+<div class="absolute inset-0 bg-cover bg-center opacity-60" data-alt="Abstract blurry background representing a camera feed focusing on a desk" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD0YJE2iqExu90WpDe3B37mdVEjuJ52CUSXU6CHI2iDuz4TQn7Ybe_3qSmYfWxVxB99zlS-HXO7wPKVV5aHkAKilrMkYy_Q7-qosOCwxQQLnZ4hO1dVJts6GadHK_XOzZ5YrjmkEOWUk1vydP30AEnBe5iKNrNKM02VEIMjE5hBwq0UWxPpd21zqclc_MLv1Fnhn-E3P0ZZWgLLybwAnME7WoURmZrHGgZrsZIlIXkURzqodSpXXnPOF99dZWQCMsefRqaOFtHTOcsY');">
+</div>
+<!-- Live Indicator -->
+<div class="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10 z-20">
+<div class="size-2 bg-accent rounded-full animate-pulse"></div>
+<span class="text-[10px] font-bold text-white uppercase tracking-wider">Live</span>
+</div>
+<!-- Framing Guide (Using box-shadow trick for transparent center) -->
+<div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+<!-- The clear window -->
+<div class="w-[85%] h-[65%] rounded-lg border-2 border-white/80 framing-guide relative">
+<!-- Corner Accents -->
+<div class="absolute -top-[2px] -left-[2px] w-6 h-6 border-t-4 border-l-4 border-[#F5B400] rounded-tl-lg"></div>
+<div class="absolute -top-[2px] -right-[2px] w-6 h-6 border-t-4 border-r-4 border-[#F5B400] rounded-tr-lg"></div>
+<div class="absolute -bottom-[2px] -left-[2px] w-6 h-6 border-b-4 border-l-4 border-[#F5B400] rounded-bl-lg"></div>
+<div class="absolute -bottom-[2px] -right-[2px] w-6 h-6 border-b-4 border-r-4 border-[#F5B400] rounded-br-lg"></div>
+</div>
+</div>
+<!-- Scan Animation Line -->
+<div class="absolute inset-0 z-10 pointer-events-none opacity-50">
+<div class="w-full h-[2px] bg-[#F5B400] shadow-[0_0_15px_rgba(245,180,0,0.8)] absolute top-0 animate-[scan_3s_ease-in-out_infinite]"></div>
+</div>
+<!-- Center Icon (Optional, appears if no feed) -->
+<div class="absolute inset-0 flex flex-col items-center justify-center z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<!-- Hidden state logic would go here -->
+</div>
+</div>
+</div>
+<style>
+                @keyframes scan {
+                    0% { top: 15%; opacity: 0; }
+                    10% { opacity: 1; }
+                    90% { opacity: 1; }
+                    100% { top: 85%; opacity: 0; }
+                }
+            </style>
+<!-- Action Area -->
+<div class="px-6 pb-8 flex flex-col items-center gap-4">
+<!-- Capture Button -->
+<button class="group relative flex items-center justify-center size-20 rounded-full bg-transparent border-4 border-gray-300 dark:border-gray-600 hover:border-primary transition-all duration-300">
+<div class="size-16 bg-[#F5B400] rounded-full shadow-lg group-hover:scale-90 transition-transform duration-200"></div>
+</button>
+<p class="text-sm font-medium text-text-muted dark:text-text-muted-dark">Tap to Capture</p>
+<!-- Secondary Option -->
+<div class="mt-2 w-full pt-4 border-t border-gray-100 dark:border-gray-800 flex justify-center">
+<button class="flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark transition-colors px-4 py-2 rounded-lg hover:bg-primary/5">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+                        Upload file manually instead
+                    </button>
+</div>
+</div>
+</div>
+<!-- Security Badge / Footer Info -->
+<div class="mt-8 flex flex-col items-center gap-3 text-center opacity-70">
+<div class="flex items-center gap-2 text-xs text-text-muted dark:text-text-muted-dark">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span>Encrypted end-to-end for your privacy</span>
+</div>
+<div class="flex gap-4 text-xs font-medium text-text-muted dark:text-text-muted-dark">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<span>•</span>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+<p class="text-[10px] text-text-muted/60 dark:text-text-muted-dark/60 mt-2">Powered by AU Digital Systems</p>
+</div>
+</main>
+
+<script>
+// ============================================
+// AU Voting System - Shared Frontend Logic
+// ============================================
+
+const API_BASE = 'http://localhost:8000/api';
+
+// --- Dark Mode ---
+function initDarkMode() {
+    const saved = localStorage.getItem('au-dark-mode');
+    if (saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+}
+
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('au-dark-mode', document.documentElement.classList.contains('dark'));
+    updateToggleIcon();
+}
+
+function updateToggleIcon() {
+    const btn = document.getElementById('dark-mode-toggle');
+    if (btn) {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.textContent = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
+        }
+    }
+}
+
+// --- API Client ---
+async function apiCall(endpoint, options = {}) {
+    const token = localStorage.getItem('au-token');
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    if (token) headers['Authorization'] = `Token ${token}`;
+
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+// --- Auth Helpers ---
+function getSession() {
+    try { return JSON.parse(localStorage.getItem('au-session')); } catch { return null; }
+}
+
+function setSession(data) {
+    localStorage.setItem('au-session', JSON.stringify(data));
+}
+
+function clearSession() {
+    localStorage.removeItem('au-session');
+    localStorage.removeItem('au-token');
+}
+
+function requireStudentAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'student') { window.location.href = '/'; return null; }
+    return s;
+}
+
+function requireAdminAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'admin') { window.location.href = '/'; return null; }
+    return s;
+}
+
+async function logout() {
+    try { await apiCall('/auth/logout/', { method: 'POST' }); } catch { }
+    clearSession();
+    window.location.href = '/';
+}
+
+// --- Toast Notifications ---
+function showToast(message, type) {
+    const colors = {
+        success: 'bg-green-600',
+        error: 'bg-red-600',
+        info: 'bg-primary'
+    };
+    const toast = document.createElement('div');
+    toast.className = 'fixed top-6 right-6 z-[200] ' + (colors[type] || colors.info) + ' text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-slide-in font-medium text-sm';
+    toast.innerHTML = '<span class="material-symbols-outlined text-lg">' +
+        (type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info') +
+        '</span>' + message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100px)'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+// --- Student Navigation (Floating FAB) ---
+function createStudentNav(currentPage) {
+    const pages = [
+        { href: '/dashboard.html', icon: 'space_dashboard', label: 'Dashboard', id: 'dashboard' },
+        { href: '/elections.html', icon: 'how_to_vote', label: 'Elections', id: 'elections' },
+        { href: '/results.html', icon: 'bar_chart', label: 'Election Results', id: 'results' },
+        { href: '/profile.html', icon: 'account_circle', label: 'My Profile', id: 'profile' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Admin Navigation (Floating FAB) ---
+function createAdminNav(currentPage) {
+    const pages = [
+        { href: '/admin.html', icon: 'admin_panel_settings', label: 'Dashboard', id: 'admin' },
+        { href: '/monitoring.html', icon: 'analytics', label: 'Live Monitoring', id: 'monitoring' },
+        { href: '/create-election.html', icon: 'add_circle', label: 'Create Election', id: 'create-election' },
+        { href: '/admin-results.html', icon: 'assessment', label: 'Results Report', id: 'admin-results' },
+        { href: '/admin-settings.html', icon: 'settings', label: 'Profile & Settings', id: 'admin-settings' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Floating Nav Builder (shared) ---
+function _createFloatingNav(pages, currentPage) {
+    const nav = document.createElement('div');
+    nav.id = 'floating-nav';
+    nav.innerHTML = `
+    <button id="nav-toggle" onclick="document.getElementById('floating-nav').classList.toggle('open')"
+      class="fixed bottom-6 left-6 z-[100] size-14 rounded-full bg-primary text-white shadow-xl shadow-primary/30 flex items-center justify-center hover:bg-[#002D7A] transition-all hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+    <div id="nav-panel" class="fixed bottom-24 left-6 z-[99] bg-white dark:bg-[#141414] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-3 w-64 transition-all origin-bottom-left scale-0 opacity-0">
+      <div class="flex items-center justify-between px-3 py-2 mb-2 border-b border-slate-100 dark:border-slate-800">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Navigation</span>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="size-8 rounded-lg flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-lg">${document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode'}</span>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-0.5 max-h-80 overflow-y-auto">
+        ${pages.map(p => `
+          <a href="${p.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${p.id === currentPage
+            ? 'bg-primary/10 text-primary'
+            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+        }">
+            <span class="material-symbols-outlined text-lg">${p.icon}</span>
+            ${p.label}
+          </a>
+        `).join('')}
+      </nav>
+    </div>
+  `;
+    document.body.appendChild(nav);
+
+    const style = document.createElement('style');
+    style.textContent = `
+    #floating-nav.open #nav-panel { transform: scale(1); opacity: 1; }
+    #floating-nav.open #nav-toggle { background: #ef4444; }
+    #floating-nav.open #nav-toggle span { font-size: 0; }
+    #floating-nav.open #nav-toggle span::after { content: 'close'; font-size: 24px; font-family: 'Material Symbols Outlined'; }
+    #nav-panel { transition: transform 0.2s ease, opacity 0.2s ease; }
+    .animate-slide-in { animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { opacity:0; transform: translateX(100px); } to { opacity:1; transform: translateX(0); } }
+  `;
+    document.head.appendChild(style);
+
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('floating-nav');
+        if (nav && !nav.contains(e.target)) nav.classList.remove('open');
+    });
+}
+
+// Init dark mode on every page
+initDarkMode();
+
+// Verify Page Logic
+document.addEventListener('DOMContentLoaded', () => {
+    createStudentNav('verify');
+    const session = requireStudentAuth();
+    if (!session) return;
+
+    // Find all buttons on the page
+    const allButtons = Array.from(document.querySelectorAll('button'));
+
+    // The big yellow capture button (circle with yellow inner circle)
+    const captureBtn = document.querySelector('button.group') ||
+        allButtons.find(b => b.querySelector('div[class*="bg-[#F5B400]"][class*="rounded-full"]'));
+
+    // Upload button
+    const uploadBtn = allButtons.find(b => b.textContent.includes('Upload'));
+
+    // Handle capture button click
+    if (captureBtn) {
+        captureBtn.addEventListener('click', async () => {
+            // Visual feedback - scanning animation
+            showToast('Scanning your Student ID...', 'info');
+            captureBtn.disabled = true;
+            captureBtn.style.opacity = '0.5';
+
+            // Simulate scan delay for realism
+            await new Promise(r => setTimeout(r, 2000));
+
+            try {
+                const data = await apiCall('/auth/verify/', { method: 'POST' });
+
+                // Update session storage
+                const s = getSession();
+                if (s) { s.is_verified = true; setSession(s); }
+
+                showToast('✅ Identity verified successfully!', 'success');
+
+                // Redirect to profile page to see updated status
+                setTimeout(() => window.location.href = '/profile.html', 1500);
+            } catch (err) {
+                showToast(err.message || 'Verification failed. Please try again.', 'error');
+                captureBtn.disabled = false;
+                captureBtn.style.opacity = '1';
+            }
+        });
+    }
+
+    // Handle upload button  
+    if (uploadBtn) {
+        uploadBtn.addEventListener('click', async () => {
+            showToast('Processing uploaded ID...', 'info');
+            uploadBtn.disabled = true;
+
+            await new Promise(r => setTimeout(r, 2000));
+
+            try {
+                const data = await apiCall('/auth/verify/', { method: 'POST' });
+                const s = getSession();
+                if (s) { s.is_verified = true; setSession(s); }
+                showToast('✅ Identity verified successfully!', 'success');
+                setTimeout(() => window.location.href = '/profile.html', 1500);
+            } catch (err) {
+                showToast(err.message || 'Verification failed', 'error');
+                uploadBtn.disabled = false;
+            }
+        });
+    }
+});
+
+</script>
+</body></html>

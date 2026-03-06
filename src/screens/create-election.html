@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create Election - Adeleke University Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#003DA5",
+                        "accent": "#F5B400",
+                        "accent-dark": "#D49B00",
+                        "accent-light": "#FFF5D6",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "slate-850": "#1e293b", // Custom dark slate for text
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Be Vietnam Pro", sans-serif;
+        }
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 shadow-sm">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<div class="size-8 text-primary flex items-center justify-center bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-2xl">how_to_vote</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">AU Voting Admin</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<!-- Search -->
+<label class="hidden md:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 transition-colors focus-within:border-primary focus-within:ring-1 focus-within:ring-primary">
+<div class="text-slate-500 dark:text-slate-400 flex items-center justify-center pl-3">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden bg-transparent text-slate-900 dark:text-white focus:outline-0 border-none h-full placeholder:text-slate-400 px-3 text-sm font-normal leading-normal" placeholder="Search elections..." value=""/>
+</div>
+</label>
+<!-- Actions -->
+<div class="flex gap-2">
+<button class="flex items-center justify-center size-10 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<!-- Profile -->
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-slate-700 shadow-sm cursor-pointer" data-alt="Admin user profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCuFqS-pPQB6KGos5c5jGxzWntVNM3LF03rhEpLgONE9vsmvx1rMsXDk2xlzKqsTugTHS5tMdZOdEyCBKrUwZe7hiMEJXBUKFPDZEI_2_7noC2SONfo-UrS6VFCNlK147l_eJ2JYYmz3W0W_BUv3k1AhyEdT8gagHwPUTtfiQBG62PCqUOOnHaSZWH5Rmfpk9oVSTucGt6yOIf3yX_fqCJSyj3D_p1B8Ol5p4Pky8emps45Yq3NNZ6J6V5J67DCQcvuLo-I4TVNC0dt");'></div>
+</div>
+</header>
+<div class="flex flex-1 relative">
+<!-- Sidebar Navigation -->
+
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark">
+<div class="flex-1 px-4 py-8 md:px-8 max-w-5xl mx-auto w-full">
+<!-- Breadcrumbs -->
+<nav class="flex items-center text-sm text-slate-500 dark:text-slate-400 mb-6">
+<a class="hover:text-primary transition-colors" href="#">Dashboard</a>
+<span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
+<a class="hover:text-primary transition-colors" href="#">Elections</a>
+<span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
+<span class="text-slate-900 dark:text-white font-medium">Create Election</span>
+</nav>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl md:text-4xl font-display font-black text-slate-900 dark:text-white tracking-tight mb-2">Create New Election</h1>
+<p class="text-slate-600 dark:text-slate-400 max-w-2xl">Configure the details, timeline, and rules for the upcoming student election.</p>
+</div>
+<div class="hidden md:block">
+<button class="text-slate-500 hover:text-primary text-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">help</span>
+                            Help Guide
+                       </button>
+</div>
+</div>
+<!-- Wizard Progress -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 mb-8 shadow-sm">
+<div class="flex justify-between items-center mb-4">
+<div>
+<span class="uppercase tracking-wider text-xs font-bold text-primary mb-1 block">Step 1 of 3</span>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Election Basics</h3>
+</div>
+<div class="text-right hidden sm:block">
+<span class="text-sm text-slate-500 dark:text-slate-400">Next: Timeline &amp; Rules</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2.5">
+<div class="bg-primary h-2.5 rounded-full w-1/3 transition-all duration-500 ease-in-out"></div>
+</div>
+</div>
+<!-- Form Container -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<form class="p-6 md:p-8 space-y-8">
+<!-- Section: General Info -->
+<div class="space-y-6">
+<div>
+<h4 class="text-base font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">badge</span>
+                                    Identification
+                                </h4>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Set the primary name and scope for this voting event.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="col-span-1 md:col-span-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="election-name">Election Name</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm" id="election-name" name="election-name" placeholder="e.g. 2023 Student Union General Election" type="text"/>
+</div>
+<div class="col-span-1 md:col-span-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Election Type</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Option 1 -->
+<label class="relative flex items-start p-4 cursor-pointer rounded-lg border border-primary bg-primary/5 dark:bg-primary/10 ring-1 ring-primary transition-all">
+<div class="flex items-center h-5">
+<input checked="" class="h-4 w-4 text-primary border-slate-300 focus:ring-primary" id="type-general" name="election-type" type="radio"/>
+</div>
+<div class="ml-3 text-sm">
+<span class="block font-bold text-slate-900 dark:text-white">General Election</span>
+<span class="block text-slate-500 dark:text-slate-400 mt-1">Open to all registered students across all faculties.</span>
+</div>
+</label>
+<!-- Option 2 -->
+<label class="relative flex items-start p-4 cursor-pointer rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+<div class="flex items-center h-5">
+<input class="h-4 w-4 text-primary border-slate-300 focus:ring-primary" id="type-faculty" name="election-type" type="radio"/>
+</div>
+<div class="ml-3 text-sm">
+<span class="block font-bold text-slate-900 dark:text-white">Faculty Specific</span>
+<span class="block text-slate-500 dark:text-slate-400 mt-1">Restricted to students within a specific faculty.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Conditional Faculty Select (Hidden by default logic, but shown here for layout completeness if selected) -->
+<div class="col-span-1 md:col-span-2 hidden" id="faculty-select-container">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="faculty-select">Select Faculty</label>
+<select class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm" id="faculty-select">
+<option>Faculty of Science</option>
+<option>Faculty of Arts</option>
+<option>Faculty of Law</option>
+<option>Faculty of Business &amp; Social Sciences</option>
+</select>
+</div>
+</div>
+</div>
+<hr class="border-slate-200 dark:border-slate-700"/>
+<!-- Section: Timeline -->
+<div class="space-y-6">
+<div>
+<h4 class="text-base font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">calendar_month</span>
+                                    Timeline
+                                </h4>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Define the start and end period for voting access.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="start-date">Start Date &amp; Time</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+<span class="material-symbols-outlined text-[20px]">event_available</span>
+</div>
+<input class="pl-10 block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm sm:text-sm" id="start-date" type="datetime-local"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="end-date">End Date &amp; Time</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+<span class="material-symbols-outlined text-[20px]">event_busy</span>
+</div>
+<input class="pl-10 block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm sm:text-sm" id="end-date" type="datetime-local"/>
+</div>
+<p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Voting will automatically close at this time.</p>
+</div>
+</div>
+</div>
+<hr class="border-slate-200 dark:border-slate-700"/>
+<!-- Section: Categories -->
+<div class="space-y-6">
+<div>
+<h4 class="text-base font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">category</span>
+                                    Position Categories
+                                </h4>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Add the positions students will be voting for (e.g., President, Treasurer).</p>
+</div>
+<div class="space-y-4">
+<div class="flex gap-2">
+<div class="flex-1">
+<label class="sr-only" for="new-category">New Category Name</label>
+<input class="block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm" id="new-category" placeholder="Enter position name..." type="text"/>
+</div>
+<button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-slate-800 hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500" type="button">
+<span class="material-symbols-outlined text-lg mr-1">add</span> Add
+                                    </button>
+</div>
+<!-- Added Categories List -->
+<div class="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Active Positions</p>
+<div class="flex flex-wrap gap-2">
+<div class="inline-flex items-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-3 py-1 text-sm font-medium text-slate-900 dark:text-white shadow-sm">
+                                            President
+                                            <button class="ml-2 inline-flex size-4 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 hover:text-slate-500 dark:hover:bg-slate-700" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="inline-flex items-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-3 py-1 text-sm font-medium text-slate-900 dark:text-white shadow-sm">
+                                            Vice President
+                                            <button class="ml-2 inline-flex size-4 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 hover:text-slate-500 dark:hover:bg-slate-700" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="inline-flex items-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-3 py-1 text-sm font-medium text-slate-900 dark:text-white shadow-sm">
+                                            General Secretary
+                                            <button class="ml-2 inline-flex size-4 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 hover:text-slate-500 dark:hover:bg-slate-700" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="inline-flex items-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-3 py-1 text-sm font-medium text-slate-900 dark:text-white shadow-sm">
+                                            Treasurer
+                                            <button class="ml-2 inline-flex size-4 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 hover:text-slate-500 dark:hover:bg-slate-700" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr class="border-slate-200 dark:border-slate-700"/>
+<!-- Section: Rules -->
+<div class="space-y-6">
+<div>
+<h4 class="text-base font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">gavel</span>
+                                    Rules &amp; Regulations
+                                </h4>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Specify any guidelines voters or candidates should see before proceeding.</p>
+</div>
+<div>
+<label class="sr-only" for="rules">Rules</label>
+<textarea class="block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm" id="rules" placeholder="e.g. Candidates must not campaign on election day..." rows="4"></textarea>
+</div>
+</div>
+</form>
+<!-- Form Actions Footer -->
+<div class="bg-slate-50 dark:bg-slate-800/50 px-6 py-4 md:px-8 border-t border-slate-200 dark:border-slate-800 flex flex-col-reverse sm:flex-row justify-between items-center gap-4">
+<button class="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-slate-300 dark:border-slate-600 shadow-sm text-base font-medium rounded-lg text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="button">
+                            Cancel
+                        </button>
+<div class="w-full sm:w-auto flex gap-3">
+<button class="w-1/2 sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-primary bg-primary/10 hover:bg-primary/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="button">
+                                Save Draft
+                            </button>
+<button class="w-1/2 sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-primary hover:bg-[#002D7A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="button">
+                                Create Election <span class="material-symbols-outlined ml-2 text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

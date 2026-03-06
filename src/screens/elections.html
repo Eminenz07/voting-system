@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Elections - Adeleke University Voting Portal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#003DA5",
+                        "primary-dark": "#102694",
+                        secondary: "#FFD700",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1e2330",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased">
+    <div class="flex h-screen w-full overflow-hidden">
+        <main class="flex h-full flex-1 flex-col overflow-y-auto bg-background-light dark:bg-background-dark relative">
+            
+            <!-- Mobile Header -->
+            <header class="flex h-16 items-center border-b border-slate-200 dark:border-slate-800 bg-surface-light dark:bg-surface-dark px-4 lg:hidden sticky top-0 z-30">
+                <img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-10 rounded-full object-cover shadow-sm border border-slate-200 dark:border-slate-700 bg-white" />
+                <h1 class="text-base font-bold text-[#003DA5] dark:text-white hidden sm:block tracking-tight ml-3">Adeleke University</h1>
+            </header>
+
+            <!-- Desktop Header -->
+            <div class="sticky top-0 z-20 hidden h-24 items-center justify-between bg-surface-light/90 dark:bg-background-dark/90 px-8 backdrop-blur-md lg:flex border-b border-transparent dark:border-slate-800">
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-12 sm:size-16 rounded-full object-cover border-2 sm:border-4 border-[#F5B400]/50 shadow-sm bg-white" />
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-black text-[#003DA5] dark:text-white leading-tight tracking-tight">Adeleke University</h2>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-bold tracking-wide">Voting Portal</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full max-w-[1000px] mx-auto p-4 lg:p-8 space-y-8 pb-24">
+                <div class="flex items-center justify-between mb-2">
+                    <a href="/dashboard.html" class="flex items-center gap-2 text-sm font-bold text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-lg">arrow_back</span>
+                        Back to Dashboard
+                    </a>
+                    <div id="admin-controls" class="hidden">
+                        <a href="/create-election.html" class="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#003DA5]/20 hover:bg-primary-dark transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">add_circle</span>
+                            <span class="hidden sm:inline">Create Election</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary text-4xl">how_to_vote</span>
+                        Available Elections
+                    </h1>
+                    <p class="text-slate-500 dark:text-slate-400">Select an active election below to view the ballot and cast your vote.</p>
+                </div>
+
+                <div id="elections-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <!-- Elections will be loaded here via JS -->
+                    <div class="animate-pulse flex flex-col gap-4 overflow-hidden rounded-2xl bg-white dark:bg-surface-dark p-6 shadow-sm ring-1 ring-slate-100 dark:ring-slate-800">
+                        <div class="h-32 w-full rounded-xl bg-slate-200 dark:bg-slate-700"></div>
+                        <div class="h-6 w-3/4 rounded bg-slate-200 dark:bg-slate-700"></div>
+                        <div class="h-4 w-1/2 rounded bg-slate-200 dark:bg-slate-700"></div>
+                        <div class="mt-4 h-10 w-full rounded-lg bg-slate-200 dark:bg-slate-700"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="/src/shared.js"></script>
+    <script src="/src/pages/elections.js"></script>
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Adeleke University - Final Election Results</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#003DA5",
+                        "accent": "#F5B400",
+                        "accent-dark": "#D49B00",
+                        "accent-light": "#FFF5D6",
+                        "primary-content": "#ffffff",
+                        "primary-dark": "#002D7A",
+                        "primary-light": "#E6EEF9",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#141414",
+                        "surface-border": "#2d3748",
+                        "border-dark": "#2d3748",
+                        "text-main": "#0A0A0A",
+                        "text-muted": "#64748b",
+                        "text-primary": "#0A0A0A",
+                        "text-secondary": "#4e5a97",
+                        "border-light": "#e2e8f0",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "sans": ["Be Vietnam Pro", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+
+<style id="au-brand-overrides">
+  /* ===== AU Brand Colors Override ===== */
+  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
+
+  /* Active sidebar items get yellow left border */
+  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
+
+  /* Progress bars: yellow fill */
+  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Live/ENDS SOON badges: yellow instead of red */
+  .bg-red-500.rounded-full, .bg-red-500.px-2 {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Camera scan frame corners: yellow */
+  [class*="border-t-4"][class*="border-primary"],
+  [class*="border-b-4"][class*="border-primary"],
+  [class*="border-l-4"][class*="border-primary"],
+  [class*="border-r-4"][class*="border-primary"] {
+    border-color: #F5B400 !important;
+  }
+
+  /* Scan line glow: yellow */
+  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
+  [class*="animate-scanline"] div[class*="bg-primary"] {
+    background-color: #F5B400 !important;
+    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
+  }
+
+  /* Selected candidate card border: yellow */
+  [class*="border-primary"][class*="shadow-lg"] {
+    border-color: #F5B400 !important;
+    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
+  }
+
+  /* Selected candidate radio dot: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Verified check badges on candidates: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* KPI/stat card accent lines at bottom */
+  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Step badges: yellow-tinted bg */
+  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
+    background-color: #FFF5D6 !important;
+    color: #8B6D00 !important;
+  }
+
+  /* Capture button (verify screen): yellow ring */
+  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Stat card icon backgrounds: slightly yellow-tinted */
+  .bg-primary\/10 > .material-symbols-outlined {
+    color: #003DA5 !important;
+  }
+
+  /* University logo wrapper ring */
+  .rounded-lg.bg-primary\/10.text-primary {
+    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
+  }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-gray-100 min-h-screen flex flex-col">
+<div class="relative flex flex-col w-full h-full overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">school</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Adeleke University Voting Admin</h2>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center overflow-hidden rounded-lg h-10 bg-background-light dark:bg-gray-800 text-text-main dark:text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-3 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">print</span>
+<span>Print</span>
+</button>
+<button class="flex items-center justify-center overflow-hidden rounded-lg h-10 bg-background-light dark:bg-gray-800 text-text-main dark:text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-3 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Export PDF</span>
+</button>
+<button class="flex items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-error/10 text-error text-sm font-bold leading-normal tracking-[0.015em] hover:bg-error/20 transition-colors ml-2">
+<span class="truncate">Sign Out</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex flex-1 justify-center py-8 px-4 sm:px-8">
+<div class="w-full max-w-[1100px] flex flex-col gap-6">
+<!-- Title Section -->
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-1 bg-warning/20 text-warning text-xs font-bold uppercase tracking-wider rounded">Pending Certification</span>
+<span class="text-text-secondary dark:text-gray-400 text-sm">ID: ELE-2024-SC-FINAL</span>
+</div>
+<h1 class="text-3xl sm:text-4xl font-black leading-tight tracking-[-0.033em]">Final Election Results: 2024 Student Council</h1>
+<p class="text-text-secondary dark:text-gray-400 text-base font-normal">Generated on May 24, 2024 at 16:00 PM</p>
+</div>
+<button class="flex h-12 items-center justify-center rounded-lg bg-success px-6 text-white shadow-lg hover:bg-success/90 transition-all font-bold gap-2">
+<span class="material-symbols-outlined">verified</span>
+<span>Certify &amp; Publish Results</span>
+</button>
+</div>
+<!-- Stats Overview Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Stat Card 1 -->
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-text-secondary dark:text-gray-400 text-sm font-medium uppercase tracking-wider">Total Votes</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded-md text-[20px]">how_to_vote</span>
+</div>
+<div class="flex items-end gap-2">
+<p class="text-3xl font-bold leading-tight">4,521</p>
+<p class="text-success text-sm font-bold mb-1 flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                12%
+                            </p>
+</div>
+<p class="text-xs text-text-secondary dark:text-gray-500">vs. last election cycle</p>
+</div>
+<!-- Stat Card 2 -->
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-text-secondary dark:text-gray-400 text-sm font-medium uppercase tracking-wider">Participation Rate</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1 rounded-md text-[20px]">group</span>
+</div>
+<div class="flex items-end gap-2">
+<p class="text-3xl font-bold leading-tight">87.4%</p>
+<p class="text-success text-sm font-bold mb-1 flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                5%
+                            </p>
+</div>
+<p class="text-xs text-text-secondary dark:text-gray-500">of eligible voters (5,172)</p>
+</div>
+<!-- Stat Card 3 -->
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-text-secondary dark:text-gray-400 text-sm font-medium uppercase tracking-wider">Abstentions</p>
+<span class="material-symbols-outlined text-warning bg-warning/10 p-1 rounded-md text-[20px]">do_not_disturb_on</span>
+</div>
+<div class="flex items-end gap-2">
+<p class="text-3xl font-bold leading-tight">124</p>
+<p class="text-error text-sm font-bold mb-1 flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+                                2%
+                            </p>
+</div>
+<p class="text-xs text-text-secondary dark:text-gray-500">Registered but didn't vote</p>
+</div>
+<!-- Stat Card 4 -->
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-text-secondary dark:text-gray-400 text-sm font-medium uppercase tracking-wider">Spoiled/Invalid</p>
+<span class="material-symbols-outlined text-error bg-error/10 p-1 rounded-md text-[20px]">warning</span>
+</div>
+<div class="flex items-end gap-2">
+<p class="text-3xl font-bold leading-tight">15</p>
+<p class="text-success text-sm font-bold mb-1 flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+                                1%
+                            </p>
+</div>
+<p class="text-xs text-text-secondary dark:text-gray-500">Technical errors or voided</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Voting Speed Chart -->
+<div class="lg:col-span-2 bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-6">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-lg font-bold leading-tight">Voting Traffic Analysis</h3>
+<p class="text-text-secondary dark:text-gray-400 text-sm">Votes processed per hour throughout election day</p>
+</div>
+<div class="text-right">
+<p class="text-xs text-text-secondary uppercase font-bold tracking-wider">Peak Traffic</p>
+<p class="text-xl font-bold text-primary">450 votes/hr</p>
+</div>
+</div>
+<!-- Chart Visualization -->
+<div class="relative h-[250px] w-full mt-4">
+<!-- Y-Axis Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between text-xs text-text-secondary dark:text-gray-500 pointer-events-none">
+<div class="border-b border-dashed border-gray-200 dark:border-gray-700 w-full pb-1">500</div>
+<div class="border-b border-dashed border-gray-200 dark:border-gray-700 w-full pb-1">375</div>
+<div class="border-b border-dashed border-gray-200 dark:border-gray-700 w-full pb-1">250</div>
+<div class="border-b border-dashed border-gray-200 dark:border-gray-700 w-full pb-1">125</div>
+<div class="border-b border-gray-300 dark:border-gray-600 w-full pb-1">0</div>
+</div>
+<!-- SVG Chart Line -->
+<svg class="absolute inset-0 h-full w-full pt-6 pb-6" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Gradient Definition -->
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#003DA5" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#003DA5" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,100 L0,80 L10,60 L20,30 L30,10 L40,15 L50,40 L60,45 L70,30 L80,50 L90,80 L100,90 L100,100 Z" fill="url(#chartGradient)"></path>
+<polyline fill="none" points="0,80 10,60 20,30 30,10 40,15 50,40 60,45 70,30 80,50 90,80 100,90" stroke="#003DA5" stroke-width="2" vector-effect="non-scaling-stroke"></polyline>
+<!-- Points of interest -->
+<circle cx="30" cy="10" fill="white" r="2" stroke="#003DA5" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex justify-between text-xs text-text-secondary dark:text-gray-400 mt-2 px-1 font-medium">
+<span>8:00 AM</span>
+<span>10:00 AM</span>
+<span>12:00 PM</span>
+<span>2:00 PM</span>
+<span>4:00 PM</span>
+<span>6:00 PM</span>
+</div>
+</div>
+<!-- Faculty Breakdown Summary -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-6 flex flex-col h-full">
+<h3 class="text-lg font-bold leading-tight mb-4">Participation by Faculty</h3>
+<div class="flex-1 flex flex-col gap-4 overflow-y-auto pr-2">
+<!-- Row 1 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-sm">
+<span class="font-medium">Faculty of Law</span>
+<span class="text-text-secondary">98% (420/428)</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 98%"></div>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-sm">
+<span class="font-medium">Basic Medical Sciences</span>
+<span class="text-text-secondary">92% (850/924)</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-sm">
+<span class="font-medium">Science</span>
+<span class="text-text-secondary">85% (1100/1294)</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+<div class="bg-primary/80 h-2 rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-sm">
+<span class="font-medium">Business &amp; Social Sciences</span>
+<span class="text-text-secondary">78% (980/1256)</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+<div class="bg-primary/60 h-2 rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<!-- Row 5 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-sm">
+<span class="font-medium">Arts</span>
+<span class="text-text-secondary">75% (600/800)</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+<div class="bg-primary/50 h-2 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<!-- Row 6 -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-sm">
+<span class="font-medium">Engineering</span>
+<span class="text-text-secondary">65% (571/870)</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+<div class="bg-warning h-2 rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-border-light dark:border-border-dark">
+<button class="text-sm text-primary font-bold hover:underline flex items-center gap-1">
+                                View Full Faculty Breakdown
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Winners Section -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark overflow-hidden">
+<div class="p-6 border-b border-border-light dark:border-border-dark flex justify-between items-center">
+<h3 class="text-lg font-bold leading-tight">Projected Winners</h3>
+<span class="text-xs bg-success/10 text-success px-2 py-1 rounded font-bold uppercase tracking-wide">Majority Verified</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-background-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark">
+<th class="p-4 text-xs font-bold text-text-secondary uppercase tracking-wider">Position</th>
+<th class="p-4 text-xs font-bold text-text-secondary uppercase tracking-wider">Candidate</th>
+<th class="p-4 text-xs font-bold text-text-secondary uppercase tracking-wider text-right">Vote Count</th>
+<th class="p-4 text-xs font-bold text-text-secondary uppercase tracking-wider text-right">% of Vote</th>
+<th class="p-4 text-xs font-bold text-text-secondary uppercase tracking-wider text-center">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-gray-700">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<td class="p-4 font-medium">President</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 dark:text-blue-300 font-bold text-xs">DA</div>
+<span class="font-bold text-text-main dark:text-gray-100">David Adeleke</span>
+</div>
+</td>
+<td class="p-4 text-right tabular-nums">2,845</td>
+<td class="p-4 text-right tabular-nums font-medium">62.9%</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Winner
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<td class="p-4 font-medium">Vice President</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-purple-600 dark:text-purple-300 font-bold text-xs">SO</div>
+<span class="font-bold text-text-main dark:text-gray-100">Sarah Oladipo</span>
+</div>
+</td>
+<td class="p-4 text-right tabular-nums">2,100</td>
+<td class="p-4 text-right tabular-nums font-medium">46.4%</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning/10 text-warning border border-warning/20">
+<span class="material-symbols-outlined text-[14px]">scale</span> Run-off Likely
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<td class="p-4 font-medium">Secretary General</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-300 font-bold text-xs">CN</div>
+<span class="font-bold text-text-main dark:text-gray-100">Chinedu Nwachukwu</span>
+</div>
+</td>
+<td class="p-4 text-right tabular-nums">3,120</td>
+<td class="p-4 text-right tabular-nums font-medium">69.0%</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success border border-success/20">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Winner
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Audit Logs Section -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-lg font-bold leading-tight">System Audit Log</h3>
+<button class="text-sm text-primary font-bold hover:underline">Download Full Log (CSV)</button>
+</div>
+<div class="border rounded-lg border-border-light dark:border-border-dark overflow-hidden">
+<div class="bg-background-light dark:bg-gray-800 px-4 py-2 border-b border-border-light dark:border-border-dark flex text-xs font-bold text-text-secondary uppercase tracking-wider">
+<div class="w-32">Timestamp</div>
+<div class="w-32">Event Type</div>
+<div class="flex-1">Details</div>
+<div class="w-24 text-right">Status</div>
+</div>
+<div class="divide-y divide-border-light dark:divide-gray-700 font-mono text-sm">
+<div class="px-4 py-3 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-gray-800/50">
+<div class="w-32 text-text-secondary shrink-0">16:00:01 PM</div>
+<div class="w-32 font-bold shrink-0">POLLS_CLOSE</div>
+<div class="flex-1 text-text-main dark:text-gray-300">System automatically closed voting portal. No further ballots accepted.</div>
+<div class="w-24 text-right text-success font-bold">SUCCESS</div>
+</div>
+<div class="px-4 py-3 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-gray-800/50">
+<div class="w-32 text-text-secondary shrink-0">15:58:22 PM</div>
+<div class="w-32 font-bold shrink-0">VOTE_CAST</div>
+<div class="flex-1 text-text-main dark:text-gray-300">Encrypted ballot received from Node #04 (Faculty of Science). hash: 8f9a...3b21</div>
+<div class="w-24 text-right text-success font-bold">VERIFIED</div>
+</div>
+<div class="px-4 py-3 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-gray-800/50">
+<div class="w-32 text-text-secondary shrink-0">15:45:10 PM</div>
+<div class="w-32 font-bold shrink-0">AUTH_FAIL</div>
+<div class="flex-1 text-text-main dark:text-gray-300">Failed login attempt: Matric Number 19/0234 (Invalid Credentials).</div>
+<div class="w-24 text-right text-warning font-bold">FLAGGED</div>
+</div>
+<div class="px-4 py-3 flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-gray-800/50">
+<div class="w-32 text-text-secondary shrink-0">12:00:00 PM</div>
+<div class="w-32 font-bold shrink-0">SYS_CHECK</div>
+<div class="flex-1 text-text-main dark:text-gray-300">Hourly integrity check of blockchain ledger. All blocks consistent.</div>
+<div class="w-24 text-right text-success font-bold">PASSED</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="flex justify-between text-xs text-text-secondary dark:text-gray-500 pt-6 pb-12 border-t border-border-light dark:border-border-dark mt-4">
+<p>© 2024 Adeleke University Digital Services. Confidential Document.</p>
+<p>System Version 2.4.1 | Encrypted End-to-End</p>
+</footer>
+</div>
+</main>
+</div>
+
+<script>
+// ============================================
+// AU Voting System - Shared Frontend Logic
+// ============================================
+
+const API_BASE = 'http://localhost:8000/api';
+
+// --- Dark Mode ---
+function initDarkMode() {
+    const saved = localStorage.getItem('au-dark-mode');
+    if (saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+}
+
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('au-dark-mode', document.documentElement.classList.contains('dark'));
+    updateToggleIcon();
+}
+
+function updateToggleIcon() {
+    const btn = document.getElementById('dark-mode-toggle');
+    if (btn) {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.textContent = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
+        }
+    }
+}
+
+// --- API Client ---
+async function apiCall(endpoint, options = {}) {
+    const token = localStorage.getItem('au-token');
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    if (token) headers['Authorization'] = `Token ${token}`;
+
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+// --- Auth Helpers ---
+function getSession() {
+    try { return JSON.parse(localStorage.getItem('au-session')); } catch { return null; }
+}
+
+function setSession(data) {
+    localStorage.setItem('au-session', JSON.stringify(data));
+}
+
+function clearSession() {
+    localStorage.removeItem('au-session');
+    localStorage.removeItem('au-token');
+}
+
+function requireStudentAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'student') { window.location.href = '/'; return null; }
+    return s;
+}
+
+function requireAdminAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'admin') { window.location.href = '/'; return null; }
+    return s;
+}
+
+async function logout() {
+    try { await apiCall('/auth/logout/', { method: 'POST' }); } catch { }
+    clearSession();
+    window.location.href = '/';
+}
+
+// --- Toast Notifications ---
+function showToast(message, type) {
+    const colors = {
+        success: 'bg-green-600',
+        error: 'bg-red-600',
+        info: 'bg-primary'
+    };
+    const toast = document.createElement('div');
+    toast.className = 'fixed top-6 right-6 z-[200] ' + (colors[type] || colors.info) + ' text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-slide-in font-medium text-sm';
+    toast.innerHTML = '<span class="material-symbols-outlined text-lg">' +
+        (type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info') +
+        '</span>' + message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100px)'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+// --- Student Navigation (Floating FAB) ---
+function createStudentNav(currentPage) {
+    const pages = [
+        { href: '/dashboard.html', icon: 'space_dashboard', label: 'Dashboard', id: 'dashboard' },
+        { href: '/elections.html', icon: 'how_to_vote', label: 'Elections', id: 'elections' },
+        { href: '/results.html', icon: 'bar_chart', label: 'Election Results', id: 'results' },
+        { href: '/profile.html', icon: 'account_circle', label: 'My Profile', id: 'profile' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Admin Navigation (Floating FAB) ---
+function createAdminNav(currentPage) {
+    const pages = [
+        { href: '/admin.html', icon: 'admin_panel_settings', label: 'Dashboard', id: 'admin' },
+        { href: '/monitoring.html', icon: 'analytics', label: 'Live Monitoring', id: 'monitoring' },
+        { href: '/create-election.html', icon: 'add_circle', label: 'Create Election', id: 'create-election' },
+        { href: '/admin-results.html', icon: 'assessment', label: 'Results Report', id: 'admin-results' },
+        { href: '/admin-settings.html', icon: 'settings', label: 'Profile & Settings', id: 'admin-settings' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Floating Nav Builder (shared) ---
+function _createFloatingNav(pages, currentPage) {
+    const nav = document.createElement('div');
+    nav.id = 'floating-nav';
+    nav.innerHTML = `
+    <button id="nav-toggle" onclick="document.getElementById('floating-nav').classList.toggle('open')"
+      class="fixed bottom-6 left-6 z-[100] size-14 rounded-full bg-primary text-white shadow-xl shadow-primary/30 flex items-center justify-center hover:bg-[#002D7A] transition-all hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+    <div id="nav-panel" class="fixed bottom-24 left-6 z-[99] bg-white dark:bg-[#141414] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-3 w-64 transition-all origin-bottom-left scale-0 opacity-0">
+      <div class="flex items-center justify-between px-3 py-2 mb-2 border-b border-slate-100 dark:border-slate-800">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Navigation</span>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="size-8 rounded-lg flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-lg">${document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode'}</span>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-0.5 max-h-80 overflow-y-auto">
+        ${pages.map(p => `
+          <a href="${p.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${p.id === currentPage
+            ? 'bg-primary/10 text-primary'
+            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+        }">
+            <span class="material-symbols-outlined text-lg">${p.icon}</span>
+            ${p.label}
+          </a>
+        `).join('')}
+      </nav>
+    </div>
+  `;
+    document.body.appendChild(nav);
+
+    const style = document.createElement('style');
+    style.textContent = `
+    #floating-nav.open #nav-panel { transform: scale(1); opacity: 1; }
+    #floating-nav.open #nav-toggle { background: #ef4444; }
+    #floating-nav.open #nav-toggle span { font-size: 0; }
+    #floating-nav.open #nav-toggle span::after { content: 'close'; font-size: 24px; font-family: 'Material Symbols Outlined'; }
+    #nav-panel { transition: transform 0.2s ease, opacity 0.2s ease; }
+    .animate-slide-in { animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { opacity:0; transform: translateX(100px); } to { opacity:1; transform: translateX(0); } }
+  `;
+    document.head.appendChild(style);
+
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('floating-nav');
+        if (nav && !nav.contains(e.target)) nav.classList.remove('open');
+    });
+}
+
+// Init dark mode on every page
+initDarkMode();
+
+// Admin Results Report Logic
+document.addEventListener('DOMContentLoaded', async () => {
+    createAdminNav('admin-results');
+    const session = requireAdminAuth();
+    if (!session) return;
+
+    const electionId = localStorage.getItem('au-active-election') || '1';
+
+    // Fix sidebar navigation links
+    document.querySelectorAll('aside a, nav a').forEach(a => {
+        const text = a.textContent.trim().toLowerCase();
+        if (text.includes('dashboard') || text === 'dashboard') a.href = '/admin.html';
+        else if (text.includes('create election')) a.href = '/create-election.html';
+        else if (text.includes('live monitoring') || text.includes('monitoring')) a.href = '/monitoring.html';
+        else if (text.includes('results') || text.includes('report')) a.href = '/admin-results.html';
+        else if (text.includes('settings')) a.href = '/admin-settings.html';
+        else if (text.includes('log out') || text.includes('logout')) {
+            a.href = '#';
+            a.addEventListener('click', (e) => { e.preventDefault(); logout(); });
+        }
+    });
+
+    // Fetch election results from API
+    try {
+        const data = await apiCall(`/elections/${electionId}/results/`);
+
+        // Update turnout
+        document.querySelectorAll('span, p, h3, h4').forEach(el => {
+            if (el.textContent.includes('%') && el.textContent.match(/\d+\.?\d*%/)) {
+                el.textContent = data.turnout + '%';
+            }
+        });
+
+        // Update total votes
+        document.querySelectorAll('h3, .text-3xl, .text-4xl').forEach(el => {
+            const text = el.textContent.trim().replace(/,/g, '');
+            const num = parseInt(text);
+            if (!isNaN(num) && num > 100) {
+                el.textContent = data.total_votes.toLocaleString();
+            }
+        });
+    } catch (err) {
+        console.error('Failed to fetch results:', err);
+    }
+
+    // Print / Download
+    document.querySelectorAll('button').forEach(btn => {
+        const text = btn.textContent.toLowerCase();
+        if (text.includes('print') || text.includes('download') || text.includes('export')) {
+            btn.addEventListener('click', (e) => { e.preventDefault(); window.print(); });
+        }
+        if (text.includes('certify') || text.includes('publish') || text.includes('approve')) {
+            btn.addEventListener('click', () => showToast('Results certified and published!', 'success'));
+        }
+    });
+});
+
+</script>
+</body></html>

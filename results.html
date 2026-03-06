@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AU e-Vote Portal - Election Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#003DA5",
+                        "accent": "#F5B400",
+                        "accent-dark": "#D49B00",
+                        "accent-light": "#FFF5D6",
+                        "primary-content": "#ffffff",
+                        "primary-dark": "#002D7A",
+                        "primary-light": "#E6EEF9",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#141414",
+                        "surface-border": "#2d3748",
+                        "border-dark": "#2d3748",
+                        "text-main": "#0A0A0A",
+                        "text-muted": "#64748b",
+                        "text-primary": "#0A0A0A",
+                        "text-secondary": "#4e5a97",
+                        "border-light": "#e2e8f0",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"],
+                        "body": ["Be Vietnam Pro", "sans-serif"],
+                        "sans": ["Be Vietnam Pro", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .watermark-pattern {
+            background-image: radial-gradient(#003DA5 0.5px, transparent 0.5px), radial-gradient(#003DA5 0.5px, #f6f7f8 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.03;
+        }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+
+<style id="au-brand-overrides">
+  /* ===== AU Brand Colors Override ===== */
+  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
+
+  /* Active sidebar items get yellow left border */
+  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
+
+  /* Progress bars: yellow fill */
+  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Live/ENDS SOON badges: yellow instead of red */
+  .bg-red-500.rounded-full, .bg-red-500.px-2 {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Camera scan frame corners: yellow */
+  [class*="border-t-4"][class*="border-primary"],
+  [class*="border-b-4"][class*="border-primary"],
+  [class*="border-l-4"][class*="border-primary"],
+  [class*="border-r-4"][class*="border-primary"] {
+    border-color: #F5B400 !important;
+  }
+
+  /* Scan line glow: yellow */
+  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
+  [class*="animate-scanline"] div[class*="bg-primary"] {
+    background-color: #F5B400 !important;
+    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
+  }
+
+  /* Selected candidate card border: yellow */
+  [class*="border-primary"][class*="shadow-lg"] {
+    border-color: #F5B400 !important;
+    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
+  }
+
+  /* Selected candidate radio dot: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Verified check badges on candidates: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* KPI/stat card accent lines at bottom */
+  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Step badges: yellow-tinted bg */
+  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
+    background-color: #FFF5D6 !important;
+    color: #8B6D00 !important;
+  }
+
+  /* Capture button (verify screen): yellow ring */
+  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Stat card icon backgrounds: slightly yellow-tinted */
+  .bg-primary\/10 > .material-symbols-outlined {
+    color: #003DA5 !important;
+  }
+
+  /* University logo wrapper ring */
+  .rounded-lg.bg-primary\/10.text-primary {
+    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
+  }
+</style>
+</head>
+<body class="bg-background-light text-slate-900 font-display antialiased min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-white border-b border-neutral-200 shadow-sm">
+<div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-3 sm:gap-4">
+<img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-10 sm:size-12 rounded-full object-cover border-2 border-[#F5B400]/50 shadow-sm bg-white" />
+<div>
+<h1 class="text-[#003DA5] text-lg font-black leading-tight tracking-tight">Adeleke University</h1>
+<span class="text-xs text-neutral-500 font-bold tracking-wide">Voting Portal</span>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-neutral-600 hover:text-primary text-sm font-medium transition-colors" href="#">Current Elections</a>
+<a class="text-primary text-sm font-medium" href="#">Results</a>
+<a class="text-neutral-600 hover:text-primary text-sm font-medium transition-colors" href="#">Candidates</a>
+<a class="text-neutral-600 hover:text-primary text-sm font-medium transition-colors" href="#">Analytics</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex flex-col items-end mr-2">
+<span class="text-sm font-bold text-slate-900">Dr. Sarah A.</span>
+<span class="text-xs text-neutral-500">Election Monitor</span>
+</div>
+<div class="relative group">
+<div class="h-10 w-10 rounded-full bg-neutral-200 border-2 border-white shadow-sm overflow-hidden bg-cover bg-center cursor-pointer" data-alt="User profile photo avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCTfR8v6AoXMQkkUFyR89sTSm03ZyWUvHuP_jCQKRSzYo6tOARsggYRBXKJ51t9FHdbOhr3qVZ_xCCums1O1n99fmOiljMm9pLlpO0VX57nqCUhHIKobMETs-1igHW8Of1hpavue-Vb-U15CtXoZFZfk2TT2gciKYs-BEmKZuIuEcvmeFc77TZNnT84uLhLUfOFxje3d22uEyDVFBGMmE4gIJPNzlngj1Wnz6OjNCEgnnIlITZgxJfDdpw-VW2PJgFyUFFPaGGkC41p');"></div>
+</div>
+<button class="hidden sm:flex items-center justify-center h-9 w-9 rounded-full text-neutral-500 hover:bg-neutral-100 transition-colors">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-[1200px] mx-auto px-6 py-8 relative">
+<!-- Watermark Background Layer -->
+<div class="absolute inset-0 watermark-pattern pointer-events-none z-0"></div>
+<!-- Header Section -->
+<div class="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 border-b border-neutral-200 pb-8">
+<div class="flex flex-col gap-2">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold w-fit border border-green-200">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                    OFFICIAL CERTIFIED RESULTS
+                </div>
+<h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">2024 SUG Presidential Election</h2>
+<p class="text-neutral-500 text-base md:text-lg">Certified by the Adeleke University Electoral Committee (AUEC) • Final Count</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 h-10 px-5 bg-white border border-neutral-300 text-neutral-700 text-sm font-bold rounded-lg hover:bg-neutral-50 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">print</span>
+                    Print
+                </button>
+<button class="flex items-center gap-2 h-10 px-5 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-md shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                    Download Report
+                </button>
+</div>
+</div>
+<!-- Key Metrics Grid -->
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<!-- Card 1 -->
+<div class="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">groups</span>
+</div>
+<p class="text-neutral-500 text-sm font-semibold uppercase tracking-wider mb-2">Total Eligible Voters</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-black text-slate-900">15,420</span>
+</div>
+<div class="mt-4 flex items-center gap-2 text-sm text-neutral-500">
+<span class="inline-block w-2 h-2 rounded-full bg-neutral-300"></span>
+<span>Registered students</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">ballot</span>
+</div>
+<p class="text-neutral-500 text-sm font-semibold uppercase tracking-wider mb-2">Votes Cast</p>
+<div class="flex items-baseline gap-3">
+<span class="text-4xl font-black text-slate-900">12,850</span>
+<span class="text-sm font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
+                        +5.2% vs 2023
+                    </span>
+</div>
+<div class="mt-4 w-full bg-neutral-100 rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 83.3%"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">pie_chart</span>
+</div>
+<p class="text-neutral-500 text-sm font-semibold uppercase tracking-wider mb-2">Voter Turnout</p>
+<div class="flex items-baseline gap-3">
+<span class="text-4xl font-black text-slate-900">83.3%</span>
+<span class="text-sm font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full border border-green-100">
+                        High Engagement
+                    </span>
+</div>
+<div class="mt-4 flex items-center gap-2 text-sm text-neutral-500">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>4.1% increase from last election</span>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Bar Chart -->
+<div class="lg:col-span-2 bg-white rounded-xl border border-neutral-200 shadow-sm p-6 md:p-8">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+<div>
+<h3 class="text-xl font-bold text-slate-900">Candidate Performance</h3>
+<p class="text-neutral-500 text-sm">Percentage of total valid votes cast per candidate</p>
+</div>
+<div class="flex items-center gap-2 text-sm bg-neutral-50 p-1 rounded-lg border border-neutral-200">
+<button class="px-3 py-1.5 bg-white text-slate-900 shadow-sm rounded-md font-medium border border-neutral-200">Chart</button>
+<button class="px-3 py-1.5 text-neutral-500 hover:text-slate-900 font-medium">Table</button>
+</div>
+</div>
+<!-- Chart Content -->
+<div class="flex flex-col gap-8">
+<!-- Candidate 1 -->
+<div class="group">
+<div class="flex items-end justify-between mb-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-neutral-100 overflow-hidden border border-neutral-200" data-alt="Candidate portrait photo">
+<img alt="David O." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDohbK4rKIU3a6oQgdfT9ehGjFQTpolT_NzAFEWiNjqPbYrjyC7OpQwbIWI4VyutZ74eeBfXyaEGXde3B-_jxCELpSxuiK3buRJMEAEzVUIZm07GMppAF6kkNj9VZpqEnbgotlr_TcYWwufOa3tvuFMQEAnTWz8Y32zd3MyGCiXjGGBuxUuyg5NO5mpwbD6am1X4d-9gDL9oPJ1F6dAK8jCkooS2O2tB2rgbzLlZmAsMv5jTQEte0pgDROR0nUlhqR6-JRLlf8CMd_R"/>
+</div>
+<div>
+<p class="font-bold text-slate-900 group-hover:text-primary transition-colors">David O.</p>
+<p class="text-xs text-neutral-500">Progressive Alliance</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900">5,140</p>
+<p class="text-xs font-bold text-primary">40%</p>
+</div>
+</div>
+<div class="w-full bg-neutral-100 rounded-full h-3 overflow-hidden">
+<div class="bg-primary h-full rounded-full relative group-hover:bg-primary/90 transition-all duration-500 ease-out w-[40%]">
+<div class="absolute right-0 top-0 bottom-0 w-[2px] bg-white/30"></div>
+</div>
+</div>
+</div>
+<!-- Candidate 2 -->
+<div class="group">
+<div class="flex items-end justify-between mb-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-neutral-100 overflow-hidden border border-neutral-200" data-alt="Candidate portrait photo">
+<img alt="Sarah M." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSN1GYmK8jyjNPrhfwpWozRNSsqns63v0OG6xS7EuEsFMbx2rmaEup0ZZHGGCGNfG5qlQmZVRYQ1JthkIJ1n-Fa30A_fFpiK1bhjBmI61D9IFf72NcNmzUS6GgrexbFNibKxs0WdNzBoTM1VrGUfTdc3Ep9DoYk8rsObcvgciQ6MwKpMEfc0GPKOzBUzvW0oPvn0x3HiFJy8yyOo2a2pjrOp2iZyNyAtPz5UJOsxExnJjQ8ZyEV3DAqwLdbv-iuGRrwsqbbDdW5BJ3"/>
+</div>
+<div>
+<p class="font-bold text-slate-900 group-hover:text-primary transition-colors">Sarah M.</p>
+<p class="text-xs text-neutral-500">Student Voice</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900">4,497</p>
+<p class="text-xs font-bold text-neutral-500">35%</p>
+</div>
+</div>
+<div class="w-full bg-neutral-100 rounded-full h-3 overflow-hidden">
+<div class="bg-neutral-400 h-full rounded-full relative group-hover:bg-neutral-500 transition-all duration-500 ease-out w-[35%]"></div>
+</div>
+</div>
+<!-- Candidate 3 -->
+<div class="group">
+<div class="flex items-end justify-between mb-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-neutral-100 overflow-hidden border border-neutral-200" data-alt="Candidate portrait photo">
+<img alt="Emmanuel K." class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeKv-FnrXYISinC1OtLva5YRObY4cTWC6EbzXvsXSN0BUK8gz-l9HwF560-BS3iIItGyI-TZ8N_R0mQ3cHakMGe-R3C2Advj2NxKzDak6_I4LKzpEX5_LT6TDwd7JbH-h7iLEmWLh9tWqr1O_hr0VGcAgoa_bR3WbcdWaNU_50xs_h2oAVGXVrGuvT2mpu0OkfUq56xHBMRgS-zSQUq6hUVewlKV3P6HYLLF_sXfdGqWff_gFWhEJsJjepd_8LDWW_ezuy0sb1oUG1"/>
+</div>
+<div>
+<p class="font-bold text-slate-900 group-hover:text-primary transition-colors">Emmanuel K.</p>
+<p class="text-xs text-neutral-500">Unity Front</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900">3,213</p>
+<p class="text-xs font-bold text-neutral-500">25%</p>
+</div>
+</div>
+<div class="w-full bg-neutral-100 rounded-full h-3 overflow-hidden">
+<div class="bg-neutral-300 h-full rounded-full relative group-hover:bg-neutral-400 transition-all duration-500 ease-out w-[25%]"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-400">
+<span>Data last updated: 2 mins ago</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                        Encrypted &amp; Verified Blockchain Ledger
+                    </span>
+</div>
+</div>
+<!-- Side Panel Details -->
+<div class="flex flex-col gap-6">
+<!-- Faculty Breakdown -->
+<div class="bg-white rounded-xl border border-neutral-200 shadow-sm p-6">
+<h3 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">domain</span>
+                        Top Faculties Participation
+                    </h3>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-neutral-600">Science</span>
+<span class="text-sm font-bold text-slate-900">92%</span>
+</div>
+<div class="w-full bg-neutral-100 rounded-full h-2">
+<div class="bg-primary/80 h-2 rounded-full w-[92%]"></div>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="text-sm font-medium text-neutral-600">Law</span>
+<span class="text-sm font-bold text-slate-900">88%</span>
+</div>
+<div class="w-full bg-neutral-100 rounded-full h-2">
+<div class="bg-primary/60 h-2 rounded-full w-[88%]"></div>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="text-sm font-medium text-neutral-600">Arts</span>
+<span class="text-sm font-bold text-slate-900">75%</span>
+</div>
+<div class="w-full bg-neutral-100 rounded-full h-2">
+<div class="bg-primary/40 h-2 rounded-full w-[75%]"></div>
+</div>
+</div>
+</div>
+<!-- Electoral Committee Info -->
+<div class="bg-neutral-50 rounded-xl border border-neutral-200 p-6">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 bg-white rounded-lg border border-neutral-200 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-neutral-400">gavel</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900 mb-1">AUEC Certified</h4>
+<p class="text-xs text-neutral-500 leading-relaxed">
+                                 This result has been digitally signed and verified by the Adeleke University Electoral Committee. Any disputes must be filed within 24 hours.
+                             </p>
+<a class="text-xs font-bold text-primary mt-3 inline-block hover:underline" href="#">View Certification Hash</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto border-t border-neutral-200 bg-white py-8">
+<div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-neutral-400">© 2024 Adeleke University. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-xs text-neutral-500 hover:text-primary" href="#">Privacy Policy</a>
+<a class="text-xs text-neutral-500 hover:text-primary" href="#">Terms of Service</a>
+<a class="text-xs text-neutral-500 hover:text-primary" href="#">Support</a>
+</div>
+</div>
+</footer>
+
+<script>
+// ============================================
+// AU Voting System - Shared Frontend Logic
+// ============================================
+
+const API_BASE = 'http://localhost:8000/api';
+
+// --- Dark Mode ---
+function initDarkMode() {
+    const saved = localStorage.getItem('au-dark-mode');
+    if (saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+}
+
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('au-dark-mode', document.documentElement.classList.contains('dark'));
+    updateToggleIcon();
+}
+
+function updateToggleIcon() {
+    const btn = document.getElementById('dark-mode-toggle');
+    if (btn) {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.textContent = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
+        }
+    }
+}
+
+// --- API Client ---
+async function apiCall(endpoint, options = {}) {
+    const token = localStorage.getItem('au-token');
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    if (token) headers['Authorization'] = `Token ${token}`;
+
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+// --- Auth Helpers ---
+function getSession() {
+    try { return JSON.parse(localStorage.getItem('au-session')); } catch { return null; }
+}
+
+function setSession(data) {
+    localStorage.setItem('au-session', JSON.stringify(data));
+}
+
+function clearSession() {
+    localStorage.removeItem('au-session');
+    localStorage.removeItem('au-token');
+}
+
+function requireStudentAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'student') { window.location.href = '/'; return null; }
+    return s;
+}
+
+function requireAdminAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'admin') { window.location.href = '/'; return null; }
+    return s;
+}
+
+async function logout() {
+    try { await apiCall('/auth/logout/', { method: 'POST' }); } catch { }
+    clearSession();
+    window.location.href = '/';
+}
+
+// --- Toast Notifications ---
+function showToast(message, type) {
+    const colors = {
+        success: 'bg-green-600',
+        error: 'bg-red-600',
+        info: 'bg-primary'
+    };
+    const toast = document.createElement('div');
+    toast.className = 'fixed top-6 right-6 z-[200] ' + (colors[type] || colors.info) + ' text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-slide-in font-medium text-sm';
+    toast.innerHTML = '<span class="material-symbols-outlined text-lg">' +
+        (type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info') +
+        '</span>' + message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100px)'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+// --- Student Navigation (Floating FAB) ---
+function createStudentNav(currentPage) {
+    const pages = [
+        { href: '/dashboard.html', icon: 'space_dashboard', label: 'Dashboard', id: 'dashboard' },
+        { href: '/elections.html', icon: 'how_to_vote', label: 'Elections', id: 'elections' },
+        { href: '/results.html', icon: 'bar_chart', label: 'Election Results', id: 'results' },
+        { href: '/profile.html', icon: 'account_circle', label: 'My Profile', id: 'profile' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Admin Navigation (Floating FAB) ---
+function createAdminNav(currentPage) {
+    const pages = [
+        { href: '/admin.html', icon: 'admin_panel_settings', label: 'Dashboard', id: 'admin' },
+        { href: '/monitoring.html', icon: 'analytics', label: 'Live Monitoring', id: 'monitoring' },
+        { href: '/create-election.html', icon: 'add_circle', label: 'Create Election', id: 'create-election' },
+        { href: '/admin-results.html', icon: 'assessment', label: 'Results Report', id: 'admin-results' },
+        { href: '/admin-settings.html', icon: 'settings', label: 'Profile & Settings', id: 'admin-settings' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Floating Nav Builder (shared) ---
+function _createFloatingNav(pages, currentPage) {
+    const nav = document.createElement('div');
+    nav.id = 'floating-nav';
+    nav.innerHTML = `
+    <button id="nav-toggle" onclick="document.getElementById('floating-nav').classList.toggle('open')"
+      class="fixed bottom-6 left-6 z-[100] size-14 rounded-full bg-primary text-white shadow-xl shadow-primary/30 flex items-center justify-center hover:bg-[#002D7A] transition-all hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+    <div id="nav-panel" class="fixed bottom-24 left-6 z-[99] bg-white dark:bg-[#141414] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-3 w-64 transition-all origin-bottom-left scale-0 opacity-0">
+      <div class="flex items-center justify-between px-3 py-2 mb-2 border-b border-slate-100 dark:border-slate-800">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Navigation</span>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="size-8 rounded-lg flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-lg">${document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode'}</span>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-0.5 max-h-80 overflow-y-auto">
+        ${pages.map(p => `
+          <a href="${p.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${p.id === currentPage
+            ? 'bg-primary/10 text-primary'
+            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+        }">
+            <span class="material-symbols-outlined text-lg">${p.icon}</span>
+            ${p.label}
+          </a>
+        `).join('')}
+      </nav>
+    </div>
+  `;
+    document.body.appendChild(nav);
+
+    const style = document.createElement('style');
+    style.textContent = `
+    #floating-nav.open #nav-panel { transform: scale(1); opacity: 1; }
+    #floating-nav.open #nav-toggle { background: #ef4444; }
+    #floating-nav.open #nav-toggle span { font-size: 0; }
+    #floating-nav.open #nav-toggle span::after { content: 'close'; font-size: 24px; font-family: 'Material Symbols Outlined'; }
+    #nav-panel { transition: transform 0.2s ease, opacity 0.2s ease; }
+    .animate-slide-in { animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { opacity:0; transform: translateX(100px); } to { opacity:1; transform: translateX(0); } }
+  `;
+    document.head.appendChild(style);
+
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('floating-nav');
+        if (nav && !nav.contains(e.target)) nav.classList.remove('open');
+    });
+}
+
+// Init dark mode on every page
+initDarkMode();
+
+// Results Page Logic
+document.addEventListener('DOMContentLoaded', async () => {
+    createStudentNav('results');
+    const session = requireStudentAuth();
+    if (!session) return;
+
+    const electionId = localStorage.getItem('au-active-election') || '1';
+
+    // Fetch results from API
+    try {
+        const data = await apiCall(`/elections/${electionId}/results/`);
+
+        // Update turnout percentage if displayed
+        document.querySelectorAll('span, p, h3, h4').forEach(el => {
+            if (el.textContent.includes('%') && el.textContent.match(/\d+\.?\d*%/)) {
+                el.textContent = data.turnout + '%';
+            }
+        });
+
+        // Update total votes display
+        document.querySelectorAll('span, p, h3, h4').forEach(el => {
+            if (el.textContent.match(/^\d{1,3}(,\d{3})*$/) || el.textContent.match(/^\d+$/)) {
+                const num = parseInt(el.textContent.replace(/,/g, ''));
+                if (num > 100) el.textContent = data.total_votes.toLocaleString();
+            }
+        });
+
+    } catch (err) {
+        console.error('Failed to fetch results:', err);
+    }
+
+    // Animate result bars
+    document.querySelectorAll('[class*="bg-primary"], [class*="bg-\\[#003DA5\\]"], [class*="bg-blue"]').forEach(bar => {
+        if (bar.style.width || bar.className.includes('w-[')) {
+            const width = bar.style.width || bar.className.match(/w-\[(\d+%?)\]/)?.[1];
+            if (width) {
+                bar.style.width = '0%';
+                setTimeout(() => { bar.style.transition = 'width 1.5s ease'; bar.style.width = width; }, 300);
+            }
+        }
+    });
+
+    // Print button
+    document.querySelectorAll('button').forEach(btn => {
+        const text = btn.textContent.toLowerCase();
+        if (text.includes('print') || text.includes('download')) {
+            btn.addEventListener('click', (e) => { e.preventDefault(); window.print(); });
+        }
+    });
+
+    // Chart / Table toggle
+    document.querySelectorAll('button').forEach(btn => {
+        const text = btn.textContent.toLowerCase();
+        if (text.includes('chart') || text.includes('table') || text.includes('graph')) {
+            btn.addEventListener('click', () => showToast('View toggled', 'info'));
+        }
+    });
+
+    // Logout
+    document.querySelectorAll('a, button').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (text.includes('log out') || text.includes('logout')) {
+            el.addEventListener('click', (e) => { e.preventDefault(); logout(); });
+            if (el.tagName === 'A') el.href = '#';
+        }
+    });
+});
+
+</script>
+</body></html>

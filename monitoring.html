@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Adeleke University | Admin Console</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#003DA5",
+                        "accent": "#F5B400",
+                        "accent-dark": "#D49B00",
+                        "accent-light": "#FFF5D6",
+              "primary-dark": "#102694",
+              "background-light": "#FAFAFA",
+              "background-dark": "#0A0A0A",
+              "neutral-100": "#f3f4f6", // Light grey for cards
+              "neutral-200": "#e5e7eb", // Borders
+              "neutral-900": "#0e101b", // Text
+            },
+            fontFamily: {
+              "display": ["Be Vietnam Pro", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+
+<style id="au-brand-overrides">
+  /* ===== AU Brand Colors Override ===== */
+  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
+
+  /* Active sidebar items get yellow left border */
+  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
+
+  /* Progress bars: yellow fill */
+  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Live/ENDS SOON badges: yellow instead of red */
+  .bg-red-500.rounded-full, .bg-red-500.px-2 {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Camera scan frame corners: yellow */
+  [class*="border-t-4"][class*="border-primary"],
+  [class*="border-b-4"][class*="border-primary"],
+  [class*="border-l-4"][class*="border-primary"],
+  [class*="border-r-4"][class*="border-primary"] {
+    border-color: #F5B400 !important;
+  }
+
+  /* Scan line glow: yellow */
+  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
+  [class*="animate-scanline"] div[class*="bg-primary"] {
+    background-color: #F5B400 !important;
+    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
+  }
+
+  /* Selected candidate card border: yellow */
+  [class*="border-primary"][class*="shadow-lg"] {
+    border-color: #F5B400 !important;
+    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
+  }
+
+  /* Selected candidate radio dot: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Verified check badges on candidates: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* KPI/stat card accent lines at bottom */
+  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Step badges: yellow-tinted bg */
+  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
+    background-color: #FFF5D6 !important;
+    color: #8B6D00 !important;
+  }
+
+  /* Capture button (verify screen): yellow ring */
+  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Stat card icon backgrounds: slightly yellow-tinted */
+  .bg-primary\/10 > .material-symbols-outlined {
+    color: #003DA5 !important;
+  }
+
+  /* University logo wrapper ring */
+  .rounded-lg.bg-primary\/10.text-primary {
+    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
+  }
+</style>
+</head>
+<body class="bg-background-light text-neutral-900 font-display min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="bg-white border-b border-neutral-200 sticky top-0 z-50">
+<div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined text-2xl">how_to_vote</span>
+</div>
+<div>
+<h1 class="text-lg font-bold tracking-tight leading-none">Adeleke University</h1>
+<p class="text-xs text-slate-500 font-medium">E-Voting Admin Console</p>
+</div>
+<div class="hidden md:flex ml-4 px-2 py-1 bg-red-50 text-red-600 text-xs font-bold uppercase rounded border border-red-100 tracking-wider items-center gap-1">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+</span>
+                    Live Monitoring
+                </div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-2 text-sm text-slate-500 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-100">
+<span class="material-symbols-outlined text-base">lock</span>
+<span>Admin View • Restricted Access</span>
+</div>
+<div class="h-8 w-px bg-neutral-200"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold leading-none">Dr. Admin User</p>
+<p class="text-xs text-slate-500">Chief Electoral Officer</p>
+</div>
+<div class="size-10 rounded-full bg-slate-200 overflow-hidden border-2 border-white shadow-sm" data-alt="Profile picture of the admin user" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC18_pQkxe7k4222WKMAfkAEI-NsFNktvIG7L1kVM4vBlQ-oAlop7pmjLJz6GnFgvIwZw1Jgh5lu2XeXtKoaMgkFiJT1obCTuMrYv-IZxUpJCGEYzdTMr_d4IZRsmKCBQgrJOplKGMijdhSkCTIV-d_jb0j-rlhD9ddkm-glrnG34vKF72es2t2mg-A8wK1G-m8tquk8TJW_cNAs9oP9-PBjbClrFa6YqMg0R4OeOAoXeTJDfcd06-C8K5l68nQYrxJSysiSmh4pXfB"); background-size: cover; background-position: center;'></div>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 max-w-[1440px] w-full mx-auto p-6 space-y-6">
+<!-- Filter Ribbon -->
+<div class="bg-white rounded-xl shadow-sm border border-neutral-200 p-4 flex flex-col md:flex-row items-start md:items-end justify-between gap-4">
+<div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+<div class="space-y-1.5">
+<label class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Faculty</label>
+<div class="relative">
+<select class="appearance-none w-full sm:w-48 bg-slate-50 border border-neutral-200 text-slate-900 text-sm rounded-lg focus:ring-primary focus:border-primary block p-2.5 pr-8">
+<option selected="">All Faculties</option>
+<option value="science">Science</option>
+<option value="arts">Arts</option>
+<option value="law">Law</option>
+<option value="engineering">Engineering</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</div>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Department</label>
+<div class="relative">
+<select class="appearance-none w-full sm:w-48 bg-slate-50 border border-neutral-200 text-slate-900 text-sm rounded-lg focus:ring-primary focus:border-primary block p-2.5 pr-8">
+<option selected="">All Departments</option>
+<option value="cs">Computer Science</option>
+<option value="micro">Microbiology</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs text-slate-400 font-medium">Last updated: Just now</span>
+<button class="flex items-center gap-2 px-4 py-2 bg-white border border-neutral-200 hover:bg-slate-50 hover:border-primary/30 text-slate-700 text-sm font-medium rounded-lg transition-all shadow-sm group">
+<span class="material-symbols-outlined text-lg group-hover:animate-spin">refresh</span>
+                    Refresh Data
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-dark text-white text-sm font-bold rounded-lg transition-all shadow-md shadow-[#003DA5]/20">
+<span class="material-symbols-outlined text-lg">download</span>
+                    Export Report
+                </button>
+</div>
+</div>
+<!-- KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white rounded-xl p-6 border border-neutral-200 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 h-full w-1 bg-blue-500"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-sm font-medium text-slate-500">Total Registered Voters</p>
+<h3 class="text-3xl font-bold text-slate-900 mt-1">12,450</h3>
+</div>
+<div class="p-2 bg-blue-50 text-blue-600 rounded-lg">
+<span class="material-symbols-outlined">groups</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex items-center text-emerald-600 text-xs font-bold bg-emerald-50 px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-sm mr-0.5">trending_up</span> +1.2%
+                    </span>
+<span class="text-xs text-slate-400">vs. last election</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-xl p-6 border border-neutral-200 shadow-sm relative overflow-hidden">
+<div class="absolute right-0 top-0 h-full w-1 bg-primary"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-sm font-medium text-slate-500">Total Votes Cast</p>
+<h3 class="text-3xl font-bold text-slate-900 mt-1">8,320</h3>
+</div>
+<div class="p-2 bg-indigo-50 text-primary rounded-lg">
+<span class="material-symbols-outlined">how_to_vote</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="flex items-center text-emerald-600 text-xs font-bold bg-emerald-50 px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-sm mr-0.5">trending_up</span> +5.4%
+                    </span>
+<span class="text-xs text-slate-400">participation velocity</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-xl p-6 border border-neutral-200 shadow-sm relative overflow-hidden">
+<div class="absolute right-0 top-0 h-full w-1 bg-emerald-500"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-sm font-medium text-slate-500">Current Turnout</p>
+<h3 class="text-3xl font-bold text-slate-900 mt-1">66.8%</h3>
+</div>
+<div class="p-2 bg-emerald-50 text-emerald-600 rounded-lg">
+<span class="material-symbols-outlined">donut_large</span>
+</div>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-2 mt-2">
+<div class="bg-emerald-500 h-2 rounded-full" style="width: 66.8%"></div>
+</div>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-10">
+<!-- Left Column: Election Results (8 cols) -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Presidential Race -->
+<div class="bg-white rounded-xl border border-neutral-200 shadow-sm p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold text-slate-900">Presidential Election</h3>
+<div class="flex gap-2">
+<span class="text-xs font-bold px-2 py-1 rounded bg-slate-100 text-slate-600">SUG Level</span>
+</div>
+</div>
+<!-- Chart Bars -->
+<div class="space-y-5">
+<!-- Candidate 1 -->
+<div class="relative">
+<div class="flex justify-between text-sm mb-1">
+<span class="font-bold text-slate-900">James Olubankole <span class="text-slate-400 font-normal ml-1">(Science)</span></span>
+<span class="font-bold text-primary">4,120 votes (49.5%)</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
+<div class="bg-primary h-4 rounded-full relative" style="width: 49.5%">
+<div class="absolute inset-0 bg-white/10 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xIDNIMlYzSDF6IiBmaWxsPSIjZmZmZmZmIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjwvc3ZnPg==')]"></div>
+</div>
+</div>
+</div>
+<!-- Candidate 2 -->
+<div class="relative">
+<div class="flex justify-between text-sm mb-1">
+<span class="font-bold text-slate-900">Sarah Adebayo <span class="text-slate-400 font-normal ml-1">(Law)</span></span>
+<span class="font-bold text-slate-600">2,845 votes (34.2%)</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
+<div class="bg-slate-400 h-4 rounded-full" style="width: 34.2%"></div>
+</div>
+</div>
+<!-- Candidate 3 -->
+<div class="relative">
+<div class="flex justify-between text-sm mb-1">
+<span class="font-bold text-slate-900">Michael Okon <span class="text-slate-400 font-normal ml-1">(Arts)</span></span>
+<span class="font-bold text-slate-600">1,355 votes (16.3%)</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
+<div class="bg-slate-300 h-4 rounded-full" style="width: 16.3%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Vice President Race -->
+<div class="bg-white rounded-xl border border-neutral-200 shadow-sm p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold text-slate-900">Vice Presidential Election</h3>
+<span class="text-xs font-bold px-2 py-1 rounded bg-slate-100 text-slate-600">SUG Level</span>
+</div>
+<!-- Chart Bars -->
+<div class="space-y-5">
+<!-- Candidate 1 -->
+<div class="relative">
+<div class="flex justify-between text-sm mb-1">
+<span class="font-bold text-slate-900">Zainab Ali <span class="text-slate-400 font-normal ml-1">(Engineering)</span></span>
+<span class="font-bold text-primary">5,012 votes (60.2%)</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
+<div class="bg-primary h-4 rounded-full" style="width: 60.2%"></div>
+</div>
+</div>
+<!-- Candidate 2 -->
+<div class="relative">
+<div class="flex justify-between text-sm mb-1">
+<span class="font-bold text-slate-900">David Chukwu <span class="text-slate-400 font-normal ml-1">(Social Sciences)</span></span>
+<span class="font-bold text-slate-600">3,308 votes (39.8%)</span>
+</div>
+<div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
+<div class="bg-slate-400 h-4 rounded-full" style="width: 39.8%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Faculty Breakdown Table -->
+<div class="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-neutral-200 flex justify-between items-center">
+<h3 class="text-lg font-bold text-slate-900">Faculty Participation Breakdown</h3>
+<button class="text-primary text-sm font-bold hover:underline">View Full Report</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left">
+<thead class="text-xs text-slate-500 uppercase bg-slate-50 border-b border-neutral-200">
+<tr>
+<th class="px-6 py-3 font-semibold">Faculty</th>
+<th class="px-6 py-3 font-semibold">Reg. Voters</th>
+<th class="px-6 py-3 font-semibold">Votes Cast</th>
+<th class="px-6 py-3 font-semibold">Turnout</th>
+<th class="px-6 py-3 font-semibold">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-neutral-200">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-900">Faculty of Science</td>
+<td class="px-6 py-4 text-slate-600">4,500</td>
+<td class="px-6 py-4 text-slate-600">3,800</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="text-slate-900 font-bold">84%</span>
+<div class="w-16 bg-slate-200 rounded-full h-1.5">
+<div class="bg-green-500 h-1.5 rounded-full" style="width: 84%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-bold">Active</span></td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-900">Faculty of Law</td>
+<td class="px-6 py-4 text-slate-600">2,100</td>
+<td class="px-6 py-4 text-slate-600">1,200</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="text-slate-900 font-bold">57%</span>
+<div class="w-16 bg-slate-200 rounded-full h-1.5">
+<div class="bg-yellow-500 h-1.5 rounded-full" style="width: 57%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-bold">Active</span></td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium text-slate-900">Faculty of Arts</td>
+<td class="px-6 py-4 text-slate-600">3,200</td>
+<td class="px-6 py-4 text-slate-600">1,950</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="text-slate-900 font-bold">61%</span>
+<div class="w-16 bg-slate-200 rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 61%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-bold">Active</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column: Live Feed & Pie Chart (4 cols) -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Participation Pie Chart -->
+<div class="bg-white rounded-xl border border-neutral-200 shadow-sm p-6">
+<h3 class="text-lg font-bold text-slate-900 mb-6">Overall Participation</h3>
+<div class="flex items-center justify-center relative size-56 mx-auto mb-6">
+<!-- CSS Conic Gradient for Pie Chart -->
+<!-- 66.8% is roughly 240 degrees -->
+<div class="rounded-full size-full" style="background: conic-gradient(#003DA5 0% 66.8%, #f3f4f6 66.8% 100%);"></div>
+<div class="absolute inset-4 bg-white rounded-full flex flex-col items-center justify-center text-center">
+<span class="text-4xl font-extrabold text-slate-900">67%</span>
+<span class="text-xs text-slate-500 uppercase font-semibold">Voted</span>
+</div>
+</div>
+<div class="flex justify-center gap-6">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-primary"></div>
+<span class="text-sm font-medium text-slate-600">Voted (8,320)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-slate-200"></div>
+<span class="text-sm font-medium text-slate-600">Pending (4,130)</span>
+</div>
+</div>
+</div>
+<!-- Live Activity Feed -->
+<div class="bg-white rounded-xl border border-neutral-200 shadow-sm flex flex-col h-[500px]">
+<div class="p-4 border-b border-neutral-200 flex items-center justify-between bg-slate-50/50">
+<div class="flex items-center gap-2">
+<div class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+</div>
+<h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide">Live Vote Feed</h3>
+</div>
+<span class="text-xs text-slate-400">Real-time</span>
+</div>
+<div class="flex-1 overflow-y-auto p-0 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
+<ul class="divide-y divide-neutral-100">
+<!-- Feed Item 1 -->
+<li class="p-4 hover:bg-slate-50 transition-colors animate-pulse bg-blue-50/50">
+<div class="flex items-start gap-3">
+<div class="mt-1 bg-white p-1 rounded border border-neutral-200 shadow-sm text-primary">
+<span class="material-symbols-outlined text-lg">how_to_vote</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900">Vote Cast #9822</p>
+<p class="text-xs text-slate-500 mt-0.5">Computer Science • 400L</p>
+</div>
+<span class="ml-auto text-xs font-mono text-slate-400">12:42:05</span>
+</div>
+</li>
+<!-- Feed Item 2 -->
+<li class="p-4 hover:bg-slate-50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="mt-1 bg-white p-1 rounded border border-neutral-200 shadow-sm text-slate-400">
+<span class="material-symbols-outlined text-lg">how_to_vote</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900">Vote Cast #9821</p>
+<p class="text-xs text-slate-500 mt-0.5">Law • 200L</p>
+</div>
+<span class="ml-auto text-xs font-mono text-slate-400">12:41:48</span>
+</div>
+</li>
+<!-- Feed Item 3 -->
+<li class="p-4 hover:bg-slate-50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="mt-1 bg-white p-1 rounded border border-neutral-200 shadow-sm text-slate-400">
+<span class="material-symbols-outlined text-lg">how_to_vote</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900">Vote Cast #9820</p>
+<p class="text-xs text-slate-500 mt-0.5">Microbiology • 100L</p>
+</div>
+<span class="ml-auto text-xs font-mono text-slate-400">12:41:12</span>
+</div>
+</li>
+<!-- Feed Item 4 -->
+<li class="p-4 hover:bg-slate-50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="mt-1 bg-white p-1 rounded border border-neutral-200 shadow-sm text-slate-400">
+<span class="material-symbols-outlined text-lg">how_to_vote</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900">Vote Cast #9819</p>
+<p class="text-xs text-slate-500 mt-0.5">Mass Comm. • 300L</p>
+</div>
+<span class="ml-auto text-xs font-mono text-slate-400">12:40:55</span>
+</div>
+</li>
+<!-- Feed Item 5 -->
+<li class="p-4 hover:bg-slate-50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="mt-1 bg-white p-1 rounded border border-neutral-200 shadow-sm text-slate-400">
+<span class="material-symbols-outlined text-lg">how_to_vote</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900">Vote Cast #9818</p>
+<p class="text-xs text-slate-500 mt-0.5">Accounting • 400L</p>
+</div>
+<span class="ml-auto text-xs font-mono text-slate-400">12:40:02</span>
+</div>
+</li>
+<!-- Feed Item 6 -->
+<li class="p-4 hover:bg-slate-50 transition-colors">
+<div class="flex items-start gap-3">
+<div class="mt-1 bg-white p-1 rounded border border-neutral-200 shadow-sm text-slate-400">
+<span class="material-symbols-outlined text-lg">how_to_vote</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900">Vote Cast #9817</p>
+<p class="text-xs text-slate-500 mt-0.5">Physics • 200L</p>
+</div>
+<span class="ml-auto text-xs font-mono text-slate-400">12:39:45</span>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-white border-t border-neutral-200 py-4 mt-auto">
+<div class="max-w-[1440px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500">
+<div class="flex items-center gap-4">
+<span>© 2024 Adeleke University</span>
+<span class="hidden md:inline">•</span>
+<span class="flex items-center gap-1.5">
+<span class="size-2 bg-emerald-500 rounded-full"></span>
+                    System Status: Operational
+                </span>
+</div>
+<div class="mt-2 md:mt-0">
+<span>Powered by AU E-Voting System v2.4.1</span>
+</div>
+</div>
+</footer>
+
+<script>
+// ============================================
+// AU Voting System - Shared Frontend Logic
+// ============================================
+
+const API_BASE = 'http://localhost:8000/api';
+
+// --- Dark Mode ---
+function initDarkMode() {
+    const saved = localStorage.getItem('au-dark-mode');
+    if (saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+}
+
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('au-dark-mode', document.documentElement.classList.contains('dark'));
+    updateToggleIcon();
+}
+
+function updateToggleIcon() {
+    const btn = document.getElementById('dark-mode-toggle');
+    if (btn) {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.textContent = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
+        }
+    }
+}
+
+// --- API Client ---
+async function apiCall(endpoint, options = {}) {
+    const token = localStorage.getItem('au-token');
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    if (token) headers['Authorization'] = `Token ${token}`;
+
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+// --- Auth Helpers ---
+function getSession() {
+    try { return JSON.parse(localStorage.getItem('au-session')); } catch { return null; }
+}
+
+function setSession(data) {
+    localStorage.setItem('au-session', JSON.stringify(data));
+}
+
+function clearSession() {
+    localStorage.removeItem('au-session');
+    localStorage.removeItem('au-token');
+}
+
+function requireStudentAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'student') { window.location.href = '/'; return null; }
+    return s;
+}
+
+function requireAdminAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'admin') { window.location.href = '/'; return null; }
+    return s;
+}
+
+async function logout() {
+    try { await apiCall('/auth/logout/', { method: 'POST' }); } catch { }
+    clearSession();
+    window.location.href = '/';
+}
+
+// --- Toast Notifications ---
+function showToast(message, type) {
+    const colors = {
+        success: 'bg-green-600',
+        error: 'bg-red-600',
+        info: 'bg-primary'
+    };
+    const toast = document.createElement('div');
+    toast.className = 'fixed top-6 right-6 z-[200] ' + (colors[type] || colors.info) + ' text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-slide-in font-medium text-sm';
+    toast.innerHTML = '<span class="material-symbols-outlined text-lg">' +
+        (type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info') +
+        '</span>' + message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100px)'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+// --- Student Navigation (Floating FAB) ---
+function createStudentNav(currentPage) {
+    const pages = [
+        { href: '/dashboard.html', icon: 'space_dashboard', label: 'Dashboard', id: 'dashboard' },
+        { href: '/elections.html', icon: 'how_to_vote', label: 'Elections', id: 'elections' },
+        { href: '/results.html', icon: 'bar_chart', label: 'Election Results', id: 'results' },
+        { href: '/profile.html', icon: 'account_circle', label: 'My Profile', id: 'profile' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Admin Navigation (Floating FAB) ---
+function createAdminNav(currentPage) {
+    const pages = [
+        { href: '/admin.html', icon: 'admin_panel_settings', label: 'Dashboard', id: 'admin' },
+        { href: '/monitoring.html', icon: 'analytics', label: 'Live Monitoring', id: 'monitoring' },
+        { href: '/create-election.html', icon: 'add_circle', label: 'Create Election', id: 'create-election' },
+        { href: '/admin-results.html', icon: 'assessment', label: 'Results Report', id: 'admin-results' },
+        { href: '/admin-settings.html', icon: 'settings', label: 'Profile & Settings', id: 'admin-settings' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Floating Nav Builder (shared) ---
+function _createFloatingNav(pages, currentPage) {
+    const nav = document.createElement('div');
+    nav.id = 'floating-nav';
+    nav.innerHTML = `
+    <button id="nav-toggle" onclick="document.getElementById('floating-nav').classList.toggle('open')"
+      class="fixed bottom-6 left-6 z-[100] size-14 rounded-full bg-primary text-white shadow-xl shadow-primary/30 flex items-center justify-center hover:bg-[#002D7A] transition-all hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+    <div id="nav-panel" class="fixed bottom-24 left-6 z-[99] bg-white dark:bg-[#141414] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-3 w-64 transition-all origin-bottom-left scale-0 opacity-0">
+      <div class="flex items-center justify-between px-3 py-2 mb-2 border-b border-slate-100 dark:border-slate-800">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Navigation</span>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="size-8 rounded-lg flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-lg">${document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode'}</span>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-0.5 max-h-80 overflow-y-auto">
+        ${pages.map(p => `
+          <a href="${p.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${p.id === currentPage
+            ? 'bg-primary/10 text-primary'
+            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+        }">
+            <span class="material-symbols-outlined text-lg">${p.icon}</span>
+            ${p.label}
+          </a>
+        `).join('')}
+      </nav>
+    </div>
+  `;
+    document.body.appendChild(nav);
+
+    const style = document.createElement('style');
+    style.textContent = `
+    #floating-nav.open #nav-panel { transform: scale(1); opacity: 1; }
+    #floating-nav.open #nav-toggle { background: #ef4444; }
+    #floating-nav.open #nav-toggle span { font-size: 0; }
+    #floating-nav.open #nav-toggle span::after { content: 'close'; font-size: 24px; font-family: 'Material Symbols Outlined'; }
+    #nav-panel { transition: transform 0.2s ease, opacity 0.2s ease; }
+    .animate-slide-in { animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { opacity:0; transform: translateX(100px); } to { opacity:1; transform: translateX(0); } }
+  `;
+    document.head.appendChild(style);
+
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('floating-nav');
+        if (nav && !nav.contains(e.target)) nav.classList.remove('open');
+    });
+}
+
+// Init dark mode on every page
+initDarkMode();
+
+// Monitoring Page Logic
+document.addEventListener('DOMContentLoaded', async () => {
+    createAdminNav('monitoring');
+    const session = requireAdminAuth();
+    if (!session) return;
+
+    // Fix sidebar navigation links
+    document.querySelectorAll('aside a, nav a').forEach(a => {
+        const text = a.textContent.trim().toLowerCase();
+        if (text.includes('dashboard') || text === 'dashboard') a.href = '/admin.html';
+        else if (text.includes('create election')) a.href = '/create-election.html';
+        else if (text.includes('live monitoring') || text.includes('monitoring')) a.href = '/monitoring.html';
+        else if (text.includes('results') || text.includes('report')) a.href = '/admin-results.html';
+        else if (text.includes('settings')) a.href = '/admin-settings.html';
+        else if (text.includes('log out') || text.includes('logout')) {
+            a.href = '#';
+            a.addEventListener('click', (e) => { e.preventDefault(); logout(); });
+        }
+    });
+
+    const electionId = localStorage.getItem('au-active-election') || '1';
+
+    // Fetch live results for monitoring
+    async function refreshMonitoringData() {
+        try {
+            const data = await apiCall(`/elections/${electionId}/results/`);
+            // Update vote count displays
+            document.querySelectorAll('[class*="text-3xl"], [class*="text-4xl"], [class*="text-2xl"]').forEach(el => {
+                const num = parseInt(el.textContent.replace(/[^0-9]/g, ''));
+                if (!isNaN(num) && num > 0) {
+                    el.textContent = data.total_votes?.toLocaleString() || el.textContent;
+                }
+            });
+        } catch (err) {
+            console.error('Monitoring refresh failed:', err);
+        }
+    }
+
+    // Initial load
+    await refreshMonitoringData();
+
+    // Refresh every 10 seconds for "live" monitoring
+    setInterval(refreshMonitoringData, 10000);
+});
+
+</script>
+</body></html>

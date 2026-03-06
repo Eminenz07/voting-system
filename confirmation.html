@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vote Confirmation Summary - Adeleke University</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#003DA5",
+                        "accent": "#F5B400",
+                        "accent-dark": "#D49B00",
+                        "accent-light": "#FFF5D6",
+                        "background-light": "#FAFAFA",
+                        "background-dark": "#0A0A0A",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#141414",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+
+<style id="au-brand-overrides">
+  /* ===== AU Brand Colors Override ===== */
+  /* Royal Blue: #003DA5 | AU Yellow: #F5B400 | White: #FAFAFA | Black: #0A0A0A */
+
+  /* Active sidebar items get yellow left border */
+  .bg-primary\/10 { border-left: 4px solid #F5B400 !important; }
+
+  /* Progress bars: yellow fill */
+  .bg-primary.rounded-full[style*="width"] { background-color: #F5B400 !important; }
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-2"],
+  div[class*="bg-primary"][class*="rounded-full"][class*="h-1.5"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Live/ENDS SOON badges: yellow instead of red */
+  .bg-red-500.rounded-full, .bg-red-500.px-2 {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Camera scan frame corners: yellow */
+  [class*="border-t-4"][class*="border-primary"],
+  [class*="border-b-4"][class*="border-primary"],
+  [class*="border-l-4"][class*="border-primary"],
+  [class*="border-r-4"][class*="border-primary"] {
+    border-color: #F5B400 !important;
+  }
+
+  /* Scan line glow: yellow */
+  [class*="bg-primary"][class*="shadow-"][style*="width:80%"],
+  [class*="animate-scanline"] div[class*="bg-primary"] {
+    background-color: #F5B400 !important;
+    box-shadow: 0 0 15px rgba(245,180,0,0.8) !important;
+  }
+
+  /* Selected candidate card border: yellow */
+  [class*="border-primary"][class*="shadow-lg"] {
+    border-color: #F5B400 !important;
+    box-shadow: 0 10px 25px rgba(245,180,0,0.15) !important;
+  }
+
+  /* Selected candidate radio dot: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="group-hover\:scale"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Verified check badges on candidates: yellow */
+  [class*="bg-primary"][class*="rounded-full"][class*="p-1"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* KPI/stat card accent lines at bottom */
+  div[class*="bg-primary"][class*="h-1"][class*="rounded-full"] {
+    background-color: #F5B400 !important;
+  }
+
+  /* Step badges: yellow-tinted bg */
+  [class*="bg-primary\/10"][class*="px-2"][class*="py-1"] {
+    background-color: #FFF5D6 !important;
+    color: #8B6D00 !important;
+  }
+
+  /* Capture button (verify screen): yellow ring */
+  button[class*="bg-primary"][class*="rounded-full"][class*="shadow-lg"] {
+    background-color: #F5B400 !important;
+    color: #000 !important;
+  }
+
+  /* Stat card icon backgrounds: slightly yellow-tinted */
+  .bg-primary\/10 > .material-symbols-outlined {
+    color: #003DA5 !important;
+  }
+
+  /* University logo wrapper ring */
+  .rounded-lg.bg-primary\/10.text-primary {
+    box-shadow: inset 0 0 0 2px rgba(245,180,0,0.3);
+  }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen flex flex-col antialiased">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-md">
+<div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary ring-2 ring-[#F5B400]/30 ring-2 ring-[#F5B400]/30">
+<span class="material-symbols-outlined text-2xl">school</span>
+</div>
+<div class="hidden md:flex flex-col">
+<span class="text-sm font-bold leading-tight text-slate-900 dark:text-white">Adeleke University</span>
+<span class="text-xs font-medium text-slate-500 dark:text-slate-400">Official Voting Portal</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden items-center gap-2 rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700 dark:bg-green-900/20 dark:text-green-400 sm:flex ring-1 ring-inset ring-green-600/20">
+<span class="material-symbols-outlined text-base">lock</span>
+                    Secure Connection
+                </div>
+<div class="h-8 w-8 overflow-hidden rounded-full bg-slate-200 ring-2 ring-white dark:ring-slate-800" data-alt="User profile picture placeholder">
+<img alt="Profile" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi3vBS5nP7bFsYE8aqahAPFLK_OZryPuaf-YdQo9RtY8hEkS75w_Kw_qRl6bPvMK199MS1uAVzZ9Z8oyoFjTCdkbYtknfJS3BDaWyaB6Ba4OK21IKxwA4L1tevs3jHeA5ndZCnCg8hgyEKAVwGkMD4gwYY1Sy0GVYcG6s_JX6f3g5F0Wg5DgibxXwHc2mZK6XPpa_Af8Tv0SNqTEPYxvfAgD1J0PEiWs987sHV5YmG5YEs5y9XwZv9cG8fq6FobnuV92yc1l_Nx1fC"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 py-8 sm:py-12">
+<div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+<!-- Progress Indicator -->
+<div class="mb-8">
+<div class="flex justify-between text-sm font-medium text-slate-500 dark:text-slate-400 mb-2">
+<span>Selection</span>
+<span class="text-primary font-bold">Review</span>
+</div>
+<div class="relative h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700">
+<div class="absolute left-0 top-0 h-full bg-primary w-full" style="width: 100%;"></div>
+</div>
+<p class="mt-2 text-right text-xs text-slate-400 dark:text-slate-500">Step 3 of 3</p>
+</div>
+<!-- Page Title -->
+<div class="mb-8 text-center sm:text-left">
+<h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">Review Your Selections</h1>
+<p class="mt-2 text-lg text-slate-600 dark:text-slate-400">Please review your choices below. Once submitted, your vote is final and cannot be modified.</p>
+</div>
+<!-- Summary Card -->
+<div class="overflow-hidden rounded-xl border border-slate-200 bg-surface-light shadow-sm dark:border-slate-800 dark:bg-surface-dark mb-8">
+<div class="px-6 py-5 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20">
+<h2 class="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">ballot</span>
+                        Ballot Summary
+                    </h2>
+</div>
+<div class="divide-y divide-slate-100 dark:divide-slate-800">
+<!-- Item 1 -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex items-start gap-4">
+<div class="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-slate-100 border border-slate-200 dark:border-slate-700" data-alt="Portrait of candidate Adedayo O.">
+<img alt="Candidate" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG2PWn05KQXy1dmcGZR_xbUi6P-IT51nTzt0ln83gn3pNDeSOlCe68GHDKUP0HXIvm_d3PH2I3jHJVi2NukHkqdYzfb01luR315faIs0mmcGztT0z7fj6fVd7ymupM4h8ozItzXs6uh_UEIrQzsY3mQu4T4xogW0R7IfUTgSseePUXdUnbeti6MTyfcelDcR1RVbYA4obkMzMPzsou1VcxrSPh8Ke-mjMRTVMTnSlwJz5vFnQWv08JNOPQ-naQFfftsoguxs0K2Yj3"/>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-1">Student Union President</h3>
+<p class="text-lg font-semibold text-slate-900 dark:text-white">Adedayo O.</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Computer Science Dept.</p>
+</div>
+</div>
+<button class="group flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors w-fit ml-auto sm:ml-0">
+<span class="material-symbols-outlined text-lg">edit</span>
+                            Change
+                        </button>
+</div>
+<!-- Item 2 -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<div class="flex items-start gap-4">
+<div class="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-slate-100 border border-slate-200 dark:border-slate-700" data-alt="Portrait of candidate Sarah J.">
+<img alt="Candidate" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDera88X_y6hhkZMd8bqmEi4n_04m5kaHQoSh-DXTYfwNsXDM9uPH2kEliv5IG_9vzAeCtNnG4ctkp6zVQ4YJ0cwB39UCD1cRgmny2Amn1JtjQ9IhYC627cp5qAgCUyKLc3qSAa7QY3cUtFdye-Cqmd5m1BoqrKEUWs4Af3d1r-y3ppAc-GyLIu5AD6q1mmPqo46lvGsivp5jTYKP6cSku9d0zToke7POoR0TU0exFVkZgxuwQ6GvvgncCvMdVFm6V1ppXvsROC642M"/>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-1">Vice President</h3>
+<p class="text-lg font-semibold text-slate-900 dark:text-white">Sarah J.</p>
+<p class="text-sm text-slate-600 dark:text-slate-400">Law Faculty</p>
+</div>
+</div>
+<button class="group flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors w-fit ml-auto sm:ml-0">
+<span class="material-symbols-outlined text-lg">edit</span>
+                            Change
+                        </button>
+</div>
+<!-- Item 3 - Abstention Example -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors bg-slate-50/30 dark:bg-slate-800/10">
+<div class="flex items-start gap-4">
+<div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-slate-200 text-slate-400 dark:bg-slate-700 dark:text-slate-500">
+<span class="material-symbols-outlined text-2xl">block</span>
+</div>
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-1">Sports Director</h3>
+<p class="text-lg font-medium text-slate-500 dark:text-slate-400 italic">Abstained</p>
+<p class="text-sm text-slate-400 dark:text-slate-500">No selection made</p>
+</div>
+</div>
+<button class="group flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors w-fit ml-auto sm:ml-0">
+<span class="material-symbols-outlined text-lg">edit</span>
+                            Change
+                        </button>
+</div>
+</div>
+</div>
+<!-- Confirmation & Submit -->
+<div class="rounded-xl border border-slate-200 bg-surface-light p-6 shadow-sm dark:border-slate-800 dark:bg-surface-dark">
+<div class="mb-6 rounded-lg bg-yellow-50 p-4 border border-yellow-100 dark:bg-yellow-900/10 dark:border-yellow-900/20">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-yellow-600 dark:text-yellow-500 shrink-0">info</span>
+<div class="text-sm text-yellow-800 dark:text-yellow-400">
+<p class="font-bold mb-1">Important Note</p>
+<p>This action is irreversible. Please verify all choices above before proceeding.</p>
+</div>
+</div>
+</div>
+<div class="mb-8 flex items-start gap-3">
+<div class="flex h-6 items-center">
+<input aria-describedby="confirmation-description" class="h-5 w-5 rounded border-slate-300 text-primary focus:ring-primary dark:border-slate-600 dark:bg-slate-700 dark:ring-offset-slate-800" id="confirmation" name="confirmation" type="checkbox"/>
+</div>
+<div class="text-sm leading-6">
+<label class="font-medium text-slate-900 dark:text-white" for="confirmation">I confirm that these selections are final.</label>
+<p class="text-slate-500 dark:text-slate-400" id="confirmation-description">I understand that once I click 'Submit Vote', I cannot modify my choices.</p>
+</div>
+</div>
+<div class="flex flex-col-reverse gap-4 sm:flex-row sm:justify-end">
+<button class="inline-flex justify-center rounded-lg border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 w-full sm:w-auto transition-colors" type="button">
+                        Back to Ballot
+                    </button>
+<button class="inline-flex justify-center items-center gap-2 rounded-lg bg-primary px-8 py-3 text-sm font-bold text-white shadow-lg hover:bg-[#002D7A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary w-full sm:w-auto transition-all transform active:scale-95" type="button">
+<span>Submit Vote</span>
+<span class="material-symbols-outlined text-lg">send</span>
+</button>
+</div>
+</div>
+<!-- Footer Trust Signals -->
+<div class="mt-8 flex flex-col items-center gap-4 text-center">
+<div class="flex items-center gap-2 text-xs text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined text-sm">encrypted</span>
+<span>256-bit SSL Encrypted Connection</span>
+<span class="hidden sm:inline">•</span>
+<span class="hidden sm:inline">Verified by AU Electoral Committee</span>
+</div>
+<p class="text-xs text-slate-400 dark:text-slate-500">© 2023 Adeleke University. All rights reserved.</p>
+</div>
+</div>
+</main>
+
+<script>
+// ============================================
+// AU Voting System - Shared Frontend Logic
+// ============================================
+
+const API_BASE = 'http://localhost:8000/api';
+
+// --- Dark Mode ---
+function initDarkMode() {
+    const saved = localStorage.getItem('au-dark-mode');
+    if (saved === 'true' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+}
+
+function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('au-dark-mode', document.documentElement.classList.contains('dark'));
+    updateToggleIcon();
+}
+
+function updateToggleIcon() {
+    const btn = document.getElementById('dark-mode-toggle');
+    if (btn) {
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.textContent = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
+        }
+    }
+}
+
+// --- API Client ---
+async function apiCall(endpoint, options = {}) {
+    const token = localStorage.getItem('au-token');
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    if (token) headers['Authorization'] = `Token ${token}`;
+
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+// --- Auth Helpers ---
+function getSession() {
+    try { return JSON.parse(localStorage.getItem('au-session')); } catch { return null; }
+}
+
+function setSession(data) {
+    localStorage.setItem('au-session', JSON.stringify(data));
+}
+
+function clearSession() {
+    localStorage.removeItem('au-session');
+    localStorage.removeItem('au-token');
+}
+
+function requireStudentAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'student') { window.location.href = '/'; return null; }
+    return s;
+}
+
+function requireAdminAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'admin') { window.location.href = '/'; return null; }
+    return s;
+}
+
+async function logout() {
+    try { await apiCall('/auth/logout/', { method: 'POST' }); } catch { }
+    clearSession();
+    window.location.href = '/';
+}
+
+// --- Toast Notifications ---
+function showToast(message, type) {
+    const colors = {
+        success: 'bg-green-600',
+        error: 'bg-red-600',
+        info: 'bg-primary'
+    };
+    const toast = document.createElement('div');
+    toast.className = 'fixed top-6 right-6 z-[200] ' + (colors[type] || colors.info) + ' text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-slide-in font-medium text-sm';
+    toast.innerHTML = '<span class="material-symbols-outlined text-lg">' +
+        (type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info') +
+        '</span>' + message;
+    document.body.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100px)'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+// --- Student Navigation (Floating FAB) ---
+function createStudentNav(currentPage) {
+    const pages = [
+        { href: '/dashboard.html', icon: 'space_dashboard', label: 'Dashboard', id: 'dashboard' },
+        { href: '/elections.html', icon: 'how_to_vote', label: 'Elections', id: 'elections' },
+        { href: '/results.html', icon: 'bar_chart', label: 'Election Results', id: 'results' },
+        { href: '/profile.html', icon: 'account_circle', label: 'My Profile', id: 'profile' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Admin Navigation (Floating FAB) ---
+function createAdminNav(currentPage) {
+    const pages = [
+        { href: '/admin.html', icon: 'admin_panel_settings', label: 'Dashboard', id: 'admin' },
+        { href: '/monitoring.html', icon: 'analytics', label: 'Live Monitoring', id: 'monitoring' },
+        { href: '/create-election.html', icon: 'add_circle', label: 'Create Election', id: 'create-election' },
+        { href: '/admin-results.html', icon: 'assessment', label: 'Results Report', id: 'admin-results' },
+        { href: '/admin-settings.html', icon: 'settings', label: 'Profile & Settings', id: 'admin-settings' },
+    ];
+    _createFloatingNav(pages, currentPage);
+}
+
+// --- Floating Nav Builder (shared) ---
+function _createFloatingNav(pages, currentPage) {
+    const nav = document.createElement('div');
+    nav.id = 'floating-nav';
+    nav.innerHTML = `
+    <button id="nav-toggle" onclick="document.getElementById('floating-nav').classList.toggle('open')"
+      class="fixed bottom-6 left-6 z-[100] size-14 rounded-full bg-primary text-white shadow-xl shadow-primary/30 flex items-center justify-center hover:bg-[#002D7A] transition-all hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+    <div id="nav-panel" class="fixed bottom-24 left-6 z-[99] bg-white dark:bg-[#141414] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-3 w-64 transition-all origin-bottom-left scale-0 opacity-0">
+      <div class="flex items-center justify-between px-3 py-2 mb-2 border-b border-slate-100 dark:border-slate-800">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Navigation</span>
+        <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="size-8 rounded-lg flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-lg">${document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode'}</span>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-0.5 max-h-80 overflow-y-auto">
+        ${pages.map(p => `
+          <a href="${p.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${p.id === currentPage
+            ? 'bg-primary/10 text-primary'
+            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+        }">
+            <span class="material-symbols-outlined text-lg">${p.icon}</span>
+            ${p.label}
+          </a>
+        `).join('')}
+      </nav>
+    </div>
+  `;
+    document.body.appendChild(nav);
+
+    const style = document.createElement('style');
+    style.textContent = `
+    #floating-nav.open #nav-panel { transform: scale(1); opacity: 1; }
+    #floating-nav.open #nav-toggle { background: #ef4444; }
+    #floating-nav.open #nav-toggle span { font-size: 0; }
+    #floating-nav.open #nav-toggle span::after { content: 'close'; font-size: 24px; font-family: 'Material Symbols Outlined'; }
+    #nav-panel { transition: transform 0.2s ease, opacity 0.2s ease; }
+    .animate-slide-in { animation: slideIn 0.3s ease; }
+    @keyframes slideIn { from { opacity:0; transform: translateX(100px); } to { opacity:1; transform: translateX(0); } }
+  `;
+    document.head.appendChild(style);
+
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('floating-nav');
+        if (nav && !nav.contains(e.target)) nav.classList.remove('open');
+    });
+}
+
+// Init dark mode on every page
+initDarkMode();
+
+// Confirmation Page Logic
+document.addEventListener('DOMContentLoaded', () => {
+    createStudentNav('confirmation');
+    const session = requireStudentAuth();
+    if (!session) return;
+
+    const electionId = localStorage.getItem('au-active-election') || '1';
+
+    // Load selections
+    const selections = JSON.parse(sessionStorage.getItem('au-ballot-selections') || '{}');
+
+    // Find the confirmation checkbox
+    const checkbox = document.querySelector('input[type="checkbox"]');
+    const submitBtn = Array.from(document.querySelectorAll('button')).find(b =>
+        b.textContent.toLowerCase().includes('submit') || b.textContent.toLowerCase().includes('confirm'));
+
+    // Disable submit initially
+    if (submitBtn && checkbox) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.5';
+        submitBtn.style.cursor = 'not-allowed';
+
+        checkbox.addEventListener('change', () => {
+            submitBtn.disabled = !checkbox.checked;
+            submitBtn.style.opacity = checkbox.checked ? '1' : '0.5';
+            submitBtn.style.cursor = checkbox.checked ? 'pointer' : 'not-allowed';
+        });
+    }
+
+    // Submit vote via API
+    if (submitBtn) {
+        submitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (checkbox && !checkbox.checked) {
+                showToast('Please confirm your selections first', 'error');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span> Submitting...';
+
+            // Build votes array from ballot data
+            const ballotData = JSON.parse(localStorage.getItem('au-ballot-data') || '{}');
+            const votes = [];
+
+            if (ballotData.positions) {
+                for (const position of ballotData.positions) {
+                    const selectedName = selections[position.title];
+                    if (selectedName) {
+                        const candidate = position.candidates.find(c => c.name === selectedName);
+                        if (candidate) {
+                            votes.push({ position_id: position.id, candidate_id: candidate.id });
+                        }
+                    }
+                }
+            }
+
+            if (votes.length === 0) {
+                showToast('No valid selections found. Please go back and select candidates.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Vote';
+                return;
+            }
+
+            try {
+                const data = await apiCall(`/elections/${electionId}/vote/`, {
+                    method: 'POST',
+                    body: JSON.stringify({ votes }),
+                });
+
+                sessionStorage.removeItem('au-ballot-selections');
+                localStorage.removeItem('au-ballot-data');
+
+                showToast(data.message || 'Your vote has been submitted successfully!', 'success');
+
+                submitBtn.innerHTML = '<span class="material-symbols-outlined text-lg">check_circle</span> Vote Submitted!';
+                submitBtn.classList.remove('bg-primary');
+                submitBtn.classList.add('bg-green-600');
+
+                setTimeout(() => window.location.href = '/results.html', 2000);
+            } catch (err) {
+                showToast(err.message || 'Failed to submit vote', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Vote';
+            }
+        });
+    }
+
+    // Back button -> ballot
+    document.querySelectorAll('a, button').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (text.includes('back') || text.includes('edit') || text.includes('modify')) {
+            el.addEventListener('click', (e) => { e.preventDefault(); window.location.href = '/ballot.html'; });
+        }
+    });
+});
+
+</script>
+</body></html>
