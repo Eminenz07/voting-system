@@ -44,27 +44,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (verifyStatus) verifyStatus.innerHTML = '<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span> Verified';
             if (eligibilityStatus) eligibilityStatus.innerHTML = '<span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span> Eligible to Vote';
 
-            // Add reset button for testing
-            const verifiedInfo = document.getElementById('verified-info');
-            if (verifiedInfo) {
-                verifiedInfo.classList.remove('hidden');
-                verifiedInfo.innerHTML = `
-                    <button id="reset-verify-btn" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-red-300 dark:border-red-800 text-red-600 dark:text-red-400 text-xs font-medium hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors">
-                        <span class="material-symbols-outlined text-[16px]">restart_alt</span>
-                        Reset Verification (Testing)
-                    </button>`;
-                document.getElementById('reset-verify-btn').addEventListener('click', async () => {
-                    try {
-                        await apiCall('/auth/unverify/', { method: 'POST' });
-                        const s = getSession();
-                        if (s) { s.is_verified = false; setSession(s); }
-                        showToast('Verification reset!', 'info');
-                        setTimeout(() => window.location.reload(), 800);
-                    } catch (err) {
-                        showToast(err.message || 'Reset failed', 'error');
-                    }
-                });
-            }
         } else {
             // Not verified - show warning + verify button
             if (verifyStatus) verifyStatus.innerHTML = '<span class="material-symbols-outlined text-amber-500 text-[20px]">warning</span> Not Verified';
