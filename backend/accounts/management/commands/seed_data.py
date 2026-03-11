@@ -27,6 +27,7 @@ class Command(BaseCommand):
                 'faculty': 'Administration',
                 'is_verified': True,
                 'is_staff': True,
+                'is_superuser': True,
             }
         )
         if created:
