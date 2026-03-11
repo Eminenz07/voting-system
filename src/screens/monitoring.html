@@ -184,16 +184,13 @@
 </div>
 <!-- Dashboard Grid -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-10">
-<!-- Left Column: Election Results (8 cols) -->
-<div class="lg:col-span-8 space-y-6" id="monitor-positions-container">
-<!-- Dynamic Results will be injected here -->
-</div>
-
-<!-- Right Column: Analytics (4 cols) -->
-<div class="lg:col-span-4 space-y-6">
+<!-- Left Column: Election Results & Faculty Table (8 cols) -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Dynamic Results Container -->
+<div id="monitor-positions-container" class="space-y-6"></div>
 
 <!-- Faculty Breakdown Table -->
-<div class="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden">
+<div class="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden mt-6">
 <div class="p-6 border-b border-neutral-200 flex justify-between items-center">
 <h3 class="text-lg font-bold text-slate-900">Faculty Participation Breakdown</h3>
 <button class="text-primary text-sm font-bold hover:underline">View Full Report</button>
@@ -257,6 +254,7 @@
 </div>
 </div>
 </div>
+
 <!-- Right Column: Live Feed & Pie Chart (4 cols) -->
 <div class="lg:col-span-4 space-y-6">
 <!-- Participation Pie Chart -->
@@ -377,8 +375,8 @@
 </ul>
 </div>
 </div>
-</div> <!-- End Right Column -->
-</div> <!-- End Dashboard Grid -->
+</div>
+</div>
 </main>
 <!-- Footer -->
 <footer class="bg-white border-t border-neutral-200 py-4 mt-auto">
