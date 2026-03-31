@@ -324,4 +324,25 @@ def edit_election(request, election_id):
                 position__election=election,
             ).update(is_disqualified=disqualified)
 
+    # Add new candidates to existing positions
+    add_candidates = request.data.get('add_candidates', [])
+    for cand_data in add_candidates:
+        position_id = cand_data.get('position_id')
+        name = cand_data.get('name', '').strip()
+        if not position_id or not name:
+            continue
+        try:
+            position = Position.objects.get(id=position_id, election=election)
+        except Position.DoesNotExist:
+            continue
+        Candidate.objects.create(
+            position=position,
+            name=name,
+            party=cand_data.get('party', '').strip(),
+            bio=cand_data.get('bio', '').strip(),
+            photo_url=cand_data.get('photo_url', '').strip(),
+        )
+
+    # Refresh and return updated data
+    election.refresh_from_db()
     return Response(ElectionDetailSerializer(election).data)

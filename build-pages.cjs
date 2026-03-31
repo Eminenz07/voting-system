@@ -19,6 +19,7 @@ const screens = [
     { src: 'create-election.html', dest: 'create-election.html', id: 'create-election', pageJs: 'create-election.js' },
     { src: 'admin-results.html', dest: 'admin-results.html', id: 'admin-results', pageJs: 'admin-results.js' },
     { src: 'admin-settings.html', dest: 'admin-settings.html', id: 'admin-settings', pageJs: 'admin-settings.js' },
+    { src: 'edit-election.html', dest: 'edit-election.html', id: 'edit-election', pageJs: 'edit-election.js' },
 ];
 
 const sharedScript = fs.readFileSync(path.join(__dirname, 'src', 'shared.js'), 'utf8');

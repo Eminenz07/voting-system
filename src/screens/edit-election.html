@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Election - Adeleke University Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#003DA5",
+                    "primary-dark": "#002D7A",
+                    "accent": "#F5B400",
+                    "accent-dark": "#D49B00",
+                    "accent-light": "#FFF5D6",
+                    "background-light": "#FAFAFA",
+                    "background-dark": "#0A0A0A",
+                    "surface-light": "#FFFFFF",
+                    "surface-dark": "#141414",
+                },
+                fontFamily: { "display": ["Be Vietnam Pro", "sans-serif"] },
+                borderRadius: {
+                    "DEFAULT": "0.75rem", "lg": "1rem",
+                    "xl": "1.5rem", "2xl": "2rem", "full": "9999px"
+                },
+            },
+        },
+    }
+</script>
+<style>
+    body { font-family: "Be Vietnam Pro", sans-serif; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    .badge-dq { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
+    .dark .badge-dq { background: #450a0a; color: #fca5a5; border-color: #7f1d1d; }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+
+<!-- Toast container -->
+<div id="toast-container" class="fixed top-6 right-6 z-[300] flex flex-col gap-2 pointer-events-none"></div>
+
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 shadow-sm">
+    <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+        <div class="size-8 text-primary flex items-center justify-center bg-primary/10 rounded-lg">
+            <span class="material-symbols-outlined text-2xl">how_to_vote</span>
+        </div>
+        <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">AU Voting Admin</h2>
+    </div>
+    <div class="flex flex-1 justify-end gap-4 items-center">
+        <button id="btn-signout" class="flex items-center gap-2 text-sm font-medium text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-colors">
+            <span class="material-symbols-outlined text-[18px]">logout</span>Sign Out
+        </button>
+    </div>
+</header>
+
+<!-- Loading State -->
+<div id="loading-state" class="flex-1 flex items-center justify-center p-8">
+    <div class="flex flex-col items-center gap-4 text-slate-400">
+        <span class="material-symbols-outlined text-5xl animate-spin">progress_activity</span>
+        <p class="text-sm font-medium">Loading election data...</p>
+    </div>
+</div>
+
+<!-- Main Content (hidden until loaded) -->
+<div id="main-content" class="flex flex-1 relative hidden">
+<main class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark">
+<div class="flex-1 px-4 py-8 md:px-8 max-w-5xl mx-auto w-full">
+
+    <!-- Breadcrumbs -->
+    <nav class="flex items-center text-sm text-slate-500 dark:text-slate-400 mb-6">
+        <a class="hover:text-primary transition-colors" href="/admin.html">Dashboard</a>
+        <span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
+        <span id="breadcrumb-title" class="text-slate-900 dark:text-white font-medium">Edit Election</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+            <h1 id="page-title" class="text-3xl md:text-4xl font-display font-black text-slate-900 dark:text-white tracking-tight mb-2">Edit Election</h1>
+            <p class="text-slate-600 dark:text-slate-400 max-w-2xl">Update timeline, manage candidates, and disqualify if necessary. Name &amp; positions are locked after publishing.</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <span id="status-badge" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider"></span>
+        </div>
+    </div>
+
+    <div class="space-y-8">
+
+        <!-- ── Section 1: Election Info (Read-Only) ── -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl">badge</span>Election Details
+                    <span class="ml-auto inline-flex items-center gap-1 text-xs font-normal text-slate-400">
+                        <span class="material-symbols-outlined text-[14px]">lock</span>Read-only
+                    </span>
+                </h3>
+            </div>
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Election Name</label>
+                    <p id="info-title" class="text-lg font-bold text-slate-900 dark:text-white">—</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Description</label>
+                    <p id="info-description" class="text-sm text-slate-700 dark:text-slate-300">—</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Created</label>
+                    <p id="info-created" class="text-sm text-slate-700 dark:text-slate-300">—</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Section 2: Timeline (Editable) ── -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl">calendar_month</span>Timeline
+                    <span class="ml-auto inline-flex items-center gap-1 text-xs font-normal text-green-600">
+                        <span class="material-symbols-outlined text-[14px]">edit</span>Editable
+                    </span>
+                </h3>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="edit-start-date">
+                            Start Date &amp; Time
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
+                                <span class="material-symbols-outlined text-[20px]">event_available</span>
+                            </span>
+                            <input id="edit-start-date"
+                                class="pl-10 block w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-3 text-sm transition-all"
+                                type="datetime-local"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="edit-end-date">
+                            End Date &amp; Time
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
+                                <span class="material-symbols-outlined text-[20px]">event_busy</span>
+                            </span>
+                            <input id="edit-end-date"
+                                class="pl-10 block w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-3 text-sm transition-all"
+                                type="datetime-local"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-end">
+                    <button id="btn-save-timeline" type="button"
+                        class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg shadow-sm text-white bg-primary hover:bg-primary-dark transition-colors">
+                        <span class="material-symbols-outlined text-lg">save</span>Save Timeline
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Section 3: Positions & Candidates ── -->
+        <div id="positions-section" class="space-y-6">
+            <!-- Dynamically rendered per-position cards go here -->
+        </div>
+
+        <!-- ── Section 4: Quick Actions ── -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl">tune</span>Election Status
+                </h3>
+            </div>
+            <div class="p-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button id="btn-status-active" type="button"
+                    class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-green-200 bg-green-50 hover:bg-green-100 text-green-700 font-medium text-sm transition-all dark:bg-green-900/20 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-900/40">
+                    <span class="material-symbols-outlined text-lg">play_circle</span>Set Active
+                </button>
+                <button id="btn-status-completed" type="button"
+                    class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium text-sm transition-all dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-900/40">
+                    <span class="material-symbols-outlined text-lg">check_circle</span>Mark Completed
+                </button>
+                <button id="btn-status-cancelled" type="button"
+                    class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-red-200 bg-red-50 hover:bg-red-100 text-red-700 font-medium text-sm transition-all dark:bg-red-900/20 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-900/40">
+                    <span class="material-symbols-outlined text-lg">cancel</span>Cancel Election
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Back button -->
+    <div class="mt-8 pb-16">
+        <a href="/admin.html"
+            class="inline-flex items-center gap-2 px-6 py-3 border border-slate-300 dark:border-slate-600 shadow-sm text-base font-medium rounded-lg text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 transition-colors">
+            <span class="material-symbols-outlined text-lg">arrow_back</span>Back to Dashboard
+        </a>
+    </div>
+
+</div>
+</main>
+</div>
+
+<!-- Add Candidate Modal -->
+<div id="add-candidate-modal" class="fixed inset-0 z-[200] hidden">
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="modal-backdrop"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-lg overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">person_add</span>
+                    Add Candidate
+                </h3>
+                <button id="modal-close" class="p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-6 space-y-5">
+                <p id="modal-position-label" class="text-sm text-slate-500 dark:text-slate-400">For position: <strong>—</strong></p>
+                <input type="hidden" id="modal-position-id" value=""/>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Full Name <span class="text-red-500">*</span></label>
+                    <input id="cand-name" type="text" placeholder="e.g. Adewale Johnson"
+                        class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-3 text-sm"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Party / Affiliation</label>
+                    <input id="cand-party" type="text" placeholder="e.g. Progressive Students Alliance"
+                        class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-3 text-sm"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Photo URL</label>
+                    <input id="cand-photo" type="url" placeholder="https://example.com/photo.jpg"
+                        class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-3 text-sm"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Manifesto / Bio</label>
+                    <textarea id="cand-bio" rows="3" placeholder="Brief description of the candidate's campaign goals..."
+                        class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-3 text-sm"></textarea>
+                </div>
+            </div>
+            <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex justify-end gap-3">
+                <button id="modal-cancel" type="button" class="px-5 py-2.5 text-sm font-medium rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">Cancel</button>
+                <button id="modal-submit" type="button" class="px-5 py-2.5 text-sm font-medium rounded-lg shadow-sm text-white bg-primary hover:bg-primary-dark transition-colors inline-flex items-center gap-2">
+                    <span class="material-symbols-outlined text-lg">person_add</span>Add Candidate
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const API_BASE = 'http://localhost:8000/api';
+
+// ── Auth helpers ──────────────────────────────────────────────────────────────
+function getSession() { try { return JSON.parse(localStorage.getItem('au-session')); } catch { return null; } }
+function clearSession() { localStorage.removeItem('au-session'); localStorage.removeItem('au-token'); }
+function requireAdminAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'admin') { window.location.href = '/'; return null; }
+    return s;
+}
+
+async function apiCall(endpoint, options = {}) {
+    const token = localStorage.getItem('au-token');
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    if (token) headers['Authorization'] = `Token ${token}`;
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+async function logout() {
+    try { await apiCall('/auth/logout/', { method: 'POST' }); } catch {}
+    clearSession();
+    window.location.href = '/';
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(message, type = 'info') {
+    const colors = { success: 'bg-green-600', error: 'bg-red-600', info: 'bg-primary', warning: 'bg-amber-600' };
+    const icons  = { success: 'check_circle', error: 'error', info: 'info', warning: 'warning' };
+    const toast  = document.createElement('div');
+    toast.className = `pointer-events-auto ${colors[type] || colors.info} text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 font-medium text-sm`;
+    toast.innerHTML = `<span class="material-symbols-outlined text-lg">${icons[type]}</span>${message}`;
+    document.getElementById('toast-container').appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+}
+
+function escapeHtml(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+
+function toLocalDatetime(isoStr) {
+    if (!isoStr) return '';
+    const d = new Date(isoStr);
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    const h = String(d.getHours()).padStart(2, '0');
+    const min = String(d.getMinutes()).padStart(2, '0');
+    return `${y}-${m}-${day}T${h}:${min}`;
+}
+
+// ── Floating admin nav ────────────────────────────────────────────────────────
+function initAdminNav() {
+    const pages = [
+        { href: '/admin.html', icon: 'admin_panel_settings', label: 'Dashboard', id: 'admin' },
+        { href: '/monitoring.html', icon: 'analytics', label: 'Live Monitoring', id: 'monitoring' },
+        { href: '/create-election.html', icon: 'add_circle', label: 'Create Election', id: 'create-election' },
+        { href: '/admin-results.html', icon: 'assessment', label: 'Results Report', id: 'admin-results' },
+        { href: '/admin-settings.html', icon: 'settings', label: 'Profile & Settings', id: 'admin-settings' },
+    ];
+    const nav = document.createElement('div');
+    nav.id = 'floating-nav';
+    nav.innerHTML = `
+    <button id="nav-toggle" onclick="document.getElementById('floating-nav').classList.toggle('open')"
+      class="fixed bottom-6 left-6 z-[100] size-14 rounded-full bg-primary text-white shadow-xl flex items-center justify-center hover:bg-[#002D7A] transition-all hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+    <div id="nav-panel" class="fixed bottom-24 left-6 z-[99] bg-white dark:bg-[#141414] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-3 w-64 transition-all origin-bottom-left scale-0 opacity-0">
+      <nav class="flex flex-col gap-0.5">
+        ${pages.map(p => `
+          <a href="${p.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+            <span class="material-symbols-outlined text-lg">${p.icon}</span>${p.label}
+          </a>`).join('')}
+      </nav>
+    </div>`;
+    document.body.appendChild(nav);
+    const style = document.createElement('style');
+    style.textContent = `
+    #floating-nav.open #nav-panel { transform: scale(1); opacity: 1; }
+    #floating-nav.open #nav-toggle { background: #ef4444; }
+    #nav-panel { transition: transform 0.2s ease, opacity 0.2s ease; }`;
+    document.head.appendChild(style);
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('floating-nav');
+        if (nav && !nav.contains(e.target)) nav.classList.remove('open');
+    });
+}
+
+// ── Global state ──────────────────────────────────────────────────────────────
+let electionData = null;
+let electionId = null;
+
+// ── Render positions + candidates ─────────────────────────────────────────────
+function renderPositions() {
+    const section = document.getElementById('positions-section');
+    if (!electionData || !electionData.positions) { section.innerHTML = ''; return; }
+
+    section.innerHTML = electionData.positions.map(pos => `
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl">person_search</span>
+                    ${escapeHtml(pos.title)}
+                    <span class="text-xs font-normal text-slate-400 ml-1">(${pos.candidates.length} candidate${pos.candidates.length !== 1 ? 's' : ''})</span>
+                </h3>
+                <button type="button" onclick="openAddCandidate(${pos.id}, '${escapeHtml(pos.title)}')"
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg text-white bg-primary hover:bg-primary-dark transition-colors">
+                    <span class="material-symbols-outlined text-[16px]">person_add</span>Add Candidate
+                </button>
+            </div>
+            <div class="p-4">
+                ${pos.candidates.length === 0
+                    ? `<div class="flex items-center gap-3 p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-dashed border-slate-300 dark:border-slate-600 text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-[20px]">info</span>
+                        No candidates yet. Click "Add Candidate" to register one.
+                       </div>`
+                    : `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        ${pos.candidates.map(c => renderCandidateCard(c, pos.id)).join('')}
+                       </div>`
+                }
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderCandidateCard(c, positionId) {
+    const dq = c.is_disqualified;
+    const photoPlaceholder = c.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+    return `
+    <div class="relative flex flex-col rounded-xl border ${dq ? 'border-red-200 dark:border-red-900 bg-red-50/50 dark:bg-red-900/10' : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800'} p-4 transition-all">
+        ${dq ? '<div class="absolute top-2 right-2"><span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold badge-dq border">DISQUALIFIED</span></div>' : ''}
+        <div class="flex items-start gap-3 mb-3">
+            ${c.photo_url
+                ? `<img src="${escapeHtml(c.photo_url)}" alt="${escapeHtml(c.name)}" class="size-12 rounded-full object-cover border-2 ${dq ? 'border-red-300 grayscale' : 'border-slate-200 dark:border-slate-600'} flex-shrink-0"/>`
+                : `<div class="size-12 rounded-full ${dq ? 'bg-red-100 text-red-400' : 'bg-primary/10 text-primary'} flex items-center justify-center text-sm font-bold flex-shrink-0">${photoPlaceholder}</div>`
+            }
+            <div class="min-w-0 flex-1">
+                <h4 class="text-sm font-bold ${dq ? 'text-red-600 dark:text-red-400 line-through' : 'text-slate-900 dark:text-white'} truncate">${escapeHtml(c.name)}</h4>
+                ${c.party ? `<p class="text-xs text-slate-500 dark:text-slate-400 truncate">${escapeHtml(c.party)}</p>` : ''}
+            </div>
+        </div>
+        ${c.bio ? `<p class="text-xs text-slate-500 dark:text-slate-400 mb-3 line-clamp-2">${escapeHtml(c.bio)}</p>` : ''}
+        <div class="mt-auto pt-2 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between">
+            <span class="text-xs text-slate-400">${c.vote_count || 0} vote${(c.vote_count || 0) !== 1 ? 's' : ''}</span>
+            <button type="button" onclick="toggleDisqualify(${c.id}, ${!dq})"
+                class="text-xs font-medium px-2.5 py-1 rounded-lg transition-colors ${dq
+                    ? 'text-green-700 bg-green-50 hover:bg-green-100 dark:text-green-400 dark:bg-green-900/20 dark:hover:bg-green-900/40'
+                    : 'text-red-600 bg-red-50 hover:bg-red-100 dark:text-red-400 dark:bg-red-900/20 dark:hover:bg-red-900/40'}">
+                ${dq ? 'Reinstate' : 'Disqualify'}
+            </button>
+        </div>
+    </div>`;
+}
+
+// ── Status badge styling ──────────────────────────────────────────────────────
+function updateStatusBadge(status) {
+    const badge = document.getElementById('status-badge');
+    const styles = {
+        active: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
+        completed: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
+        draft: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400',
+        cancelled: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+    };
+    const icons = { active: 'play_circle', completed: 'check_circle', draft: 'edit_note', cancelled: 'cancel' };
+    badge.className = `inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${styles[status] || styles.draft}`;
+    badge.innerHTML = `<span class="material-symbols-outlined text-[16px]">${icons[status] || 'help'}</span>${status}`;
+}
+
+// ── Load election ─────────────────────────────────────────────────────────────
+async function loadElection() {
+    try {
+        const data = await apiCall(`/admin/elections/${electionId}/`);
+        electionData = data;
+
+        // Populate read-only info
+        document.getElementById('info-title').textContent = data.title;
+        document.getElementById('info-description').textContent = data.description || 'No description provided.';
+        document.getElementById('info-created').textContent = new Date(data.created_at).toLocaleDateString('en-NG', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        document.getElementById('page-title').textContent = data.title;
+        document.getElementById('breadcrumb-title').textContent = data.title;
+
+        // Populate editable timeline
+        document.getElementById('edit-start-date').value = toLocalDatetime(data.start_date);
+        document.getElementById('edit-end-date').value = toLocalDatetime(data.end_date);
+
+        // Status badge
+        updateStatusBadge(data.status);
+
+        // Positions + candidates
+        renderPositions();
+
+        // Show content
+        document.getElementById('loading-state').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+
+    } catch (err) {
+        document.getElementById('loading-state').innerHTML = `
+            <div class="flex flex-col items-center gap-4 text-red-500 p-8">
+                <span class="material-symbols-outlined text-5xl">error</span>
+                <p class="text-sm font-medium">${err.message || 'Failed to load election.'}</p>
+                <a href="/admin.html" class="text-primary text-sm font-medium hover:underline">← Back to Dashboard</a>
+            </div>`;
+    }
+}
+
+// ── Save timeline ─────────────────────────────────────────────────────────────
+async function saveTimeline() {
+    const btn = document.getElementById('btn-save-timeline');
+    const start = document.getElementById('edit-start-date').value;
+    const end = document.getElementById('edit-end-date').value;
+
+    if (!start || !end) { showToast('Both dates are required', 'error'); return; }
+    if (end <= start) { showToast('End date must be after start date', 'error'); return; }
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span>Saving...';
+
+    try {
+        const data = await apiCall(`/admin/elections/${electionId}/`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                start_date: new Date(start).toISOString(),
+                end_date: new Date(end).toISOString(),
+            }),
+        });
+        electionData = data;
+        showToast('Timeline updated successfully!', 'success');
+    } catch (err) {
+        showToast(err.message || 'Failed to update timeline', 'error');
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-outlined text-lg">save</span>Save Timeline';
+}
+
+// ── Disqualify / reinstate ────────────────────────────────────────────────────
+window.toggleDisqualify = async function(candidateId, disqualify) {
+    const action = disqualify ? 'disqualify' : 'reinstate';
+    if (!confirm(`Are you sure you want to ${action} this candidate?`)) return;
+
+    try {
+        const data = await apiCall(`/admin/elections/${electionId}/`, {
+            method: 'PATCH',
+            body: JSON.stringify({ candidates: [{ id: candidateId, is_disqualified: disqualify }] }),
+        });
+        electionData = data;
+        renderPositions();
+        showToast(`Candidate ${action}d successfully`, 'success');
+    } catch (err) {
+        showToast(err.message || `Failed to ${action} candidate`, 'error');
+    }
+};
+
+// ── Change election status ────────────────────────────────────────────────────
+async function changeStatus(newStatus) {
+    const labels = { active: 'activate', completed: 'complete', cancelled: 'cancel' };
+    if (!confirm(`Are you sure you want to ${labels[newStatus]} this election?`)) return;
+
+    try {
+        const data = await apiCall(`/admin/elections/${electionId}/`, {
+            method: 'PATCH',
+            body: JSON.stringify({ status: newStatus }),
+        });
+        electionData = data;
+        updateStatusBadge(newStatus);
+        showToast(`Election status changed to "${newStatus}"`, 'success');
+    } catch (err) {
+        showToast(err.message || 'Failed to change status', 'error');
+    }
+}
+
+// ── Add candidate modal ───────────────────────────────────────────────────────
+window.openAddCandidate = function(positionId, positionTitle) {
+    document.getElementById('modal-position-id').value = positionId;
+    document.getElementById('modal-position-label').innerHTML = `For position: <strong>${escapeHtml(positionTitle)}</strong>`;
+    document.getElementById('cand-name').value = '';
+    document.getElementById('cand-party').value = '';
+    document.getElementById('cand-photo').value = '';
+    document.getElementById('cand-bio').value = '';
+    document.getElementById('add-candidate-modal').classList.remove('hidden');
+    setTimeout(() => document.getElementById('cand-name').focus(), 100);
+};
+
+function closeModal() {
+    document.getElementById('add-candidate-modal').classList.add('hidden');
+}
+
+async function submitCandidate() {
+    const name = document.getElementById('cand-name').value.trim();
+    const party = document.getElementById('cand-party').value.trim();
+    const photo = document.getElementById('cand-photo').value.trim();
+    const bio = document.getElementById('cand-bio').value.trim();
+    const positionId = document.getElementById('modal-position-id').value;
+
+    if (!name) { showToast('Candidate name is required', 'error'); return; }
+
+    const btn = document.getElementById('modal-submit');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span>Adding...';
+
+    // We need to re-create the election with the new candidate via the create endpoint
+    // OR we need a dedicated add-candidate endpoint. 
+    // For now, let's use the existing create structure by adding to an existing position.
+    // Since we don't have a dedicated add-candidate endpoint yet, let's create one inline.
+    
+    // Actually, let's add a direct candidate creation approach via the edit endpoint
+    try {
+        const response = await fetch(`${API_BASE}/admin/elections/${electionId}/`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('au-token')}`,
+            },
+            body: JSON.stringify({
+                add_candidates: [{
+                    position_id: parseInt(positionId),
+                    name, party, bio, photo_url: photo,
+                }],
+            }),
+        });
+        const data = await response.json();
+        if (!response.ok) throw { message: data.error || 'Failed to add candidate' };
+        
+        electionData = data;
+        renderPositions();
+        closeModal();
+        showToast(`${name} added successfully!`, 'success');
+    } catch (err) {
+        showToast(err.message || 'Failed to add candidate', 'error');
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-outlined text-lg">person_add</span>Add Candidate';
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    const session = requireAdminAuth();
+    if (!session) return;
+
+    initAdminNav();
+
+    // Get election ID from URL params or localStorage
+    const params = new URLSearchParams(window.location.search);
+    electionId = params.get('id') || localStorage.getItem('au-active-election');
+
+    if (!electionId) {
+        document.getElementById('loading-state').innerHTML = `
+            <div class="flex flex-col items-center gap-4 text-slate-400 p-8">
+                <span class="material-symbols-outlined text-5xl">help</span>
+                <p class="text-sm font-medium">No election ID specified.</p>
+                <a href="/admin.html" class="text-primary text-sm font-medium hover:underline">← Back to Dashboard</a>
+            </div>`;
+        return;
+    }
+
+    loadElection();
+
+    // Event listeners
+    document.getElementById('btn-signout')?.addEventListener('click', logout);
+    document.getElementById('btn-save-timeline')?.addEventListener('click', saveTimeline);
+    document.getElementById('btn-status-active')?.addEventListener('click', () => changeStatus('active'));
+    document.getElementById('btn-status-completed')?.addEventListener('click', () => changeStatus('completed'));
+    document.getElementById('btn-status-cancelled')?.addEventListener('click', () => changeStatus('cancelled'));
+
+    // Modal
+    document.getElementById('modal-close')?.addEventListener('click', closeModal);
+    document.getElementById('modal-cancel')?.addEventListener('click', closeModal);
+    document.getElementById('modal-backdrop')?.addEventListener('click', closeModal);
+    document.getElementById('modal-submit')?.addEventListener('click', submitCandidate);
+});
+</script>
+</body>
+</html>
