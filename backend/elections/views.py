@@ -33,7 +33,6 @@ def election_ballot(request, election_id):
     except Election.DoesNotExist:
         return Response({'error': 'Election not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-    # Check if student already voted in this election
     has_voted = Vote.objects.filter(
         voter=request.user,
         candidate__position__election=election
@@ -60,7 +59,6 @@ def cast_vote(request, election_id):
     except Election.DoesNotExist:
         return Response({'error': 'Election not found or not active.'}, status=status.HTTP_404_NOT_FOUND)
 
-    # Check if already voted
     if Vote.objects.filter(voter=user, candidate__position__election=election).exists():
         return Response({'error': 'You have already voted in this election.'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -70,6 +68,7 @@ def cast_vote(request, election_id):
 
     votes_data = serializer.validated_data['votes']
     created_votes = []
+    voted_positions = set()
 
     for vote_item in votes_data:
         try:
@@ -79,9 +78,15 @@ def cast_vote(request, election_id):
                 position__election=election,
             )
         except Candidate.DoesNotExist:
-            return Response({'error': f'Invalid candidate for position.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Invalid candidate for position.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Check duplicate position vote
+        # Prevent duplicate votes for the same position within this request
+        if candidate.position_id in voted_positions:
+            return Response({'error': f'Duplicate vote for position: {candidate.position.title}'},
+                            status=status.HTTP_400_BAD_REQUEST)
+        voted_positions.add(candidate.position_id)
+
+        # Check if already voted for this position in DB
         if Vote.objects.filter(voter=user, candidate__position=candidate.position).exists():
             return Response({'error': f'Duplicate vote for position: {candidate.position.title}'},
                             status=status.HTTP_400_BAD_REQUEST)
@@ -89,31 +94,37 @@ def cast_vote(request, election_id):
         created_votes.append(Vote(voter=user, candidate=candidate))
 
     Vote.objects.bulk_create(created_votes)
-    return Response({'message': 'Your votes have been submitted successfully!', 'votes_count': len(created_votes)},
-                    status=status.HTTP_201_CREATED)
+    return Response(
+        {'message': 'Your votes have been submitted successfully!', 'votes_count': len(created_votes)},
+        status=status.HTTP_201_CREATED
+    )
 
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def election_results(request, election_id):
-    """Get election results with vote tallies."""
+    """Get election results with vote tallies.
+    
+    Returns positions keyed as 'positions' (not 'results') so the frontend
+    can reference data.positions consistently across all pages.
+    """
     try:
         election = Election.objects.get(id=election_id)
     except Election.DoesNotExist:
         return Response({'error': 'Election not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-    positions = election.positions.all()
-    results = []
+    positions_qs = election.positions.all()
+    positions_data = []
 
-    for position in positions:
+    for position in positions_qs:
         candidates = position.candidates.annotate(
             votes=Count('votes')
         ).order_by('-votes')
 
         total_position_votes = sum(c.votes for c in candidates)
 
-        results.append({
-            'position': position.title,
+        positions_data.append({
+            'title': position.title,           # 'title' not 'position' — matches frontend
             'position_id': position.id,
             'total_votes': total_position_votes,
             'candidates': [
@@ -129,12 +140,16 @@ def election_results(request, election_id):
             ],
         })
 
+    total_votes = election.total_votes
+    eligible_voters = election.total_eligible_voters
+    turnout = round((total_votes / max(eligible_voters, 1)) * 100, 1)
+
     return Response({
         'election': ElectionListSerializer(election).data,
-        'results': results,
-        'total_votes': election.total_votes,
-        'total_eligible': election.total_eligible_voters,
-        'turnout': round((election.total_votes / max(election.total_eligible_voters, 1)) * 100, 1),
+        'positions': positions_data,           # was 'results' — now matches frontend
+        'total_votes': total_votes,
+        'eligible_voters': eligible_voters,    # was 'total_eligible' — now matches frontend
+        'turnout': turnout,
     })
 
 
@@ -153,7 +168,6 @@ def admin_dashboard(request):
     active_elections = Election.objects.filter(status='active').count()
     total_votes = Vote.objects.count()
 
-    # Recent elections
     recent_elections = ElectionListSerializer(
         Election.objects.all()[:5], many=True
     ).data
@@ -179,7 +193,6 @@ def create_election(request):
     if serializer.is_valid():
         election = serializer.save(created_by=request.user, status='active')
 
-        # Create positions and candidates from request data
         positions_data = request.data.get('positions', [])
         for pos_data in positions_data:
             position = Position.objects.create(
