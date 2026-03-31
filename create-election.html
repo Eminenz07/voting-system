@@ -1,280 +1,578 @@
 <!DOCTYPE html>
-
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Create Election - Adeleke University Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#003DA5",
-                        "accent": "#F5B400",
-                        "accent-dark": "#D49B00",
-                        "accent-light": "#FFF5D6",
-                        "background-light": "#FAFAFA",
-                        "background-dark": "#0A0A0A",
-                        "slate-850": "#1e293b", // Custom dark slate for text
-                    },
-                    fontFamily: {
-                        "display": ["Be Vietnam Pro", "sans-serif"]
-                    },
-                    borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#003DA5",
+                    "primary-dark": "#002D7A",
+                    "accent": "#F5B400",
+                    "accent-dark": "#D49B00",
+                    "accent-light": "#FFF5D6",
+                    "background-light": "#FAFAFA",
+                    "background-dark": "#0A0A0A",
+                    "surface-light": "#FFFFFF",
+                    "surface-dark": "#141414",
+                },
+                fontFamily: { "display": ["Be Vietnam Pro", "sans-serif"] },
+                borderRadius: {
+                    "DEFAULT": "0.75rem", "lg": "1rem",
+                    "xl": "1.5rem", "2xl": "2rem", "full": "9999px"
                 },
             },
-        }
-    </script>
+        },
+    }
+</script>
 <style>
-        body {
-            font-family: "Be Vietnam Pro", sans-serif;
-        }
-        /* Hide scrollbar for clean UI */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-    </style>
+    body { font-family: "Be Vietnam Pro", sans-serif; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+</style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
-<!-- Top Navigation -->
-<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 shadow-sm">
-<div class="flex items-center gap-4 text-slate-900 dark:text-white">
-<div class="size-8 text-primary flex items-center justify-center bg-primary/10 rounded-lg">
-<span class="material-symbols-outlined text-2xl">how_to_vote</span>
-</div>
-<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">AU Voting Admin</h2>
-</div>
-<div class="flex flex-1 justify-end gap-6 items-center">
-<!-- Search -->
-<label class="hidden md:flex flex-col min-w-40 h-10 max-w-64">
-<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 transition-colors focus-within:border-primary focus-within:ring-1 focus-within:ring-primary">
-<div class="text-slate-500 dark:text-slate-400 flex items-center justify-center pl-3">
-<span class="material-symbols-outlined text-[20px]">search</span>
-</div>
-<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden bg-transparent text-slate-900 dark:text-white focus:outline-0 border-none h-full placeholder:text-slate-400 px-3 text-sm font-normal leading-normal" placeholder="Search elections..." value=""/>
-</div>
-</label>
-<!-- Actions -->
-<div class="flex gap-2">
-<button class="flex items-center justify-center size-10 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<button class="flex items-center justify-center size-10 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors">
-<span class="material-symbols-outlined">settings</span>
-</button>
-</div>
-<!-- Profile -->
-<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-slate-700 shadow-sm cursor-pointer" data-alt="Admin user profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCuFqS-pPQB6KGos5c5jGxzWntVNM3LF03rhEpLgONE9vsmvx1rMsXDk2xlzKqsTugTHS5tMdZOdEyCBKrUwZe7hiMEJXBUKFPDZEI_2_7noC2SONfo-UrS6VFCNlK147l_eJ2JYYmz3W0W_BUv3k1AhyEdT8gagHwPUTtfiQBG62PCqUOOnHaSZWH5Rmfpk9oVSTucGt6yOIf3yX_fqCJSyj3D_p1B8Ol5p4Pky8emps45Yq3NNZ6J6V5J67DCQcvuLo-I4TVNC0dt");'></div>
-</div>
-</header>
-<div class="flex flex-1 relative">
-<!-- Sidebar Navigation -->
 
-<!-- Main Content Area -->
+<!-- Toast container -->
+<div id="toast-container" class="fixed top-6 right-6 z-[300] flex flex-col gap-2 pointer-events-none"></div>
+
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 shadow-sm">
+    <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+        <div class="size-8 text-primary flex items-center justify-center bg-primary/10 rounded-lg">
+            <span class="material-symbols-outlined text-2xl">how_to_vote</span>
+        </div>
+        <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">AU Voting Admin</h2>
+    </div>
+    <div class="flex flex-1 justify-end gap-4 items-center">
+        <button id="btn-signout" class="flex items-center gap-2 text-sm font-medium text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition-colors">
+            <span class="material-symbols-outlined text-[18px]">logout</span>Sign Out
+        </button>
+    </div>
+</header>
+
+<div class="flex flex-1 relative">
 <main class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark">
 <div class="flex-1 px-4 py-8 md:px-8 max-w-5xl mx-auto w-full">
-<!-- Breadcrumbs -->
-<nav class="flex items-center text-sm text-slate-500 dark:text-slate-400 mb-6">
-<a class="hover:text-primary transition-colors" href="#">Dashboard</a>
-<span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
-<a class="hover:text-primary transition-colors" href="#">Elections</a>
-<span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
-<span class="text-slate-900 dark:text-white font-medium">Create Election</span>
-</nav>
-<!-- Header Section -->
-<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-<div>
-<h1 class="text-3xl md:text-4xl font-display font-black text-slate-900 dark:text-white tracking-tight mb-2">Create New Election</h1>
-<p class="text-slate-600 dark:text-slate-400 max-w-2xl">Configure the details, timeline, and rules for the upcoming student election.</p>
-</div>
-<div class="hidden md:block">
-<button class="text-slate-500 hover:text-primary text-sm font-medium flex items-center gap-1">
-<span class="material-symbols-outlined text-lg">help</span>
-                            Help Guide
-                       </button>
-</div>
-</div>
-<!-- Wizard Progress -->
-<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 mb-8 shadow-sm">
-<div class="flex justify-between items-center mb-4">
-<div>
-<span class="uppercase tracking-wider text-xs font-bold text-primary mb-1 block">Step 1 of 3</span>
-<h3 class="text-lg font-bold text-slate-900 dark:text-white">Election Basics</h3>
-</div>
-<div class="text-right hidden sm:block">
-<span class="text-sm text-slate-500 dark:text-slate-400">Next: Timeline &amp; Rules</span>
-</div>
-</div>
-<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2.5">
-<div class="bg-primary h-2.5 rounded-full w-1/3 transition-all duration-500 ease-in-out"></div>
-</div>
-</div>
-<!-- Form Container -->
-<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-<form class="p-6 md:p-8 space-y-8">
-<!-- Section: General Info -->
-<div class="space-y-6">
-<div>
-<h4 class="text-base font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-xl">badge</span>
-                                    Identification
-                                </h4>
-<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Set the primary name and scope for this voting event.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="col-span-1 md:col-span-2">
-<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="election-name">Election Name</label>
-<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm" id="election-name" name="election-name" placeholder="e.g. 2023 Student Union General Election" type="text"/>
-</div>
-<div class="col-span-1 md:col-span-2">
-<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Election Type</label>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<!-- Option 1 -->
-<label class="relative flex items-start p-4 cursor-pointer rounded-lg border border-primary bg-primary/5 dark:bg-primary/10 ring-1 ring-primary transition-all">
-<div class="flex items-center h-5">
-<input checked="" class="h-4 w-4 text-primary border-slate-300 focus:ring-primary" id="type-general" name="election-type" type="radio"/>
-</div>
-<div class="ml-3 text-sm">
-<span class="block font-bold text-slate-900 dark:text-white">General Election</span>
-<span class="block text-slate-500 dark:text-slate-400 mt-1">Open to all registered students across all faculties.</span>
-</div>
-</label>
-<!-- Option 2 -->
-<label class="relative flex items-start p-4 cursor-pointer rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
-<div class="flex items-center h-5">
-<input class="h-4 w-4 text-primary border-slate-300 focus:ring-primary" id="type-faculty" name="election-type" type="radio"/>
-</div>
-<div class="ml-3 text-sm">
-<span class="block font-bold text-slate-900 dark:text-white">Faculty Specific</span>
-<span class="block text-slate-500 dark:text-slate-400 mt-1">Restricted to students within a specific faculty.</span>
-</div>
-</label>
-</div>
-</div>
-<!-- Conditional Faculty Select (Hidden by default logic, but shown here for layout completeness if selected) -->
-<div class="col-span-1 md:col-span-2 hidden" id="faculty-select-container">
-<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="faculty-select">Select Faculty</label>
-<select class="w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm" id="faculty-select">
-<option>Faculty of Science</option>
-<option>Faculty of Arts</option>
-<option>Faculty of Law</option>
-<option>Faculty of Business &amp; Social Sciences</option>
-</select>
-</div>
-</div>
-</div>
-<hr class="border-slate-200 dark:border-slate-700"/>
-<!-- Section: Timeline -->
-<div class="space-y-6">
-<div>
-<h4 class="text-base font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-xl">calendar_month</span>
-                                    Timeline
-                                </h4>
-<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Define the start and end period for voting access.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div>
-<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="start-date">Start Date &amp; Time</label>
-<div class="relative">
-<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
-<span class="material-symbols-outlined text-[20px]">event_available</span>
-</div>
-<input class="pl-10 block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm sm:text-sm" id="start-date" type="datetime-local"/>
-</div>
-</div>
-<div>
-<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="end-date">End Date &amp; Time</label>
-<div class="relative">
-<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
-<span class="material-symbols-outlined text-[20px]">event_busy</span>
-</div>
-<input class="pl-10 block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm sm:text-sm" id="end-date" type="datetime-local"/>
-</div>
-<p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Voting will automatically close at this time.</p>
-</div>
-</div>
-</div>
-<hr class="border-slate-200 dark:border-slate-700"/>
-<!-- Section: Categories -->
-<div class="space-y-6">
-<div>
-<h4 class="text-base font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-xl">category</span>
-                                    Position Categories
-                                </h4>
-<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Add the positions students will be voting for (e.g., President, Treasurer).</p>
-</div>
-<div class="space-y-4">
-<div class="flex gap-2">
-                            <div class="flex-1">
-                                <label for="new-category" class="sr-only">New Category Name</label>
-                                <input type="text" id="new-category" class="block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm" placeholder="Enter position name...">
-                            </div>
-                            <button type="button" id="add-category-btn" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-slate-800 hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
-                                <span class="material-symbols-outlined text-lg mr-1">add</span> Add
-                            </button>
-                        </div>
 
-                        <!-- Added Categories List -->
-                        <div class="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
-                            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Active Positions</p>
-                            <div id="positions-list" class="flex flex-wrap gap-2">
-                                <!-- Dynamic positions will be injected here -->
+    <!-- Breadcrumbs -->
+    <nav class="flex items-center text-sm text-slate-500 dark:text-slate-400 mb-6">
+        <a class="hover:text-primary transition-colors" href="/admin.html">Dashboard</a>
+        <span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
+        <span class="text-slate-900 dark:text-white font-medium">Create Election</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+            <h1 class="text-3xl md:text-4xl font-display font-black text-slate-900 dark:text-white tracking-tight mb-2">Create New Election</h1>
+            <p class="text-slate-600 dark:text-slate-400 max-w-2xl">Configure the election name, voting window, and the positions students will be voting for.</p>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <form id="create-election-form" novalidate>
+    <div class="space-y-8">
+
+        <!-- ── Section 1: Election Info ── -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl">badge</span>Election Details
+                </h3>
+            </div>
+            <div class="p-6 space-y-6">
+                <!-- Title -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="election-name">
+                        Election Name <span class="text-red-500">*</span>
+                    </label>
+                    <input id="election-name"
+                        class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-3 text-sm transition-all"
+                        placeholder="e.g. 2024/2025 Student Union Government Election"
+                        type="text"/>
+                    <p id="election-name-error" class="mt-1 text-xs text-red-500 hidden">Election name is required.</p>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="election-desc">
+                        Description <span class="text-slate-400 font-normal">(optional)</span>
+                    </label>
+                    <textarea id="election-desc"
+                        class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-3 text-sm transition-all"
+                        placeholder="Brief description visible to students on the elections page..."
+                        rows="3"></textarea>
+                </div>
+
+                <!-- Election Type -->
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">Election Type</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <label class="relative flex items-start p-4 cursor-pointer rounded-lg border-2 border-primary bg-primary/5 dark:bg-primary/10 transition-all" id="type-general-label">
+                            <input checked class="h-4 w-4 text-primary border-slate-300 focus:ring-primary mt-0.5" id="type-general" name="election-type" type="radio" value="general"/>
+                            <div class="ml-3 text-sm">
+                                <span class="block font-bold text-slate-900 dark:text-white">General Election</span>
+                                <span class="block text-slate-500 dark:text-slate-400 mt-0.5 text-xs">Open to all registered &amp; verified students.</span>
                             </div>
+                        </label>
+                        <label class="relative flex items-start p-4 cursor-pointer rounded-lg border-2 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" id="type-faculty-label">
+                            <input class="h-4 w-4 text-primary border-slate-300 focus:ring-primary mt-0.5" id="type-faculty" name="election-type" type="radio" value="faculty"/>
+                            <div class="ml-3 text-sm">
+                                <span class="block font-bold text-slate-900 dark:text-white">Faculty Specific</span>
+                                <span class="block text-slate-500 dark:text-slate-400 mt-0.5 text-xs">Restricted to a single faculty.</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Section 2: Timeline ── -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl">calendar_month</span>Timeline
+                </h3>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="start-date">
+                            Start Date &amp; Time <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
+                                <span class="material-symbols-outlined text-[20px]">event_available</span>
+                            </span>
+                            <input id="start-date"
+                                class="pl-10 block w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-3 text-sm transition-all"
+                                type="datetime-local"/>
                         </div>
-</div>
-</div>
-<hr class="border-slate-200 dark:border-slate-700"/>
-<!-- Section: Rules -->
-<div class="space-y-6">
-<div>
-<h4 class="text-base font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-xl">gavel</span>
-                                    Rules &amp; Regulations
-                                </h4>
-<p class="text-sm text-slate-500 dark:text-slate-400 mb-6">Specify any guidelines voters or candidates should see before proceeding.</p>
-</div>
-<div>
-<label class="sr-only" for="rules">Rules</label>
-<textarea class="block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm" id="rules" placeholder="e.g. Candidates must not campaign on election day..." rows="4"></textarea>
-</div>
-</div>
-</form>
-<!-- Form Actions Footer -->
-<div class="bg-slate-50 dark:bg-slate-800/50 px-6 py-4 md:px-8 border-t border-slate-200 dark:border-slate-800 flex flex-col-reverse sm:flex-row justify-between items-center gap-4">
-<button class="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-slate-300 dark:border-slate-600 shadow-sm text-base font-medium rounded-lg text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="button">
-                            Cancel
-                        </button>
-<div class="w-full sm:w-auto flex gap-3">
-<button class="w-1/2 sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-primary bg-primary/10 hover:bg-primary/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="button">
-                                Save Draft
-                            </button>
-<button class="w-1/2 sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-primary hover:bg-[#002D7A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="button">
-                                Create Election <span class="material-symbols-outlined ml-2 text-lg">arrow_forward</span>
-</button>
-</div>
-</div>
-</div>
+                        <p id="start-date-error" class="mt-1 text-xs text-red-500 hidden">Start date is required.</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2" for="end-date">
+                            End Date &amp; Time <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 pointer-events-none">
+                                <span class="material-symbols-outlined text-[20px]">event_busy</span>
+                            </span>
+                            <input id="end-date"
+                                class="pl-10 block w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-3 text-sm transition-all"
+                                type="datetime-local"/>
+                        </div>
+                        <p id="end-date-error" class="mt-1 text-xs text-red-500 hidden">End date must be after start date.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Section 3: Positions ── -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl">category</span>
+                    Positions
+                    <span class="ml-auto text-xs font-normal text-slate-500 dark:text-slate-400">
+                        At least one position is required
+                    </span>
+                </h3>
+            </div>
+            <div class="p-6 space-y-4">
+
+                <!-- Add position input row -->
+                <div class="flex gap-2">
+                    <div class="flex-1">
+                        <input id="new-position-input"
+                            class="block w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-2.5 text-sm transition-all"
+                            placeholder="Enter position name (e.g. President, Vice President)"
+                            type="text"
+                            maxlength="200"/>
+                    </div>
+                    <button id="btn-add-position" type="button"
+                        class="inline-flex items-center gap-1.5 px-4 py-2.5 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">
+                        <span class="material-symbols-outlined text-lg">add</span>Add
+                    </button>
+                </div>
+                <p id="positions-error" class="text-xs text-red-500 hidden">Add at least one position.</p>
+
+                <!-- Positions list — populated by JS -->
+                <div id="positions-list" class="flex flex-col gap-3">
+                    <!-- Empty state -->
+                    <div id="positions-empty" class="flex items-center gap-3 p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-dashed border-slate-300 dark:border-slate-600 text-slate-400 text-sm">
+                        <span class="material-symbols-outlined text-[20px]">info</span>
+                        No positions added yet. Type a position name above and click Add.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Section 4: Rules (optional) ── -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl">gavel</span>Rules &amp; Guidelines
+                    <span class="ml-auto text-xs font-normal text-slate-500">Optional</span>
+                </h3>
+            </div>
+            <div class="p-6">
+                <textarea id="election-rules"
+                    class="block w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none shadow-sm px-4 py-3 text-sm transition-all"
+                    placeholder="e.g. Candidates must not campaign on election day. Results are final once certified..."
+                    rows="4"></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Form Actions -->
+    <div class="flex flex-col-reverse sm:flex-row justify-between items-center gap-4 mt-8 pb-16">
+        <a href="/admin.html"
+            class="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-slate-300 dark:border-slate-600 shadow-sm text-base font-medium rounded-lg text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 transition-colors">
+            Cancel
+        </a>
+        <div class="w-full sm:w-auto flex gap-3">
+            <button id="btn-save-draft" type="button"
+                class="flex-1 sm:flex-none inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-primary bg-primary/10 hover:bg-primary/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">
+                Save Draft
+            </button>
+            <button id="btn-publish" type="submit"
+                class="flex-1 sm:flex-none inline-flex justify-center items-center gap-2 px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">
+                Publish Election
+                <span class="material-symbols-outlined text-lg">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+    </form>
+
 </div>
 </main>
 </div>
+
+<script>
+const API_BASE = 'http://localhost:8000/api';
+
+// ── Auth helpers ──────────────────────────────────────────────────────────────
+function getSession() { try { return JSON.parse(localStorage.getItem('au-session')); } catch { return null; } }
+function clearSession() { localStorage.removeItem('au-session'); localStorage.removeItem('au-token'); }
+function requireAdminAuth() {
+    const s = getSession();
+    if (!s || s.role !== 'admin') { window.location.href = '/'; return null; }
+    return s;
+}
+
+async function apiCall(endpoint, options = {}) {
+    const token = localStorage.getItem('au-token');
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    if (token) headers['Authorization'] = `Token ${token}`;
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+async function logout() {
+    try { await apiCall('/auth/logout/', { method: 'POST' }); } catch {}
+    clearSession();
+    window.location.href = '/';
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(message, type = 'info') {
+    const colors = { success: 'bg-green-600', error: 'bg-red-600', info: 'bg-primary' };
+    const icons  = { success: 'check_circle', error: 'error', info: 'info' };
+    const toast  = document.createElement('div');
+    toast.className = `pointer-events-auto ${colors[type] || colors.info} text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 font-medium text-sm`;
+    toast.innerHTML = `<span class="material-symbols-outlined text-lg">${icons[type]}</span>${message}`;
+    document.getElementById('toast-container').appendChild(toast);
+    setTimeout(() => toast.remove(), 3500);
+}
+
+// ── Floating nav ──────────────────────────────────────────────────────────────
+function initAdminNav() {
+    const pages = [
+        { href: '/admin.html', icon: 'admin_panel_settings', label: 'Dashboard', id: 'admin' },
+        { href: '/monitoring.html', icon: 'analytics', label: 'Live Monitoring', id: 'monitoring' },
+        { href: '/create-election.html', icon: 'add_circle', label: 'Create Election', id: 'create-election' },
+        { href: '/admin-results.html', icon: 'assessment', label: 'Results Report', id: 'admin-results' },
+        { href: '/admin-settings.html', icon: 'settings', label: 'Profile & Settings', id: 'admin-settings' },
+    ];
+    const nav = document.createElement('div');
+    nav.id = 'floating-nav';
+    nav.innerHTML = `
+    <button id="nav-toggle" onclick="document.getElementById('floating-nav').classList.toggle('open')"
+      class="fixed bottom-6 left-6 z-[100] size-14 rounded-full bg-primary text-white shadow-xl flex items-center justify-center hover:bg-[#002D7A] transition-all hover:scale-105 active:scale-95 cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">menu</span>
+    </button>
+    <div id="nav-panel" class="fixed bottom-24 left-6 z-[99] bg-white dark:bg-[#141414] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-3 w-64 transition-all origin-bottom-left scale-0 opacity-0">
+      <nav class="flex flex-col gap-0.5">
+        ${pages.map(p => `
+          <a href="${p.href}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${p.id === 'create-election' ? 'bg-primary/10 text-primary' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'}">
+            <span class="material-symbols-outlined text-lg">${p.icon}</span>${p.label}
+          </a>`).join('')}
+      </nav>
+    </div>`;
+    document.body.appendChild(nav);
+    const style = document.createElement('style');
+    style.textContent = `
+    #floating-nav.open #nav-panel { transform: scale(1); opacity: 1; }
+    #floating-nav.open #nav-toggle { background: #ef4444; }
+    #nav-panel { transition: transform 0.2s ease, opacity 0.2s ease; }`;
+    document.head.appendChild(style);
+    document.addEventListener('click', (e) => {
+        const nav = document.getElementById('floating-nav');
+        if (nav && !nav.contains(e.target)) nav.classList.remove('open');
+    });
+}
+
+// ── Positions state ───────────────────────────────────────────────────────────
+// Each position = { title: string, order: number }
+// Candidates are not added here (added after election creation via separate flow)
+let positions = [];
+
+function renderPositions() {
+    const list   = document.getElementById('positions-list');
+    const empty  = document.getElementById('positions-empty');
+
+    if (positions.length === 0) {
+        empty.classList.remove('hidden');
+        // Remove any existing position items
+        list.querySelectorAll('.position-item').forEach(el => el.remove());
+        return;
+    }
+    empty.classList.add('hidden');
+
+    // Rebuild list (simple re-render — list is small)
+    list.querySelectorAll('.position-item').forEach(el => el.remove());
+
+    positions.forEach((pos, idx) => {
+        const item = document.createElement('div');
+        item.className = 'position-item flex items-center justify-between gap-3 px-4 py-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700';
+        item.innerHTML = `
+            <div class="flex items-center gap-3 flex-1 min-w-0">
+                <span class="flex items-center justify-center size-6 rounded-full bg-primary text-white text-xs font-bold flex-shrink-0">${idx + 1}</span>
+                <span class="text-sm font-medium text-slate-900 dark:text-white truncate">${escapeHtml(pos.title)}</span>
+            </div>
+            <div class="flex items-center gap-1 flex-shrink-0">
+                <button type="button" data-idx="${idx}" data-dir="up"
+                    class="move-btn p-1 rounded text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors ${idx === 0 ? 'opacity-30 pointer-events-none' : ''}"
+                    title="Move up">
+                    <span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+                </button>
+                <button type="button" data-idx="${idx}" data-dir="down"
+                    class="move-btn p-1 rounded text-slate-400 hover:text-primary hover:bg-primary/10 transition-colors ${idx === positions.length - 1 ? 'opacity-30 pointer-events-none' : ''}"
+                    title="Move down">
+                    <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+                </button>
+                <button type="button" data-idx="${idx}"
+                    class="remove-btn p-1 rounded text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                    title="Remove position">
+                    <span class="material-symbols-outlined text-[18px]">close</span>
+                </button>
+            </div>`;
+        list.appendChild(item);
+    });
+
+    // Wire move + remove buttons
+    list.querySelectorAll('.move-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const idx = parseInt(btn.dataset.idx);
+            const dir = btn.dataset.dir;
+            if (dir === 'up' && idx > 0) {
+                [positions[idx - 1], positions[idx]] = [positions[idx], positions[idx - 1]];
+            } else if (dir === 'down' && idx < positions.length - 1) {
+                [positions[idx], positions[idx + 1]] = [positions[idx + 1], positions[idx]];
+            }
+            // Update order values to match array index
+            positions.forEach((p, i) => { p.order = i; });
+            renderPositions();
+        });
+    });
+
+    list.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            positions.splice(parseInt(btn.dataset.idx), 1);
+            positions.forEach((p, i) => { p.order = i; });
+            renderPositions();
+        });
+    });
+}
+
+function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
+function addPosition() {
+    const input = document.getElementById('new-position-input');
+    const title = input.value.trim();
+    if (!title) {
+        input.focus();
+        showToast('Enter a position name first', 'error');
+        return;
+    }
+    // Prevent duplicates (case-insensitive)
+    if (positions.some(p => p.title.toLowerCase() === title.toLowerCase())) {
+        showToast(`"${title}" is already in the list`, 'error');
+        input.focus();
+        input.select();
+        return;
+    }
+    positions.push({ title, order: positions.length });
+    input.value = '';
+    input.focus();
+    document.getElementById('positions-error').classList.add('hidden');
+    renderPositions();
+}
+
+// ── Radio type styling ────────────────────────────────────────────────────────
+function updateTypeLabels() {
+    const generalChecked = document.getElementById('type-general').checked;
+    document.getElementById('type-general-label').className =
+        `relative flex items-start p-4 cursor-pointer rounded-lg border-2 transition-all ${generalChecked ? 'border-primary bg-primary/5 dark:bg-primary/10' : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'}`;
+    document.getElementById('type-faculty-label').className =
+        `relative flex items-start p-4 cursor-pointer rounded-lg border-2 transition-all ${!generalChecked ? 'border-primary bg-primary/5 dark:bg-primary/10' : 'border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'}`;
+}
+
+// ── Validation ────────────────────────────────────────────────────────────────
+function validate() {
+    let valid = true;
+
+    const name = document.getElementById('election-name').value.trim();
+    const nameErr = document.getElementById('election-name-error');
+    if (!name) { nameErr.classList.remove('hidden'); valid = false; }
+    else { nameErr.classList.add('hidden'); }
+
+    const start = document.getElementById('start-date').value;
+    const startErr = document.getElementById('start-date-error');
+    if (!start) { startErr.classList.remove('hidden'); valid = false; }
+    else { startErr.classList.add('hidden'); }
+
+    const end = document.getElementById('end-date').value;
+    const endErr = document.getElementById('end-date-error');
+    if (!end || (start && end <= start)) {
+        endErr.textContent = !end ? 'End date is required.' : 'End date must be after start date.';
+        endErr.classList.remove('hidden');
+        valid = false;
+    } else {
+        endErr.classList.add('hidden');
+    }
+
+    const posErr = document.getElementById('positions-error');
+    if (positions.length === 0) { posErr.classList.remove('hidden'); valid = false; }
+    else { posErr.classList.add('hidden'); }
+
+    return valid;
+}
+
+// ── Submit ────────────────────────────────────────────────────────────────────
+async function submitElection(asDraft = false) {
+    if (!asDraft && !validate()) {
+        showToast('Please fix the errors above before publishing.', 'error');
+        return;
+    }
+
+    const btn = asDraft
+        ? document.getElementById('btn-save-draft')
+        : document.getElementById('btn-publish');
+    const originalHtml = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span> Saving...';
+
+    const startVal = document.getElementById('start-date').value;
+    const endVal   = document.getElementById('end-date').value;
+
+    // Default dates for draft (backend requires them)
+    const now     = new Date();
+    const weekOut = new Date(now.getTime() + 7 * 86400_000);
+
+    const payload = {
+        title:       document.getElementById('election-name').value.trim() || 'Draft Election',
+        description: document.getElementById('election-desc').value.trim(),
+        start_date:  startVal ? new Date(startVal).toISOString() : now.toISOString(),
+        end_date:    endVal   ? new Date(endVal).toISOString()   : weekOut.toISOString(),
+        // positions: send titles only — candidates are added separately after creation
+        positions: positions.map((p) => ({ title: p.title, order: p.order, candidates: [] })),
+    };
+
+    try {
+        const data = await apiCall('/admin/elections/', {
+            method: 'POST',
+            body: JSON.stringify(payload),
+        });
+
+        // Store the newly created election as the active one for other pages
+        localStorage.setItem('au-active-election', data.id);
+
+        showToast(
+            asDraft
+                ? `Draft "${data.title}" saved (ID: ${data.id})`
+                : `Election "${data.title}" published successfully!`,
+            'success'
+        );
+
+        btn.innerHTML = '<span class="material-symbols-outlined text-lg">check_circle</span> Done!';
+        btn.classList.replace('bg-primary', 'bg-green-600');
+
+        setTimeout(() => window.location.href = '/admin.html', 1500);
+
+    } catch (err) {
+        showToast(err.message || 'Failed to create election. Is the backend running?', 'error');
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+    }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    const session = requireAdminAuth();
+    if (!session) return;
+
+    initAdminNav();
+    renderPositions();
+
+    // Sign out
+    document.getElementById('btn-signout')?.addEventListener('click', logout);
+
+    // Add position — button click
+    document.getElementById('btn-add-position')?.addEventListener('click', addPosition);
+
+    // Add position — Enter key in input
+    document.getElementById('new-position-input')?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); addPosition(); }
+    });
+
+    // Radio type labels
+    document.querySelectorAll('input[name="election-type"]').forEach(r =>
+        r.addEventListener('change', updateTypeLabels)
+    );
+
+    // Save draft
+    document.getElementById('btn-save-draft')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        submitElection(true);
+    });
+
+    // Publish — form submit
+    document.getElementById('create-election-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        submitElection(false);
+    });
+});
+</script>
 
 <script>
 // ============================================
@@ -578,4 +876,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
-</body></html>
+</body>
+</html>

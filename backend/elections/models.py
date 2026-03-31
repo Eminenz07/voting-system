@@ -58,6 +58,7 @@ class Candidate(models.Model):
     bio = models.TextField(blank=True, default='')
     photo_url = models.URLField(blank=True, default='')
     position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name='candidates')
+    is_disqualified = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['id']
@@ -75,14 +76,14 @@ class Vote(models.Model):
 
     voter = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='votes')
     candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='votes')
+    position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name='votes', null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        # A voter can only vote once per position
         constraints = [
             models.UniqueConstraint(
-                fields=['voter', 'candidate'],
-                name='unique_vote_per_candidate',
+                fields=['voter', 'position'],
+                name='unique_vote_per_position',
             ),
         ]
         ordering = ['-timestamp']

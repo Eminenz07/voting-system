@@ -6,11 +6,16 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-au-voting-dev-key-change-in-production'
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-au-voting-dev-key-CHANGE-IN-PRODUCTION'
+)
 
-DEBUG = True
+# ── Environment flag ──────────────────────────────────────────────────────────
+# Set DEBUG=False and provide ALLOWED_HOSTS / CORS_ALLOWED_ORIGINS in production.
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 # Application definition
 INSTALLED_APPS = [
@@ -30,7 +35,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',   # must be first
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,7 +65,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database — SQLite for development
+# Database — SQLite for development, swap for PostgreSQL in production
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -68,16 +73,14 @@ DATABASES = {
     }
 }
 
-# Custom user model
 AUTH_USER_MODEL = 'accounts.User'
 
-# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
      'OPTIONS': {'min_length': 6}},
 ]
 
-# DRF configuration
+# DRF
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
@@ -88,16 +91,28 @@ REST_FRAMEWORK = {
     ],
 }
 
-# CORS — allow Vite dev server
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://127.0.0.1:5173',
-    'http://127.0.0.1:5174',
-]
+# ── CORS ──────────────────────────────────────────────────────────────────────
+# Development: allow all origins so any local port works (Vite, live-server,
+# direct file:// open, etc.) without constant config changes.
+#
+# Production: set the environment variable CORS_ALLOWED_ORIGINS to a comma-
+# separated list of your actual frontend domains, e.g.:
+#   CORS_ALLOWED_ORIGINS=https://vote.adeleke.edu.ng,https://www.adeleke.edu.ng
+#
+if DEBUG:
+    # Allow every origin during local development
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOW_ALL_ORIGINS = False
+    CORS_ALLOWED_ORIGINS = [
+        o.strip()
+        for o in os.environ.get('CORS_ALLOWED_ORIGINS', '').split(',')
+        if o.strip()
+    ]
+
 CORS_ALLOW_CREDENTIALS = True
 
-# Internationalization
+# Internationalisation
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Africa/Lagos'
 USE_I18N = True

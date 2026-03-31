@@ -10,4 +10,5 @@ urlpatterns = [
     # Admin endpoints
     path('admin/dashboard/', views.admin_dashboard, name='admin-dashboard'),
     path('admin/elections/', views.create_election, name='create-election'),
+    path('admin/elections/<int:election_id>/', views.edit_election, name='edit-election'),
 ]
