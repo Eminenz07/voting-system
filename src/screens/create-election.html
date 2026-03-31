@@ -223,44 +223,22 @@
 </div>
 <div class="space-y-4">
 <div class="flex gap-2">
-<div class="flex-1">
-<label class="sr-only" for="new-category">New Category Name</label>
-<input class="block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm" id="new-category" placeholder="Enter position name..." type="text"/>
-</div>
-<button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-slate-800 hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500" type="button">
-<span class="material-symbols-outlined text-lg mr-1">add</span> Add
-                                    </button>
-</div>
-<!-- Added Categories List -->
-<div class="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
-<p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Active Positions</p>
-<div class="flex flex-wrap gap-2">
-<div class="inline-flex items-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-3 py-1 text-sm font-medium text-slate-900 dark:text-white shadow-sm">
-                                            President
-                                            <button class="ml-2 inline-flex size-4 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 hover:text-slate-500 dark:hover:bg-slate-700" type="button">
-<span class="material-symbols-outlined text-[16px]">close</span>
-</button>
-</div>
-<div class="inline-flex items-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-3 py-1 text-sm font-medium text-slate-900 dark:text-white shadow-sm">
-                                            Vice President
-                                            <button class="ml-2 inline-flex size-4 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 hover:text-slate-500 dark:hover:bg-slate-700" type="button">
-<span class="material-symbols-outlined text-[16px]">close</span>
-</button>
-</div>
-<div class="inline-flex items-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-3 py-1 text-sm font-medium text-slate-900 dark:text-white shadow-sm">
-                                            General Secretary
-                                            <button class="ml-2 inline-flex size-4 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 hover:text-slate-500 dark:hover:bg-slate-700" type="button">
-<span class="material-symbols-outlined text-[16px]">close</span>
-</button>
-</div>
-<div class="inline-flex items-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-3 py-1 text-sm font-medium text-slate-900 dark:text-white shadow-sm">
-                                            Treasurer
-                                            <button class="ml-2 inline-flex size-4 items-center justify-center rounded-full text-slate-400 hover:bg-slate-200 hover:text-slate-500 dark:hover:bg-slate-700" type="button">
-<span class="material-symbols-outlined text-[16px]">close</span>
-</button>
-</div>
-</div>
-</div>
+                            <div class="flex-1">
+                                <label for="new-category" class="sr-only">New Category Name</label>
+                                <input type="text" id="new-category" class="block w-full rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:border-primary focus:ring-primary shadow-sm" placeholder="Enter position name...">
+                            </div>
+                            <button type="button" id="add-category-btn" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-slate-800 hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">
+                                <span class="material-symbols-outlined text-lg mr-1">add</span> Add
+                            </button>
+                        </div>
+
+                        <!-- Added Categories List -->
+                        <div class="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-4 border border-slate-200 dark:border-slate-700">
+                            <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Active Positions</p>
+                            <div id="positions-list" class="flex flex-wrap gap-2">
+                                <!-- Dynamic positions will be injected here -->
+                            </div>
+                        </div>
 </div>
 </div>
 <hr class="border-slate-200 dark:border-slate-700"/>
