@@ -1,149 +1,254 @@
 <!DOCTYPE html>
-
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Student Sign Up - Adeleke University</title>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-      tailwind.config = {
+<script>
+    /* FIXED: was #1978e5 (old color) instead of #003DA5 (AU Royal Blue) */
+    tailwind.config = {
         darkMode: "class",
         theme: {
-          extend: {
-            colors: {
-              "primary": "#1978e5",
-              "background-light": "#f6f7f8",
-              "background-dark": "#111821",
+            extend: {
+                colors: {
+                    "primary": "#003DA5",
+                    "primary-dark": "#002D7A",
+                    "accent": "#F5B400",
+                    "background-light": "#FAFAFA",
+                    "background-dark": "#0A0A0A",
+                    "surface-light": "#FFFFFF",
+                    "surface-dark": "#141414",
+                },
+                fontFamily: { "display": ["Be Vietnam Pro", "sans-serif"] },
+                borderRadius: {
+                    "DEFAULT": "0.75rem", "lg": "1rem",
+                    "xl": "1.5rem", "2xl": "2rem", "full": "9999px"
+                },
             },
-            fontFamily: {
-              "display": ["Be Vietnam Pro", "sans-serif"]
-            },
-            borderRadius: {"DEFAULT": "0.75rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
-          },
         },
-      }
-    </script>
-<style>
-      @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap');
-    </style>
+    }
+</script>
 </head>
 <body class="font-display min-h-screen flex flex-col items-center justify-center p-4 relative bg-slate-900">
-<!-- Blurred AU Logo Background for Entire Page -->
+<!-- Background -->
 <div class="fixed inset-0 z-0">
     <div class="absolute inset-0 bg-[url('/assets/au-logo.jpg')] bg-cover bg-center opacity-30 select-none"></div>
     <div class="absolute inset-0 backdrop-blur-md bg-white/40 dark:bg-black/60"></div>
 </div>
-<!-- Main Container -->
+
+<!-- Toast container -->
+<div id="toast-container" class="fixed top-6 right-6 z-[300] flex flex-col gap-2"></div>
+
+<!-- Main Card -->
 <div class="w-full max-w-[520px] bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700 overflow-hidden relative z-10">
-<!-- Header/Logo Section -->
-<div class="flex flex-col items-center pt-10 pb-6 px-8 text-center border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800">
-<div class="size-20 rounded-full flex items-center justify-center mb-4 bg-white shadow-sm border-4 border-white dark:border-slate-800">
-<img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-full object-contain overflow-hidden rounded-full" />
+    <!-- Header -->
+    <div class="flex flex-col items-center pt-10 pb-6 px-8 text-center border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800">
+        <div class="size-20 rounded-full flex items-center justify-center mb-4 bg-white shadow-sm border-4 border-white dark:border-slate-800 overflow-hidden">
+            <img src="/assets/au-logo.jpg" alt="Adeleke University Logo" class="size-full object-cover rounded-full"/>
+        </div>
+        <h1 class="text-slate-900 dark:text-white text-2xl font-black tracking-tight mb-1">Adeleke University</h1>
+        <h2 class="text-slate-900 dark:text-white text-base font-bold">Student E-Voting Portal</h2>
+        <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Create your secure account to participate in elections.</p>
+    </div>
+
+    <!-- Form -->
+    <form id="signup-form" class="p-8 flex flex-col gap-5" novalidate>
+        <!-- Name row -->
+        <div class="grid grid-cols-2 gap-4">
+            <label class="block group">
+                <span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">First Name</span>
+                <div class="relative flex items-center">
+                    <span class="absolute left-4 text-slate-400 material-symbols-outlined text-[20px]">person</span>
+                    <input id="first-name" class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="John" type="text" autocomplete="given-name"/>
+                </div>
+            </label>
+            <label class="block group">
+                <span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Surname</span>
+                <div class="relative flex items-center">
+                    <span class="absolute left-4 text-slate-400 material-symbols-outlined text-[20px]">person</span>
+                    <input id="last-name" class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="Doe" type="text" autocomplete="family-name"/>
+                </div>
+            </label>
+        </div>
+
+        <!-- Matric -->
+        <label class="block group">
+            <span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Matric Number</span>
+            <div class="relative flex items-center">
+                <span class="absolute left-4 text-slate-400 material-symbols-outlined text-[20px]">badge</span>
+                <input id="matric" class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="e.g. 19/0123" type="text"/>
+            </div>
+        </label>
+
+        <!-- Dept + Faculty -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <label class="block group">
+                <span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Department</span>
+                <div class="relative flex items-center">
+                    <span class="absolute left-4 text-slate-400 material-symbols-outlined text-[20px]">category</span>
+                    <select id="department" class="w-full pl-11 pr-10 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium appearance-none cursor-pointer">
+                        <option value="" disabled selected>Select Department</option>
+                        <option value="Computer Science" data-faculty="Science">Computer Science</option>
+                        <option value="Mathematics" data-faculty="Science">Mathematics</option>
+                        <option value="Physics" data-faculty="Science">Physics</option>
+                        <option value="Law" data-faculty="Law">Law</option>
+                        <option value="Mass Communication" data-faculty="Arts">Mass Communication</option>
+                        <option value="English" data-faculty="Arts">English</option>
+                        <option value="Accounting" data-faculty="Management Sciences">Accounting</option>
+                        <option value="Business Administration" data-faculty="Management Sciences">Business Administration</option>
+                        <option value="Medicine" data-faculty="Basic Medical Sciences">Medicine</option>
+                        <option value="Nursing" data-faculty="Basic Medical Sciences">Nursing</option>
+                        <option value="Civil Engineering" data-faculty="Engineering">Civil Engineering</option>
+                        <option value="Electrical Engineering" data-faculty="Engineering">Electrical Engineering</option>
+                    </select>
+                    <span class="absolute right-4 text-slate-400 pointer-events-none material-symbols-outlined text-[20px]">expand_more</span>
+                </div>
+            </label>
+            <label class="block group">
+                <span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Faculty <span class="text-slate-400 font-normal">(auto-filled)</span></span>
+                <div class="relative flex items-center">
+                    <span class="absolute left-4 text-slate-400 material-symbols-outlined text-[20px]">domain</span>
+                    <input id="faculty" class="w-full pl-11 pr-4 py-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-500 dark:text-slate-400 text-sm font-medium cursor-not-allowed" placeholder="Auto-filled from department" readonly type="text"/>
+                </div>
+            </label>
+        </div>
+
+        <!-- Password -->
+        <label class="block group">
+            <span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Password</span>
+            <div class="relative flex items-center">
+                <span class="absolute left-4 text-slate-400 material-symbols-outlined text-[20px]">lock</span>
+                <input id="password" class="w-full pl-11 pr-12 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="Create a strong password" type="password" autocomplete="new-password"/>
+                <button type="button" id="toggle-password" class="absolute right-4 text-slate-400 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">visibility</span>
+                </button>
+            </div>
+        </label>
+
+        <!-- Confirm Password -->
+        <label class="block group">
+            <span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Confirm Password</span>
+            <div class="relative flex items-center">
+                <span class="absolute left-4 text-slate-400 material-symbols-outlined text-[20px]">lock_reset</span>
+                <input id="confirm-password" class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="Repeat your password" type="password" autocomplete="new-password"/>
+            </div>
+        </label>
+
+        <!-- Actions -->
+        <div class="mt-2 flex flex-col gap-4">
+            <button id="signup-btn" type="submit" class="w-full py-3 px-6 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow-lg shadow-primary/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                <span>Create Account</span>
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </button>
+            <p class="text-center text-sm text-slate-500 dark:text-slate-400">
+                Already have an account?
+                <a href="/" class="text-primary hover:text-primary-dark font-bold ml-1 transition-colors">Sign In</a>
+            </p>
+        </div>
+    </form>
 </div>
-<h1 class="text-slate-900 dark:text-white text-2xl font-black tracking-tight mb-2">Adeleke University</h1>
-<h2 class="text-slate-900 dark:text-white text-lg font-bold">Student E-Voting Portal</h2>
-<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Create your secure account to participate in elections.</p>
-</div>
-<!-- Form Section -->
-<form class="p-8 flex flex-col gap-5">
-<!-- Name Fields Wrapper -->
-<div class="grid grid-cols-2 gap-4">
-<!-- First Name -->
-<label class="block group">
-<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">First Name</span>
-<div class="relative flex items-center">
-<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">person</span>
-<input class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="John" type="text"/>
-</div>
-</label>
-<!-- Surname -->
-<label class="block group">
-<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Surname</span>
-<div class="relative flex items-center">
-<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">person</span>
-<input class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="Doe" type="text"/>
-</div>
-</label>
-</div>
-<!-- Matric Number -->
-<label class="block group">
-<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Matric Number</span>
-<div class="relative flex items-center">
-<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">badge</span>
-<input class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="e.g., 19/0123" type="text"/>
-</div>
-</label>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-<!-- Department -->
-<label class="block group">
-<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Department</span>
-<div class="relative flex items-center">
-<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">category</span>
-<select class="w-full pl-11 pr-10 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium appearance-none cursor-pointer">
-<option disabled="" selected="" value="">Select Dept</option>
-<option value="cs">Computer Science</option>
-<option value="law">Law</option>
-<option value="mass_comm">Mass Comm</option>
-<option value="accounting">Accounting</option>
-</select>
-<span class="absolute right-4 text-slate-400 pointer-events-none material-symbols-outlined text-[20px]">expand_more</span>
-</div>
-</label>
-<!-- Faculty (Auto-filled) -->
-<label class="block group opacity-75 cursor-not-allowed">
-<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Faculty</span>
-<div class="relative flex items-center">
-<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">domain</span>
-<input class="w-full pl-11 pr-4 py-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-slate-500 dark:text-slate-400 focus:outline-none cursor-not-allowed text-sm font-medium" placeholder="Auto-filled" readonly="" type="text" value="Science"/>
-</div>
-</label>
-</div>
-<!-- Password -->
-<label class="block group">
-<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Password</span>
-<div class="relative flex items-center">
-<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">lock</span>
-<input class="w-full pl-11 pr-10 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="Create a password" type="password"/>
-<button class="absolute right-4 text-slate-400 hover:text-primary transition-colors flex items-center justify-center" type="button">
-<span class="material-symbols-outlined text-[20px]">visibility</span>
-</button>
-</div>
-</label>
-<!-- Confirm Password -->
-<label class="block group">
-<span class="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2 ml-1">Confirm Password</span>
-<div class="relative flex items-center">
-<span class="absolute left-4 text-slate-400 dark:text-slate-500 material-symbols-outlined text-[20px]">lock_reset</span>
-<input class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all text-sm font-medium" placeholder="Repeat password" type="password"/>
-</div>
-</label>
-<!-- Actions -->
-<div class="mt-4 flex flex-col gap-4">
-<button class="w-full py-3 px-6 bg-primary hover:bg-primary/90 text-white font-bold rounded-full shadow-lg shadow-primary/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="button">
-<span>Sign Up</span>
-<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-</button>
-<div class="text-center">
-<span class="text-slate-500 dark:text-slate-400 text-sm">Already have an account?</span>
-<a class="text-primary hover:text-primary/80 font-bold text-sm ml-1 transition-colors" href="#">Login</a>
-</div>
-</div>
-</form>
-</div>
-<!-- Decorative Background Elements -->
-<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-0 overflow-hidden">
-<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px]"></div>
-<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px]"></div>
-</div>
+
 <!-- Footer -->
-<footer class="mt-8 text-center text-slate-400 dark:text-slate-500 text-xs font-medium z-10">
-<p>© 2024 Adeleke University IT Support. All rights reserved.</p>
-<div class="flex gap-4 justify-center mt-2">
-<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
-<span>•</span>
-<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
-</div>
+<footer class="mt-8 text-center text-slate-400 text-xs font-medium z-10 relative">
+    <p>© 2024 Adeleke University IT Support. All rights reserved.</p>
+    <div class="flex gap-4 justify-center mt-2">
+        <a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+        <span>•</span>
+        <a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+    </div>
 </footer>
-</body></html>
+
+<script>
+const API_BASE = 'http://localhost:8000/api';
+
+async function apiCall(endpoint, options = {}) {
+    const headers = { 'Content-Type': 'application/json', ...options.headers };
+    const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+        const errorMsg = data.error || data.detail || Object.values(data).flat().join(', ') || 'Request failed';
+        throw { status: response.status, message: errorMsg, data };
+    }
+    return data;
+}
+
+function showToast(message, type) {
+    const colors = { success: 'bg-green-600', error: 'bg-red-600', info: 'bg-blue-600' };
+    const toast = document.createElement('div');
+    toast.className = `${colors[type] || colors.info} text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 font-medium text-sm animate-pulse`;
+    toast.innerHTML = `<span class="material-symbols-outlined text-lg">${type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info'}</span>${message}`;
+    document.getElementById('toast-container').appendChild(toast);
+    setTimeout(() => toast.remove(), 3500);
+}
+
+// Dept → Faculty auto-fill
+document.getElementById('department')?.addEventListener('change', function () {
+    const selected = this.options[this.selectedIndex];
+    const faculty = selected.getAttribute('data-faculty') || '';
+    document.getElementById('faculty').value = faculty;
+});
+
+// Password toggle
+document.getElementById('toggle-password')?.addEventListener('click', function () {
+    const input = document.getElementById('password');
+    const icon = this.querySelector('.material-symbols-outlined');
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.textContent = 'visibility_off';
+    } else {
+        input.type = 'password';
+        icon.textContent = 'visibility';
+    }
+});
+
+// Form submission
+document.getElementById('signup-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const firstName = document.getElementById('first-name').value.trim();
+    const lastName  = document.getElementById('last-name').value.trim();
+    const matric    = document.getElementById('matric').value.trim();
+    const dept      = document.getElementById('department').value;
+    const faculty   = document.getElementById('faculty').value;
+    const password  = document.getElementById('password').value;
+    const confirm   = document.getElementById('confirm-password').value;
+
+    // Validation
+    if (!firstName) { showToast('Please enter your first name', 'error'); document.getElementById('first-name').focus(); return; }
+    if (!lastName)  { showToast('Please enter your surname', 'error'); document.getElementById('last-name').focus(); return; }
+    if (!matric)    { showToast('Please enter your matric number', 'error'); document.getElementById('matric').focus(); return; }
+    if (!dept)      { showToast('Please select a department', 'error'); document.getElementById('department').focus(); return; }
+    if (password.length < 6) { showToast('Password must be at least 6 characters', 'error'); document.getElementById('password').focus(); return; }
+    if (password !== confirm) { showToast('Passwords do not match', 'error'); document.getElementById('confirm-password').focus(); return; }
+
+    const btn = document.getElementById('signup-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">progress_activity</span> Creating account...';
+
+    try {
+        await apiCall('/auth/register/', {
+            method: 'POST',
+            body: JSON.stringify({
+                matric,
+                first_name: firstName,
+                last_name: lastName,
+                department: dept,
+                faculty,
+                password,
+                confirm_password: confirm,
+            }),
+        });
+        showToast('Account created! Redirecting to login...', 'success');
+        setTimeout(() => window.location.href = '/', 1500);
+    } catch (err) {
+        showToast(err.message || 'Registration failed. Please try again.', 'error');
+        btn.disabled = false;
+        btn.innerHTML = '<span>Create Account</span><span class="material-symbols-outlined text-[18px]">arrow_forward</span>';
+    }
+});
+</script>
+</body>
+</html>
